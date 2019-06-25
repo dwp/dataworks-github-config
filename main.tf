@@ -1,5 +1,5 @@
 resource "github_team" "dataworks" {
-  name = "DataWorks"
+  name    = "DataWorks"
   privacy = "closed"
 }
 
