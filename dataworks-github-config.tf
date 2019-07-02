@@ -13,7 +13,7 @@ resource "github_team_repository" "dataworks-github-config-dataworks" {
   permission = "admin"
 }
 
-resource "github_branch_protection" "master" {
+resource "github_branch_protection" "dataworks-github-config-master" {
   branch         = "${github_repository.dataworks-github-config.default_branch}"
   repository     = "${github_repository.dataworks-github-config.name}"
   enforce_admins = true
