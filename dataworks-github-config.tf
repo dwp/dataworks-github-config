@@ -27,9 +27,3 @@ resource "github_branch_protection" "master" {
     require_code_owner_reviews = true
   }
 }
-
-resource "github_issue_label" "dataworks-github-config-wip" {
-  color      = "${var.wip-label-colour}"
-  name       = "WIP"
-  repository = "${github_repository.dataworks-github-config.name}"
-}
