@@ -5,6 +5,10 @@ resource "github_repository" "acm-pca-cert-generator" {
   allow_merge_commit = false
   default_branch     = "master"
   has_issues         = true
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "github_team_repository" "acm-pca-cert-generator-dataworks" {
