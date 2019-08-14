@@ -1,5 +1,5 @@
-resource "github_repository" "mongo-export-delivery" {
-  name        = "mongo-export-delivery"
+resource "github_repository" "snapshot-sender" {
+  name        = "snapshot-sender"
   description = "Decrypts and delivers mongo exports created by hbase-to-mongo-export"
 
   allow_merge_commit = false
@@ -11,15 +11,15 @@ resource "github_repository" "mongo-export-delivery" {
   }
 }
 
-resource "github_team_repository" "mongo-export-delivery-dataworks" {
-  repository = "${github_repository.mongo-export-delivery.name}"
+resource "github_team_repository" "snapshot-sender-dataworks" {
+  repository = "${github_repository.snapshot-sender.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "admin"
 }
 
 resource "github_branch_protection" "mongo-export-delivery-master" {
-  branch         = "${github_repository.mongo-export-delivery.default_branch}"
-  repository     = "${github_repository.mongo-export-delivery.name}"
+  branch         = "${github_repository.snapshot-sender.default_branch}"
+  repository     = "${github_repository.snapshot-sender.name}"
   enforce_admins = true
 
   required_status_checks {
