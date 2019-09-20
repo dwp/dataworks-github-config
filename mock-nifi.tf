@@ -1,6 +1,6 @@
 resource "github_repository" "mock-nifi" {
   name        = "mock-nifi"
-  description = "Repository for the mock-nifi application"
+  description = "Mock nifi endpoint - writes posted data to disk."
 
   allow_merge_commit = false
   default_branch     = "master"

@@ -24,6 +24,7 @@ resource "github_branch_protection" "kafka-to-hbase-master" {
 
   required_status_checks {
     strict = true
+    contexts = ["ci/circleci: test"]
   }
 
   required_pull_request_reviews {
