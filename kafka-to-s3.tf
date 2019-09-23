@@ -24,6 +24,7 @@ resource "github_branch_protection" "kafka-to-s3-master" {
 
   required_status_checks {
     strict = true
+    contexts = ["ci/circleci: build-image"]
   }
 
   required_pull_request_reviews {
