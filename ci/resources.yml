@@ -1,0 +1,7 @@
+resources:
+- name: dataworks-github-config
+  type: git
+  source:
+    branch: master
+    uri: git@github.com:dwp/dataworks-github-config.git
+  check_every: 5m

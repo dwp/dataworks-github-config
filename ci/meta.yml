@@ -1,0 +1,85 @@
+meta:
+  plan:
+    terraform-bootstrap:
+      task: terraform-bootstrap
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: dwpdigital/jinja-yaml-aws
+            version: 0.0.4
+            tag: 0.0.4
+        run:
+          path: sh
+          args:
+            - -exc
+            - |
+              python bootstrap_terraform.py
+              cp terraform.tf ../terraform-config
+          dir: dataworks-github-config
+        inputs:
+          - name: dataworks-github-config
+        outputs:
+          - name: terraform-config
+      params:
+        AWS_ACCESS_KEY_ID: ((ci.aws_access_key_id))
+        AWS_SECRET_ACCESS_KEY: ((ci.aws_secret_access_key))
+        AWS_REGION: eu-west-2
+    terraform-apply:
+      task: terraform-apply
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: hashicorp/terraform
+            version: ((terraform.version))
+            tag: ((terraform.version))
+        run:
+          path: sh
+          args:
+            - -exc
+            - |
+              cp ../terraform-config/terraform.tf .
+              terraform workspace show
+              terraform init
+              terraform apply -auto-approve
+          dir: dataworks-github-config
+        inputs:
+          - name: dataworks-github-config
+          - name: terraform-config
+      params:
+        TF_CLI_ARGS_apply: -lock-timeout=300s
+        TF_INPUT: "false"
+        AWS_ACCESS_KEY_ID: ((ci.aws_access_key_id))
+        AWS_SECRET_ACCESS_KEY: ((ci.aws_secret_access_key))
+        TF_VAR_github_token: ((github_com_token))
+    terraform-plan:
+      task: terraform-plan
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: hashicorp/terraform
+            version: ((terraform.version))
+            tag: ((terraform.version))
+        run:
+          path: sh
+          args:
+            - -exc
+            - |
+              cp ../terraform-config/terraform.tf .
+              terraform workspace show
+              terraform init
+              terraform plan -detailed-exitcode
+          dir: dataworks-github-config
+        inputs:
+          - name: dataworks-github-config
+          - name: terraform-config
+      params:
+        TF_CLI_ARGS_plan: -lock-timeout=300s
+        TF_INPUT: "false"
+        AWS_ACCESS_KEY_ID: ((ci.aws_access_key_id))
+        AWS_SECRET_ACCESS_KEY: ((ci.aws_secret_access_key))
