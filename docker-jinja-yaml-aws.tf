@@ -7,7 +7,7 @@ resource "github_repository" "docker-jinja-yaml-aws" {
   has_issues         = true
 
   lifecycle {
-    prevent_destroy = false
+    prevent_destroy = true
   }
 }
 
