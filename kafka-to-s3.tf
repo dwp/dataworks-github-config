@@ -23,7 +23,7 @@ resource "github_branch_protection" "kafka-to-s3-master" {
   enforce_admins = true
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["ci/circleci: build-image"]
   }
 
