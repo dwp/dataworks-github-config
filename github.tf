@@ -1,9 +1,9 @@
 variable github_token {
-    type = "string"
+  type = "string"
 }
 
 variable github_organization {
-    type = "string"
+  type = "string"
 }
 
 provider "github" {
