@@ -14,7 +14,7 @@ resource "github_repository" "kafka-producer" {
 resource "github_team_repository" "kafka-producer-dataworks" {
   repository = "${github_repository.kafka-producer.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "kafka-producer-master" {

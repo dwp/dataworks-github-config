@@ -14,7 +14,7 @@ resource "github_repository" "dataworks-open-source-policy" {
 resource "github_team_repository" "dataworks-open-source-policy-dataworks" {
   repository = "${github_repository.dataworks-open-source-policy.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "dataworks-open-source-policy-master" {

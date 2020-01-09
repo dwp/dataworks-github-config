@@ -14,7 +14,7 @@ resource "github_repository" "snapshot-sender" {
 resource "github_team_repository" "snapshot-sender-dataworks" {
   repository = "${github_repository.snapshot-sender.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "mongo-export-delivery-master" {

@@ -14,7 +14,7 @@ resource "github_repository" "docker-ansible-pass-gpg" {
 resource "github_team_repository" "docker-ansible-pass-gpg-dataworks" {
   repository = "${github_repository.docker-ansible-pass-gpg.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "docker-ansible-pass-gpg-master" {

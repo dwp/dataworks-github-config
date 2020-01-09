@@ -14,7 +14,7 @@ resource "github_repository" "data-key-service" {
 resource "github_team_repository" "data-key-service-dataworks" {
   repository = "${github_repository.data-key-service.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "data-key-service-master" {

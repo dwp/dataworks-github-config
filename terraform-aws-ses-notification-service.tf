@@ -14,7 +14,7 @@ resource "github_repository" "terraform-aws-ses-notification-service" {
 resource "github_team_repository" "terraform-aws-ses-notification-service-dataworks" {
   repository = "${github_repository.terraform-aws-ses-notification-service.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "terraform-aws-ses-notification-service-master" {

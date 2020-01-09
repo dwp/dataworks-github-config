@@ -14,7 +14,7 @@ resource "github_repository" "acm-pca-cert-generator" {
 resource "github_team_repository" "acm-pca-cert-generator-dataworks" {
   repository = "${github_repository.acm-pca-cert-generator.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "acm-pca-cert-generator-master" {

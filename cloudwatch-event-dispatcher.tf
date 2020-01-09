@@ -14,7 +14,7 @@ resource "github_repository" "cloudwatch-event-dispatcher" {
 resource "github_team_repository" "cloudwatch-event-dispatcher-dataworks" {
   repository = "${github_repository.cloudwatch-event-dispatcher.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "cloudwatch-event-dispatcher-master" {

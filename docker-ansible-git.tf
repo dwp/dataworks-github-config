@@ -14,7 +14,7 @@ resource "github_repository" "docker-ansible-git" {
 resource "github_team_repository" "docker-ansible-git-dataworks" {
   repository = "${github_repository.docker-ansible-git.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "docker-ansible-git-master" {

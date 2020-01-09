@@ -14,7 +14,7 @@ resource "github_repository" "aws-cloudwatch-alerting" {
 resource "github_team_repository" "aws-cloudwatch-alerting-dataworks" {
   repository = "${github_repository.aws-cloudwatch-alerting.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "aws-cloudwatch-alerting-master" {

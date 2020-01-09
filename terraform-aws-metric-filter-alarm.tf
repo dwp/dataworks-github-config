@@ -14,7 +14,7 @@ resource "github_repository" "terraform-aws-metric-filter-alarm" {
 resource "github_team_repository" "terraform-aws-metric-filter-alarm-dataworks" {
   repository = "${github_repository.terraform-aws-metric-filter-alarm.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "terraform-aws-metric-filter-alarm-master" {

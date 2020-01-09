@@ -14,7 +14,7 @@ resource "github_repository" "packer-egress-test" {
 resource "github_team_repository" "packer-egress-test-dataworks" {
   repository = "${github_repository.packer-egress-test.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "packer-egress-test-master" {

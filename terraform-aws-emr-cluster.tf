@@ -14,7 +14,7 @@ resource "github_repository" "terraform-aws-emr-cluster" {
 resource "github_team_repository" "terraform-aws-emr-cluster-dataworks" {
   repository = "${github_repository.terraform-aws-emr-cluster.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "terraform-aws-emr-cluster-master" {

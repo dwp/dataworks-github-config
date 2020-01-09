@@ -14,7 +14,7 @@ resource "github_repository" "hbase-to-mongo-export" {
 resource "github_team_repository" "hbase-to-mongo-export-dataworks" {
   repository = "${github_repository.hbase-to-mongo-export.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "hbase-to-mongo-export-master" {

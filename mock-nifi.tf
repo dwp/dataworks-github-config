@@ -14,7 +14,7 @@ resource "github_repository" "mock-nifi" {
 resource "github_team_repository" "mock-nifi-dataworks" {
   repository = "${github_repository.mock-nifi.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "mock-nifi-master" {

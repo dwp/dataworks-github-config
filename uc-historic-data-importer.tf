@@ -14,7 +14,7 @@ resource "github_repository" "uc-historic-data-importer" {
 resource "github_team_repository" "uc-historic-data-importer-dataworks" {
   repository = "${github_repository.uc-historic-data-importer.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "uc-historic-data-importer-master" {

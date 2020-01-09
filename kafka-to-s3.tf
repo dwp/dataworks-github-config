@@ -14,7 +14,7 @@ resource "github_repository" "kafka-to-s3" {
 resource "github_team_repository" "kafka-to-s3-dataworks" {
   repository = "${github_repository.kafka-to-s3.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "kafka-to-s3-master" {

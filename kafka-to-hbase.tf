@@ -14,7 +14,7 @@ resource "github_repository" "kafka-to-hbase" {
 resource "github_team_repository" "kafka-to-hbase-dataworks" {
   repository = "${github_repository.kafka-to-hbase.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "kafka-to-hbase-master" {

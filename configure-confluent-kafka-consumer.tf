@@ -14,7 +14,7 @@ resource "github_repository" "configure-confluent-kafka-consumer" {
 resource "github_team_repository" "configure-confluent-kafka-consumer-dataworks" {
   repository = "${github_repository.configure-confluent-kafka-consumer.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "configure-confluent-kafka-consumer-master" {

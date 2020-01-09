@@ -14,7 +14,7 @@ resource "github_repository" "ami-builder" {
 resource "github_team_repository" "ami-builder-dataworks" {
   repository = "${github_repository.ami-builder.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "ami-builder-master" {

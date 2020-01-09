@@ -14,7 +14,7 @@ resource "github_repository" "concourse-control-tower" {
 resource "github_team_repository" "concourse-control-tower-dataworks" {
   repository = "${github_repository.concourse-control-tower.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "concourse-control-tower-master" {

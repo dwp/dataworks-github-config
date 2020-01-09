@@ -14,7 +14,7 @@ resource "github_repository" "emr-encryption-materials-provider" {
 resource "github_team_repository" "emr-encryption-materials-provider-dataworks" {
   repository = "${github_repository.emr-encryption-materials-provider.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "emr-encryption-materials-provider-master" {

@@ -14,7 +14,7 @@ resource "github_repository" "github-repo-config-examples" {
 resource "github_team_repository" "github-repo-config-examples-dataworks" {
   repository = "${github_repository.github-repo-config-examples.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "github-repo-config-examples-master" {
