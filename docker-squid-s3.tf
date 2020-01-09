@@ -20,7 +20,7 @@ resource "github_team_repository" "docker-squid-s3-dataworks" {
 resource "github_branch_protection" "docker-squid-s3-master" {
   branch         = "${github_repository.docker-squid-s3.default_branch}"
   repository     = "${github_repository.docker-squid-s3.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

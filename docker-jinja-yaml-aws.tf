@@ -20,7 +20,7 @@ resource "github_team_repository" "docker-jinja-yaml-aws-dataworks" {
 resource "github_branch_protection" "docker-jinja-yaml-aws-master" {
   branch         = "${github_repository.docker-jinja-yaml-aws.default_branch}"
   repository     = "${github_repository.docker-jinja-yaml-aws.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

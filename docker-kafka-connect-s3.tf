@@ -20,7 +20,7 @@ resource "github_team_repository" "docker-kafka-connect-s3-dataworks" {
 resource "github_branch_protection" "docker-kafka-connect-s3-master" {
   branch         = "${github_repository.docker-kafka-connect-s3.default_branch}"
   repository     = "${github_repository.docker-kafka-connect-s3.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

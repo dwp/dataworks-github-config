@@ -20,7 +20,7 @@ resource "github_team_repository" "dataworks-open-source-policy-dataworks" {
 resource "github_branch_protection" "dataworks-open-source-policy-master" {
   branch         = "${github_repository.dataworks-open-source-policy.default_branch}"
   repository     = "${github_repository.dataworks-open-source-policy.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

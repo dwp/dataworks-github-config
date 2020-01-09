@@ -20,7 +20,7 @@ resource "github_team_repository" "terraform-aws-emr-cluster-dataworks" {
 resource "github_branch_protection" "terraform-aws-emr-cluster-master" {
   branch         = "${github_repository.terraform-aws-emr-cluster.default_branch}"
   repository     = "${github_repository.terraform-aws-emr-cluster.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

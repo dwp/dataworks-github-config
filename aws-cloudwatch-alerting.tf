@@ -20,7 +20,7 @@ resource "github_team_repository" "aws-cloudwatch-alerting-dataworks" {
 resource "github_branch_protection" "aws-cloudwatch-alerting-master" {
   branch         = "${github_repository.aws-cloudwatch-alerting.default_branch}"
   repository     = "${github_repository.aws-cloudwatch-alerting.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

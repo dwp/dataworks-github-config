@@ -20,7 +20,7 @@ resource "github_team_repository" "uc-historic-data-importer-dataworks" {
 resource "github_branch_protection" "uc-historic-data-importer-master" {
   branch         = "${github_repository.uc-historic-data-importer.default_branch}"
   repository     = "${github_repository.uc-historic-data-importer.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

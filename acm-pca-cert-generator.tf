@@ -20,7 +20,7 @@ resource "github_team_repository" "acm-pca-cert-generator-dataworks" {
 resource "github_branch_protection" "acm-pca-cert-generator-master" {
   branch         = "${github_repository.acm-pca-cert-generator.default_branch}"
   repository     = "${github_repository.acm-pca-cert-generator.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

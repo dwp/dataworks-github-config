@@ -20,7 +20,7 @@ resource "github_team_repository" "concourse-control-tower-dataworks" {
 resource "github_branch_protection" "concourse-control-tower-master" {
   branch         = "${github_repository.concourse-control-tower.default_branch}"
   repository     = "${github_repository.concourse-control-tower.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

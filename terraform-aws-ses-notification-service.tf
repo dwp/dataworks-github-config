@@ -20,7 +20,7 @@ resource "github_team_repository" "terraform-aws-ses-notification-service-datawo
 resource "github_branch_protection" "terraform-aws-ses-notification-service-master" {
   branch         = "${github_repository.terraform-aws-ses-notification-service.default_branch}"
   repository     = "${github_repository.terraform-aws-ses-notification-service.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

@@ -20,7 +20,7 @@ resource "github_team_repository" "github-repo-config-examples-dataworks" {
 resource "github_branch_protection" "github-repo-config-examples-master" {
   branch         = "${github_repository.github-repo-config-examples.default_branch}"
   repository     = "${github_repository.github-repo-config-examples.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true
