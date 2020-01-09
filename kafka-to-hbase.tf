@@ -14,13 +14,13 @@ resource "github_repository" "kafka-to-hbase" {
 resource "github_team_repository" "kafka-to-hbase-dataworks" {
   repository = "${github_repository.kafka-to-hbase.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "kafka-to-hbase-master" {
   branch         = "${github_repository.kafka-to-hbase.default_branch}"
   repository     = "${github_repository.kafka-to-hbase.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

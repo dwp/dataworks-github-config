@@ -14,13 +14,13 @@ resource "github_repository" "terraform-aws-vpc" {
 resource "github_team_repository" "terraform-aws-vpc-dataworks" {
   repository = "${github_repository.terraform-aws-vpc.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "terraform-aws-vpc-master" {
   branch         = "${github_repository.terraform-aws-vpc.default_branch}"
   repository     = "${github_repository.terraform-aws-vpc.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

@@ -14,13 +14,13 @@ resource "github_repository" "uc-historic-data-importer" {
 resource "github_team_repository" "uc-historic-data-importer-dataworks" {
   repository = "${github_repository.uc-historic-data-importer.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "uc-historic-data-importer-master" {
   branch         = "${github_repository.uc-historic-data-importer.default_branch}"
   repository     = "${github_repository.uc-historic-data-importer.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

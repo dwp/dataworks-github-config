@@ -14,13 +14,13 @@ resource "github_repository" "ami-builder-configs" {
 resource "github_team_repository" "ami-builder-configs-dataworks" {
   repository = "${github_repository.ami-builder-configs.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "ami-builder-configs-master" {
   branch         = "${github_repository.ami-builder-configs.default_branch}"
   repository     = "${github_repository.ami-builder-configs.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

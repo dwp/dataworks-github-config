@@ -14,13 +14,13 @@ resource "github_repository" "emr-cluster-broker" {
 resource "github_team_repository" "emr-cluster-broker-dataworks" {
   repository = "${github_repository.emr-cluster-broker.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "emr-cluster-broker-master" {
   branch         = "${github_repository.emr-cluster-broker.default_branch}"
   repository     = "${github_repository.emr-cluster-broker.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

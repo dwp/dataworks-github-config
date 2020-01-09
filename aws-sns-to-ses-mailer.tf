@@ -14,13 +14,13 @@ resource "github_repository" "aws-sns-to-ses-mailer" {
 resource "github_team_repository" "aws-sns-to-ses-mailer-dataworks" {
   repository = "${github_repository.aws-sns-to-ses-mailer.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "aws-sns-to-ses-mailer-master" {
   branch         = "${github_repository.aws-sns-to-ses-mailer.default_branch}"
   repository     = "${github_repository.aws-sns-to-ses-mailer.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

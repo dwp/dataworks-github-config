@@ -14,13 +14,13 @@ resource "github_repository" "dataworks-github-config" {
 resource "github_team_repository" "dataworks-github-config-dataworks" {
   repository = "${github_repository.dataworks-github-config.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "dataworks-github-config-master" {
   branch         = "${github_repository.dataworks-github-config.default_branch}"
   repository     = "${github_repository.dataworks-github-config.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

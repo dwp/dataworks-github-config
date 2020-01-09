@@ -14,13 +14,13 @@ resource "github_repository" "docker-spark-gpg" {
 resource "github_team_repository" "docker-spark-gpg-dataworks" {
   repository = "${github_repository.docker-spark-gpg.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "docker-spark-gpg-master" {
   branch         = "${github_repository.docker-spark-gpg.default_branch}"
   repository     = "${github_repository.docker-spark-gpg.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

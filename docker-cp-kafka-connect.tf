@@ -14,13 +14,13 @@ resource "github_repository" "docker-cp-kafka-connect" {
 resource "github_team_repository" "docker-cp-kafka-connect-dataworks" {
   repository = "${github_repository.docker-cp-kafka-connect.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "docker-cp-kafka-connect-master" {
   branch         = "${github_repository.docker-cp-kafka-connect.default_branch}"
   repository     = "${github_repository.docker-cp-kafka-connect.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

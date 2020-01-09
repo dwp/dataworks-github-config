@@ -14,13 +14,13 @@ resource "github_repository" "docker-python-boto-behave" {
 resource "github_team_repository" "docker-python-boto-behave-dataworks" {
   repository = "${github_repository.docker-python-boto-behave.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "docker-python-boto-behave-master" {
   branch         = "${github_repository.docker-python-boto-behave.default_branch}"
   repository     = "${github_repository.docker-python-boto-behave.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true

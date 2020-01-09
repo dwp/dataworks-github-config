@@ -14,13 +14,13 @@ resource "github_repository" "registry-image-resource" {
 resource "github_team_repository" "registry-image-resource-dataworks" {
   repository = "${github_repository.registry-image-resource.name}"
   team_id    = "${github_team.dataworks.id}"
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "registry-image-resource-master" {
   branch         = "${github_repository.registry-image-resource.default_branch}"
   repository     = "${github_repository.registry-image-resource.name}"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true
