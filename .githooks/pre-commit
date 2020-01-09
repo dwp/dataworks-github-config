@@ -28,5 +28,7 @@ do
 done
 
 if (( match > 0 )); then
-    exit 1
+  echo "If the above are false positives then you can use the --no-verify flag to skip checks"
+  echo "git commit --no-verify"
+  exit 1
 fi
