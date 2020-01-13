@@ -12,7 +12,7 @@ def main():
     else:
         ssm = boto3.client('ssm')
     parameter = ssm.get_parameter(Name='terraform_bootstrap_config', WithDecryption=False)
-    config_data = yaml.load(parameter['Parameter']['Value'])
+    config_data = yaml.load(parameter['Parameter']['Value'], Loader=yaml.FullLoader)
     with open('terraform.tf.j2') as in_template:
         template = jinja2.Template(in_template.read())
     with open('terraform.tf', 'w+') as terraform_tf:
