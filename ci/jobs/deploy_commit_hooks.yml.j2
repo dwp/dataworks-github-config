@@ -1,0 +1,47 @@
+jobs:
+  - name: deploy-commit-hooks
+    max_in_flight: 1
+    plan:
+      - aggregate:
+          - get: dataworks-github-config
+            trigger: true
+          {% for repo in repos %}
+          - get: {{ repo }}{% endfor %}
+      - task: commit-and-push
+        config:
+          inputs:
+            - name: dataworks-github-config
+            {% for repo in repos %}
+            - name: {{ repo }}{% endfor %}
+          outputs:
+            {% for repo in repos %}
+            - name: {{ repo }}-modified{% endfor %}
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: alpine/git
+              tag: 1.0.7
+          run:
+            path: /bin/sh
+            args:
+              - -exc
+              - |
+                git config --global user.name "${GIT_USERNAME}"
+                git config --global user.email "${GIT_EMAIL}"
+                {% for repo in repos %}
+                git clone {{ repo }} {{ repo }}-modified
+                cd {{ repo }}-modified
+                git remote set-url origin https://github.com/dwp/{{ repo }}.git
+                cp -r ../dataworks-github-config/.githooks .
+                git add .githooks
+                git diff --quiet && git diff --staged --quiet || git commit -m "update .githooks from dataworks-github-config"
+                cd ..{% endfor %}
+        params:
+          GIT_USERNAME: ((github_com.username))
+          GIT_EMAIL: ((github_com.email))
+      - aggregate:
+        {% for repo in repos %}
+        - put: {{ repo }}
+          params:
+            repository: {{ repo }}-modified{% endfor %}
