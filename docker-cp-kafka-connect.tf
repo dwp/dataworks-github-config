@@ -7,7 +7,7 @@ resource "github_repository" "docker-cp-kafka-connect" {
   has_issues         = true
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
