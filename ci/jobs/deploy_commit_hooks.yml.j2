@@ -36,6 +36,11 @@ jobs:
                 cp -r ../dataworks-github-config/.githooks .
                 git add .githooks
                 git diff --quiet && git diff --staged --quiet || git commit -m "update .githooks from dataworks-github-config"
+                if [ ! -f Makefile ]; then
+                  cp -r ../dataworks-github-config/Makefile.sample ./Makefile
+                  git add Makefile
+                  git diff --quiet && git diff --staged --quiet || git commit -m "create Makefile from dataworks-github-config/Makefile.sample"
+                fi
                 cd ..{% endfor %}
         params:
           GIT_USERNAME: ((github_com.username))
