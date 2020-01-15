@@ -34,3 +34,7 @@ git-hooks: ## Set up hooks in .git/hooks
 			ln -s -f ../../.githooks/$${hook} $${HOOK_DIR}/$${hook}; \
 		done \
 	}
+
+.PHONY: pipeline
+pipeline: ## Generate and apply Concourse pipeline
+	python generate_pipeline_code.py && aviator
