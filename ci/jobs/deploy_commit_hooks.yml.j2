@@ -5,6 +5,7 @@ jobs:
       - aggregate:
           - get: dataworks-github-config
             trigger: true
+            passed: master
           {% for repo in repos %}
           - get: {{ repo }}{% endfor %}
       - task: commit-and-push
