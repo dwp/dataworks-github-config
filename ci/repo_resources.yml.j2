@@ -1,0 +1,16 @@
+resources:
+{% for repo in repos %}
+- name: {{ repo }}
+  type: git
+  source:
+    branch: master
+    uri: https://github.com/dwp/{{ repo }}.git
+    username: ((github_com.username))
+    password: ((github_com.token))
+    git_config:
+      - name: user.name
+        value: ((github_com.username))
+      - name: user.email
+        value: ((github_com.email))
+  check_every: 5m
+{% endfor %}
