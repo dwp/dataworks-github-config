@@ -44,7 +44,8 @@ meta:
               cp ../terraform-config/terraform.tf .
               terraform workspace show
               terraform init
-              terraform apply -auto-approve
+              terraform plan -out terraform.plan
+              terraform apply -auto-approve terraform.plan
           dir: dataworks-github-config
         inputs:
           - name: dataworks-github-config
