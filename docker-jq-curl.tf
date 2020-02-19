@@ -1,6 +1,7 @@
 resource "github_repository" "docker-jq-curl" {
   name        = "docker-jq-curl"
   description = "Docker container with JQ and Curl"
+  auto_init   = true
 
   allow_merge_commit = false
   default_branch     = "master"
