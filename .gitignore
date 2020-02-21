@@ -10,3 +10,10 @@
 
 # terraform config
 terraform.tf
+
+# concoure pipeline config
+aviator_pipeline.yml
+
+# generated files
+ci/jobs/deploy_commit_hooks.yml
+ci/repo_resources.yml
