@@ -1,6 +1,6 @@
 resource "github_repository" "ssm-parameter-store" {
   name        = "ssm-parameter-store"
-  description = "Docker container with JQ and Curl"
+  description = "Private data stored in SSM's parameter store"
   auto_init   = true
 
   allow_merge_commit = false
