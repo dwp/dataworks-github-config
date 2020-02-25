@@ -5,6 +5,7 @@ resource "github_repository" "aws-authentication" {
   allow_merge_commit = false
   default_branch     = "master"
   has_issues         = true
+  auto_init          = true
 
   lifecycle {
     prevent_destroy = true
