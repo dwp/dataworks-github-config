@@ -7,9 +7,10 @@ resource "github_repository" "aws-authentication" {
   has_issues         = true
   auto_init          = true
 
-  lifecycle {
-    prevent_destroy = true
-  }
+  # TODO: remove after pipeline passes
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
 }
 
 resource "github_team_repository" "aws-authentication-dataworks" {
