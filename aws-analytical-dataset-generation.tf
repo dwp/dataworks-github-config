@@ -25,6 +25,7 @@ resource "github_branch_protection" "aws-analytical-dataset-generation_master" {
 
   required_status_checks {
     strict = true
+    contexts = ["concourse-ci/aws-analytical-dataset-generation-pr"]
   }
 
   required_pull_request_reviews {
