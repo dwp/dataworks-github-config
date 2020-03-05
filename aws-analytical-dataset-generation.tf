@@ -1,5 +1,5 @@
 resource "github_repository" "aws-analytical-dataset-generation" {
-  name        = "github_repository"
+  name        = "aws-analytical-dataset-generation"
   description = "This repo holds stuff for handling ingested UCFS data "
   auto_init   = true
 
