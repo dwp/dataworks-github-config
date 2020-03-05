@@ -1,9 +1,9 @@
 resource "github_repository" "dataworks-common-logging" {
   name        = "dataworks-common-logging"
   description = "Kotlin utility library to be used in Dataworks applications to ensure common logging format."
+  auto_init   = true
 
   allow_merge_commit = false
-  default_branch     = "master"
   has_issues         = true
 
   lifecycle {
