@@ -1,6 +1,6 @@
-resource "aws-analytical-dataset-generation" "example" {
-  name        = "example"
-  description = "example"
+resource "github_repository" "aws-analytical-dataset-generation" {
+  name        = "github_repository"
+  description = "This repo holds stuff for handling ingested UCFS data "
   auto_init   = true
 
   allow_merge_commit = false
@@ -12,15 +12,15 @@ resource "aws-analytical-dataset-generation" "example" {
   }
 }
 
-resource "github_team_repository" "example_dataworks" {
-  repository = "${aws-analytical-dataset-generation.example.name}"
+resource "github_team_repository" "aws-analytical-dataset-generation_dataworks" {
+  repository = "${github_repository.aws-analytical-dataset-generation.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "push"
 }
 
-resource "github_branch_protection" "example_master" {
-  branch         = "${aws-analytical-dataset-generation.example.default_branch}"
-  repository     = "${aws-analytical-dataset-generation.example.name}"
+resource "github_branch_protection" "aws-analytical-dataset-generation_master" {
+  branch         = "${github_repository.aws-analytical-dataset-generation.default_branch}"
+  repository     = "${github_repository.aws-analytical-dataset-generation.name}"
   enforce_admins = false
 
   required_status_checks {
