@@ -1,6 +1,6 @@
-resource "dataworks-config" "example" {
-  name        = "example"
-  description = "example"
+resource "github_repository" "dataworks-config" {
+  name        = "dataworks-config"
+  description = "Repo for storing SSM Parameter Store content"
   auto_init   = true
 
   allow_merge_commit = false
@@ -12,15 +12,15 @@ resource "dataworks-config" "example" {
   }
 }
 
-resource "github_team_repository" "example_dataworks" {
-  repository = "${dataworks-config.example.name}"
+resource "github_team_repository" "dataworks-config_dataworks" {
+  repository = "${github_repository.dataworks-config.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "push"
 }
 
-resource "github_branch_protection" "example_master" {
-  branch         = "${dataworks-config.example.default_branch}"
-  repository     = "${dataworks-config.example.name}"
+resource "github_branch_protection" "dataworks-config_master" {
+  branch         = "${github_repository.dataworks-config.default_branch}"
+  repository     = "${github_repository.dataworks-config.name}"
   enforce_admins = false
 
   required_status_checks {
