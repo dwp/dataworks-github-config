@@ -24,7 +24,7 @@ resource "github_branch_protection" "aws-pdm-dataset-generation_master" {
 
   required_status_checks {
     strict = true
-    contexts = ["concourse-ci/aws-pdm-dataset-generation-pr"]
+    contexts = ["concourse-ci/pdm-dataset-generation-pr"]
   }
 
   required_pull_request_reviews {
