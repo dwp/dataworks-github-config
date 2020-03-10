@@ -4,7 +4,7 @@ resource "github_repository" "orchestration-service" {
 
   allow_merge_commit = false
   has_issues         = true
-  auto_init	     = true
+  auto_init          = true
 
   lifecycle {
     prevent_destroy = true
