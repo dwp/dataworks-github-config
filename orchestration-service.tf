@@ -3,8 +3,8 @@ resource "github_repository" "orchestration-service" {
   description = "The service orchestrator for providing remote access into the analytical environment"
 
   allow_merge_commit = false
-  default_branch     = "master"
   has_issues         = true
+  auto_init	     = true
 
   lifecycle {
     prevent_destroy = true
