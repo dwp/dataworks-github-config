@@ -9,6 +9,7 @@ Manage GitHub team and repository configuration for DataWorks
 1. Copy `repository.tf.sample` to a new `.tf` file [1]
 1. Update the `github_repository` resource name, and its `name` and `description` attributes. *Do not* make any other changes.
 1. Update the 3 references to the `github_repository` resource so their names match the new name you used in step 2.
+1. Make sure all `example` entries are replaced with new repo name as used in step 3.
 1. Run `make pipeline` to update the Concourse pipeline [2]. This step will also:
    1. Override any githooks with [canoncial copies](.githooks)
    1. Commit a Makefile with common `bootstrap` actions

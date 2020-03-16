@@ -24,7 +24,6 @@ resource "github_branch_protection" "manage-mysql-user-master" {
 
   required_status_checks {
     strict = true
-    contexts = ["concourse-ci/example-pr"]
   }
 
   required_pull_request_reviews {
