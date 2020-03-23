@@ -22,9 +22,9 @@ resource "github_branch_protection" "example_master" {
   repository     = "${github_repository.example.name}"
   enforce_admins = false
 
-  # This stanza should only be kept for Terraform repos. Application code will run through circle.
   required_status_checks {
     strict = true
+    # The contexts line should only be kept for Terraform repos.
     contexts = ["concourse-ci/example-pr"]
   }
 
