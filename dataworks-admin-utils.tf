@@ -1,6 +1,6 @@
 resource "github_repository" "dataworks-admin-utils" {
   name        = "dataworks-admin-utils"
-  description = "Contains dataworks administrative utilities"
+  description = "Contains DataWorks administrative utilities"
   auto_init   = true
 
   allow_merge_commit = false
