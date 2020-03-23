@@ -16,9 +16,10 @@ Manage GitHub team and repository configuration for DataWorks
    1. Override any githooks with [canoncial copies](.githooks)
    1. Commit a Makefile with common `bootstrap` actions
 1. Raise a PR with your changes
-1. Once approved and merged, Concourse should create your new repository
-1. If your repository is for Terraform code, you will need to update the newly committed `Makefile` with some Terraform bootstrapping commands.
-   [aws-concourse](https://github.com/dwp/aws-concourse/blob/master/Makefile) is a decent source of inspiration.
+1. Once approved and merged, the concourse job for this repo (not your new one) will run and create your new repository. This takes a while as it checks all repos configured here.
+1. Checkout your new repo.
+1. If your new repository is for Terraform code, you will need to update the newly committed `Makefile` with some Terraform bootstrapping commands.
+   1. [aws-concourse](https://github.com/dwp/aws-concourse/blob/master/Makefile) is a decent source of inspiration.
 1. Run `make bootstrap` from within the top level directory of your new repo
 
 # Notes
