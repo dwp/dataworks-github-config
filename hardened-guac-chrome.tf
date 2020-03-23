@@ -1,6 +1,6 @@
 resource "github_repository" "hardened-guac-chrome" {
   name        = "hardened-guac-chrome"
-  description = "The service orchestrator for providing remote access into the analytical environment"
+  description = "The hardened Guacamole Chrome container"
 
   allow_merge_commit = false
   has_issues         = true
