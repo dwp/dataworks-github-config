@@ -10,6 +10,8 @@ Manage GitHub team and repository configuration for DataWorks
 1. Update the `github_repository` resource name, and its `name` and `description` attributes. *Do not* make any other changes.
 1. Update the 3 references to the `github_repository` resource so their names match the new name you used in step 2.
 1. Make sure all `example` entries are replaced with new repo name as used in step 3.
+1. The `required_status_checks` stanza should only be kept for Terraform repos. 
+   1. If the new repo will not contain terraform, remove the `required_status_checks` stanza.
 1. Run `make pipeline` to update the Concourse pipeline [2]. This step will also:
    1. Override any githooks with [canoncial copies](.githooks)
    1. Commit a Makefile with common `bootstrap` actions
