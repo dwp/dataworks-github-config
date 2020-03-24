@@ -23,8 +23,7 @@ resource "github_branch_protection" "aws-api-payloader_master" {
   enforce_admins = false
 
   required_status_checks {
-    strict   = true
-    contexts = ["concourse-ci/aws-api-payloader-pr"]
+    strict = true
   }
 
   required_pull_request_reviews {
