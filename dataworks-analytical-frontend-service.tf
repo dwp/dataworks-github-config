@@ -6,9 +6,9 @@ resource "github_repository" "frontend-service" {
   has_issues         = true
   auto_init          = true
 
-//  lifecycle {
-//    prevent_destroy = true
-//  }
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "github_team_repository" "frontend-service-dataworks" {
