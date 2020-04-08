@@ -1,5 +1,5 @@
 resource "github_repository" "frontend-service" {
-  name        = "frontend-service"
+  name        = "dataworks-analytical-frontend-service"
   description = "Frontend service providing user authentication and interface with orchestration service"
 
   allow_merge_commit = false
