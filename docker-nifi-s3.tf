@@ -25,7 +25,7 @@ resource "github_branch_protection" "docker-nifi-s3-master" {
   required_status_checks {
     strict = true
     # The contexts line should only be kept for Terraform repos.
-    contexts = ["concourse-ci/example-pr"]
+    contexts = ["concourse-ci/docker-nifi-s3-pr"]
   }
 
   required_pull_request_reviews {
