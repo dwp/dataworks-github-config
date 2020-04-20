@@ -19,3 +19,6 @@ ci/jobs/deploy_commit_hooks.yml
 ci/repo_resources.yml
 
 .idea/
+
+#secrets blob
+dataworks.json
