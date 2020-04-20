@@ -2,7 +2,7 @@ jobs:
   - name: deploy-commit-hooks
     max_in_flight: 1
     plan:
-      - aggregate:
+      - in_parallel:
           - get: dataworks-github-config
             trigger: true
             passed:
@@ -47,7 +47,7 @@ jobs:
         params:
           GIT_USERNAME: ((github_com.username))
           GIT_EMAIL: ((github_com.email))
-      - aggregate:
+      - in_parallel:
         {% for repo in repos %}
         - put: {{ repo }}
           params:
