@@ -1,19 +1,19 @@
 spruce:
-- base: ci/meta.yml
-  prune:
-  - meta
-  merge:
-  - with_in: ci/
-    regexp: ".*.yml"
-    except:
-    - repo_resources.yml.j2
-  - with_in: ci/jobs/
-    regexp: ".*.yml"
-    except:
-      - deploy_commit_hooks.yml.j2
-  to: aviator_pipeline.yml
+  - base: ci/meta.yml
+    prune:
+      - meta
+    merge:
+      - with_in: ci/
+        regexp: ".*.yml"
+        except:
+          - repo_resources.yml.j2
+      - with_in: ci/jobs/
+        regexp: ".*.yml"
+        except:
+          - deploy_commit_hooks.yml.j2
+    to: aviator_pipeline.yml
 fly:
   name: dataworks-github-config
-  target: concourse
+  target: aws-concourse
   config: aviator_pipeline.yml
   expose: true
