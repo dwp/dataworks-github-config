@@ -7,7 +7,7 @@ resource "github_repository" "hardened-guac-chrome" {
   auto_init          = true
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
