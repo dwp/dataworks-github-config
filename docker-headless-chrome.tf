@@ -31,3 +31,21 @@ resource "github_branch_protection" "docker-headless-chrome-master" {
     require_code_owner_reviews = true
   }
 }
+
+resource "github_actions_secret" "dockerhub_password" {
+  repository       = "${github_repository.docker-headless-chrome.name}"
+  secret_name      = "DOCKERHUB_PASSWORD"
+  plaintext_value  = var.dockerhub_password
+}
+
+resource "github_actions_secret" "dockerhub_username" {
+  repository       = "${github_repository.docker-headless-chrome.name}"
+  secret_name      = "DOCKERHUB_USERNAME"
+  plaintext_value  = var.dockerhub_username
+}
+
+resource "github_actions_secret" "snyk_token" {
+  repository       = "${github_repository.docker-headless-chrome.name}"
+  secret_name      = "SNYK_TOKEN"
+  plaintext_value  = var.snyk_token
+}
