@@ -11,6 +11,7 @@ def main():
         'terraform.tf',
         'dataworks-github-config.tf',
         'registry-image-resource.tf',
+        'variables.tf',
     ]
     file_names = [x for x in glob.glob('*.tf') if x not in files_to_ignore]
     repos = [s.replace('.tf', '') for s in file_names]
