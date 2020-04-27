@@ -1,5 +1,8 @@
 groups:
-- name: master
-  jobs:
-  - master
-  - deploy-commit-hooks
+  - name: master
+    jobs:
+      - master
+      - deploy-commit-hooks
+  - name: pull-request
+    jobs:
+      - dataworks-github-config-pr
