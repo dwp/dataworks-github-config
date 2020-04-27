@@ -27,7 +27,7 @@ jobs:
             TF_CLI_ARGS_plan: -lock-timeout=300s
           run:
             path: sh
-            dir: dataworks-github-config/terraform/deploy
+            dir: dataworks-github-config
             args:
               - -exc
               - |
