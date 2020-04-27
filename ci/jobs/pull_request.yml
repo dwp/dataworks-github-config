@@ -23,7 +23,8 @@ jobs:
               tag: ((dataworks.terraform_version))
           params:
             TF_INPUT: false
-            TF_CLI_ARGS_apply: -lock-timeout=300s
+            TF_VAR_github_token: ((dataworks.concourse_github_pat))
+            TF_VAR_github_organization: dwp
             TF_CLI_ARGS_plan: -lock-timeout=300s
           run:
             path: sh
@@ -31,10 +32,7 @@ jobs:
             args:
               - -exc
               - |
-                cp ../../../terraform-config/terraform.tf .
-                cp ../../../terraform-config/terraform.tfvars .
                 terraform init
-                terraform workspace select management
                 terraform plan
           inputs:
             - name: dataworks-github-config
