@@ -11,5 +11,5 @@ resources:
     source:
       repo: dwp/dataworks-github-config
       uri: https://github.com/dwp/dataworks-github-config.git
-      webhook_token: ((dataworks.concourse_github_webhook_token))
+      access_token: ((dataworks.concourse_github_pat))
     check_every: 720h
