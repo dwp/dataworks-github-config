@@ -32,19 +32,19 @@ resource "github_branch_protection" "docker-headless-chrome-master" {
   }
 }
 
-resource "github_actions_secret" "dockerhub_password" {
+resource "github_actions_secret" "docker-headless-chrome-dockerhub-password" {
   repository       = "${github_repository.docker-headless-chrome.name}"
   secret_name      = "DOCKERHUB_PASSWORD"
   plaintext_value  = "${var.dockerhub_password}"
 }
 
-resource "github_actions_secret" "dockerhub_username" {
+resource "github_actions_secret" "docker-headless-chrome-dockerhub-username" {
   repository       = "${github_repository.docker-headless-chrome.name}"
   secret_name      = "DOCKERHUB_USERNAME"
   plaintext_value  = "${var.dockerhub_username}"
 }
 
-resource "github_actions_secret" "snyk_token" {
+resource "github_actions_secret" "docker-headless-chrome-snyk-token" {
   repository       = "${github_repository.docker-headless-chrome.name}"
   secret_name      = "SNYK_TOKEN"
   plaintext_value  = "${var.snyk_token}"

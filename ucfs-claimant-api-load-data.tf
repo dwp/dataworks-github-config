@@ -32,19 +32,19 @@ resource "github_branch_protection" "ucfs-claimant-api-load-data_master" {
   }
 }
 
-resource "github_actions_secret" "dockerhub_password" {
+resource "github_actions_secret" "ucfs-claimant-api-load-data_dockerhub_password" {
   repository       = "${github_repository.ucfs-claimant-api-load-data.name}"
   secret_name      = "DOCKERHUB_PASSWORD"
   plaintext_value  = "${var.dockerhub_password}"
 }
 
-resource "github_actions_secret" "dockerhub_username" {
+resource "github_actions_secret" "ucfs-claimant-api-load-data_dockerhub_username" {
   repository       = "${github_repository.ucfs-claimant-api-load-data.name}"
   secret_name      = "DOCKERHUB_USERNAME"
   plaintext_value  = "${var.dockerhub_username}"
 }
 
-resource "github_actions_secret" "snyk_token" {
+resource "github_actions_secret" "ucfs-claimant-api-load-data_snyk_token" {
   repository       = "${github_repository.ucfs-claimant-api-load-data.name}"
   secret_name      = "SNYK_TOKEN"
   plaintext_value  = "${var.snyk_token}"
