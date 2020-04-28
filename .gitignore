@@ -21,4 +21,4 @@ ci/repo_resources.yml
 .idea/
 
 #secrets blob
-dataworks.json
+concourse.json
