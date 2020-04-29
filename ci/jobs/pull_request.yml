@@ -24,7 +24,11 @@ jobs:
           params:
             TF_INPUT: false
             TF_VAR_github_token: ((dataworks.concourse_github_pat))
+            TF_VAR_github_webhook_token: ((dataworks.concourse_github_webhook_token))
             TF_VAR_github_organization: dwp
+            TF_VAR_dockerhub_username: ((dataworks.dockerhub_username))
+            TF_VAR_dockerhub_password: ((dataworks.dockerhub_token))
+            TF_VAR_snyk_token: ((dataworks.snyk_token))
             TF_CLI_ARGS_plan: -lock-timeout=300s
           run:
             path: sh
