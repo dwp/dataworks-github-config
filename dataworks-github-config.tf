@@ -36,7 +36,8 @@ resource "github_repository_webhook" "dataworks-github-config" {
   repository = "${github_repository.dataworks-github-config.name}"
   events     = ["push"]
   configuration {
-    url = "https://ci.dataworks.dwp.gov.uk/api/v1/teams/dataworks/pipelines/dataworks-github-config/resources/dataworks-github-config/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://ci.dataworks.dwp.gov.uk/api/v1/teams/dataworks/pipelines/dataworks-github-config/resources/dataworks-github-config/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
   }
 }
 
@@ -44,6 +45,7 @@ resource "github_repository_webhook" "dataworks-github-config-pr" {
   repository = "${github_repository.dataworks-github-config.name}"
   events     = ["pull_request"]
   configuration {
-    url = "https://ci.dataworks.dwp.gov.uk/api/v1/teams/dataworks/pipelines/dataworks-github-config/resources/dataworks-github-config-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://ci.dataworks.dwp.gov.uk/api/v1/teams/dataworks/pipelines/dataworks-github-config/resources/dataworks-github-config-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
   }
 }
