@@ -31,3 +31,19 @@ resource "github_branch_protection" "dataworks-github-config-master" {
     require_code_owner_reviews = true
   }
 }
+
+resource "github_repository_webhook" "dataworks-github-config" {
+  repository = "${github_repository.dataworks-github-config.name}"
+  events     = ["push"]
+  configuration {
+    url = "https://ci.dataworks.dwp.gov.uk/api/v1/teams/dataworks/pipelines/dataworks-github-config/resources/dataworks-github-config/check/webhook?webhook_token=${var.github_webhook_token}"
+  }
+}
+
+resource "github_repository_webhook" "dataworks-github-config-pr" {
+  repository = "${github_repository.dataworks-github-config.name}"
+  events     = ["pull_request"]
+  configuration {
+    url = "https://ci.dataworks.dwp.gov.uk/api/v1/teams/dataworks/pipelines/dataworks-github-config/resources/dataworks-github-config-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+  }
+}
