@@ -25,3 +25,21 @@ Manage GitHub team and repository configuration for DataWorks
 
 1. Our early repository configs didn't ask for them to be initialized by Terraform, which led to a 2-step terraform run (once without the branch protection configured, and then, once the repo had been created, with branch protection turned on). Those configuration files now can't be changed, because changing that config setting tries to delete the repository and recreate them. Thankfully, they're protected by a `lifecycle` guard so that doesn't actually happen. In short, *always* copy the `repository.tf.sample` and not just any other existing `.tf` file.
 1. You will need Python, Jinja, Spruce and Aviator installed to successfully generate and apply the new updated Concourse pipelines.
+
+# In regards to Secrets (AWS Concourse)
+
+Secrets are _all_ managed via SecretsManager.
+
+To add secrets to be used in your piplines follow the following process:  
+
+Get the Secret Binary:
+```
+aws secretsmanager get-secret-value --secret-id /concourse/{$TEAM}/{$SECRETNAME} --query SecretBinary --output text --profile $PROFILE | base64 -D > concourse.json
+```
+
+add your key:value secret, and push the binary back.
+
+```
+aws secretsmanager put-secret-value  --secret-id /concourse/{$TEAM}/{$SECRETNAME} --secret-binary file://concourse.json --profile $PROFILE
+```
+Your secrets can be called as `(($SECRETNAME.$KEY))` in your pipelines.

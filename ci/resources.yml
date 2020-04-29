@@ -1,7 +1,15 @@
 resources:
-- name: dataworks-github-config
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/dataworks-github-config.git
-  check_every: 5m
+  - name: dataworks-github-config
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/dataworks-github-config.git
+    webhook_token: ((dataworks.concourse_github_webhook_token))
+    check_every: 720h
+  - name: dataworks-github-config-pr
+    type: pull-request
+    source:
+      repo: dwp/dataworks-github-config
+      uri: https://github.com/dwp/dataworks-github-config.git
+      access_token: ((dataworks.concourse_github_pat))
+    check_every: 720h

@@ -5,12 +5,12 @@ resources:
   source:
     branch: master
     uri: https://github.com/dwp/{{ repo }}.git
-    username: ((github_com.username))
-    password: ((github_com.token))
+    username: ((dataworks.concourse_github_username))
+    password: ((dataworks.concourse_github_pat))
     git_config:
       - name: user.name
-        value: ((github_com.username))
+        value: ((dataworks.concourse_github_username))
       - name: user.email
-        value: ((github_com.email))
+        value: ((dataworks.concourse_github_email))
   check_every: 5m
 {% endfor %}

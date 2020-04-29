@@ -8,8 +8,8 @@ meta:
           type: docker-image
           source:
             repository: dwpdigital/jinja-yaml-aws
-            version: 0.0.5
-            tag: 0.0.5
+            version: 0.0.19
+            tag: 0.0.19
         run:
           path: sh
           args:
@@ -23,8 +23,6 @@ meta:
         outputs:
           - name: terraform-config
       params:
-        AWS_ACCESS_KEY_ID: ((ci.aws_access_key_id))
-        AWS_SECRET_ACCESS_KEY: ((ci.aws_secret_access_key))
         AWS_REGION: eu-west-2
     terraform-apply:
       task: terraform-apply
@@ -34,8 +32,8 @@ meta:
           type: docker-image
           source:
             repository: hashicorp/terraform
-            version: ((terraform.version))
-            tag: ((terraform.version))
+            version: ((dataworks.terraform_version))
+            tag: ((dataworks.terraform_version))
         run:
           path: sh
           args:
@@ -53,13 +51,11 @@ meta:
       params:
         TF_CLI_ARGS_apply: -lock-timeout=300s
         TF_INPUT: "false"
-        AWS_ACCESS_KEY_ID: ((ci.aws_access_key_id))
-        AWS_SECRET_ACCESS_KEY: ((ci.aws_secret_access_key))
-        TF_VAR_github_token: ((github_com.token))
+        TF_VAR_github_token: ((dataworks.concourse_github_pat))
         TF_VAR_github_organization: dwp
-        TF_VAR_dockerhub_username: ((dockerhub.username))
-        TF_VAR_dockerhub_password: ((dockerhub.token))
-        TF_VAR_snyk_token: ((snyk.token))
+        TF_VAR_dockerhub_username: ((dataworks.dockerhub_username))
+        TF_VAR_dockerhub_password: ((dataworks.dockerhub_token))
+        TF_VAR_snyk_token: ((dataworks.snyk_token))
     terraform-plan:
       task: terraform-plan
       config:
@@ -68,8 +64,8 @@ meta:
           type: docker-image
           source:
             repository: hashicorp/terraform
-            version: ((terraform.version))
-            tag: ((terraform.version))
+            version: ((dataworks.terraform_version))
+            tag: ((dataworks.terraform_version))
         run:
           path: sh
           args:
@@ -86,10 +82,8 @@ meta:
       params:
         TF_CLI_ARGS_plan: -lock-timeout=300s
         TF_INPUT: "false"
-        AWS_ACCESS_KEY_ID: ((ci.aws_access_key_id))
-        AWS_SECRET_ACCESS_KEY: ((ci.aws_secret_access_key))
-        TF_VAR_github_token: ((github_com.token))
+        TF_VAR_github_token: ((dataworks.concourse_github_pat))
         TF_VAR_github_organization: dwp
-        TF_VAR_dockerhub_username: ((dockerhub.username))
-        TF_VAR_dockerhub_password: ((dockerhub.token))
-        TF_VAR_snyk_token: ((snyk.token))
+        TF_VAR_dockerhub_username: ((dataworks.dockerhub_username))
+        TF_VAR_dockerhub_password: ((dataworks.dockerhub_token))
+        TF_VAR_snyk_token: ((dataworks.snyk_token))
