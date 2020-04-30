@@ -24,8 +24,6 @@ resource "github_branch_protection" "docker-python-pyspark-pytest-master" {
 
   required_status_checks {
     strict = true
-    # The contexts line should only be kept for Terraform repos.
-    contexts = ["concourse-ci/example-pr"]
   }
 
   required_pull_request_reviews {
