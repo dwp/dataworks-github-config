@@ -32,20 +32,20 @@ resource "github_branch_protection" "frontend-service-master" {
   }
 }
 
-resource "github_actions_secret" "docker-frontend-service-dockerhub-password" {
-  repository      = "${github_repository.docker-frontend-service.name}"
+resource "github_actions_secret" "frontend-service-dockerhub-password" {
+  repository      = "${github_repository.frontend-service.name}"
   secret_name     = "DOCKERHUB_PASSWORD"
   plaintext_value = "${var.dockerhub_password}"
 }
 
-resource "github_actions_secret" "docker-frontend-service-dockerhub-username" {
-  repository      = "${github_repository.docker-frontend-service.name}"
+resource "github_actions_secret" "frontend-service-dockerhub-username" {
+  repository      = "${github_repository.frontend-service.name}"
   secret_name     = "DOCKERHUB_USERNAME"
   plaintext_value = "${var.dockerhub_username}"
 }
 
-resource "github_actions_secret" "docker-frontend-service-snyk-token" {
-  repository      = "${github_repository.docker-frontend-service.name}"
+resource "github_actions_secret" "frontend-service-snyk-token" {
+  repository      = "${github_repository.frontend-service.name}"
   secret_name     = "SNYK_TOKEN"
   plaintext_value = "${var.snyk_token}"
 }
