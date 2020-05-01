@@ -45,6 +45,7 @@ resource "github_actions_secret" "docker-python-pyspark-pytest_dockerhub_usernam
 }
 
 resource "github_actions_secret" "docker-python-pyspark-pytest_snyk_token" {
-  repository       = "${github_repository.docker-python-pyspark-pytest.name}"
-  secret_name      = "SNYK_TOKEN"
-  plaintext_value  = "${var.snyk_token}"
+  repository = "${github_repository.docker-python-pyspark-pytest.name}"
+  secret_name = "SNYK_TOKEN"
+  plaintext_value = "${var.snyk_token}"
+}
