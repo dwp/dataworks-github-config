@@ -6,7 +6,7 @@ resources:
     branch: master
     uri: https://github.com/dwp/{{ repo }}.git
     username: ((dataworks.concourse_github_username))
-    password: ((dataworks.concourse_github_pat))
+    password: ((dataworks-secrets.concourse_github_pat))
     git_config:
       - name: user.name
         value: ((dataworks.concourse_github_username))
