@@ -1,6 +1,6 @@
-resource "github_repository" "docker-nifi" {
-  name        = "docker-nifi"
-  description = "Docker container for nifi"
+resource "github_repository" "docker-nifi-s3" {
+  name        = "docker-nifi-s3"
+  description = "Docker container for nifi that retrieves config from s3 location"
   auto_init   = true
 
   allow_merge_commit = false
@@ -11,21 +11,21 @@ resource "github_repository" "docker-nifi" {
   }
 }
 
-resource "github_team_repository" "docker-nifi-dataworks" {
-  repository = "${github_repository.docker-nifi.name}"
+resource "github_team_repository" "docker-nifi-s3-dataworks" {
+  repository = "${github_repository.docker-nifi-s3.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "push"
 }
 
-resource "github_branch_protection" "docker-nifi-master" {
-  branch         = "${github_repository.docker-nifi.default_branch}"
-  repository     = "${github_repository.docker-nifi.name}"
+resource "github_branch_protection" "docker-nifi-s3-master" {
+  branch         = "${github_repository.docker-nifi-s3.default_branch}"
+  repository     = "${github_repository.docker-nifi-s3.name}"
   enforce_admins = false
 
   required_status_checks {
     strict = true
     # The contexts line should only be kept for Terraform repos.
-    contexts = ["concourse-ci/docker-nifi-pr"]
+    contexts = ["concourse-ci/docker-nifi-s3-pr"]
   }
 
   required_pull_request_reviews {
