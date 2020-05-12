@@ -1,6 +1,6 @@
 resource "github_repository" "docker-nifi-s3" {
   name        = "docker-nifi-s3"
-  description = "Docker container for nifi that retrieves config from s3 location"
+  description = "Docker container for Apache NiFi that retrieves config from S3 location on launch. Container images published to https://hub.docker.com/r/dwpdigital/nifi-s3."
   auto_init   = true
 
   allow_merge_commit = false
@@ -24,8 +24,6 @@ resource "github_branch_protection" "docker-nifi-s3-master" {
 
   required_status_checks {
     strict = true
-    # The contexts line should only be kept for Terraform repos.
-    contexts = ["concourse-ci/docker-nifi-s3-pr"]
   }
 
   required_pull_request_reviews {

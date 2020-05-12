@@ -37,4 +37,4 @@ git-hooks: ## Set up hooks in .git/hooks
 
 .PHONY: pipeline
 pipeline: ## Generate and apply Concourse pipeline
-	python3 generate_pipeline_code.py && aviator
+	python generate_pipeline_code.py && aviator
