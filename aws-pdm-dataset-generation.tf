@@ -23,7 +23,7 @@ resource "github_branch_protection" "aws-pdm-dataset-generation_master" {
   enforce_admins = false
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["concourse-ci/pdm-dataset-generation-pr"]
   }
 
