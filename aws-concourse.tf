@@ -23,7 +23,7 @@ resource "github_branch_protection" "aws-concourse-master" {
   enforce_admins = false
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["concourse-ci/aws-concourse-pr"]
   }
 

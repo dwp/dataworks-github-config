@@ -24,7 +24,7 @@ resource "github_branch_protection" "aws-analytical-dataset-generation_master" {
   enforce_admins = false
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["concourse-ci/analytical-dataset-generation-pr"]
   }
 
