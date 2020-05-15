@@ -17,7 +17,7 @@ aviator_pipeline.yml
 # generated files
 ci/jobs/deploy_commit_hooks.yml
 ci/repo_resources.yml
-
+*.iml
 .idea/
 
 #secrets blob
