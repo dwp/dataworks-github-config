@@ -1,5 +1,5 @@
-resource "github_repository" "dataworks_repo_template" {
-  name        = "dataworks_repo_template"
+resource "github_repository" "dataworks-repo-template" {
+  name        = "dataworks-repo-template"
   description = "Template repository for DataWorks GitHub"
   auto_init   = true
   is_template = true
@@ -12,15 +12,15 @@ resource "github_repository" "dataworks_repo_template" {
   }
 }
 
-resource "github_team_repository" "dataworks_repo_template_dataworks" {
-  repository = "${github_repository.dataworks_repo_template.name}"
+resource "github_team_repository" "dataworks-repo-template_dataworks" {
+  repository = "${github_repository.dataworks-repo-template.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "push"
 }
 
-resource "github_branch_protection" "dataworks_repo_template_master" {
-  branch         = "${github_repository.dataworks_repo_template.default_branch}"
-  repository     = "${github_repository.dataworks_repo_template.name}"
+resource "github_branch_protection" "dataworks-repo-template_master" {
+  branch         = "${github_repository.dataworks-repo-template.default_branch}"
+  repository     = "${github_repository.dataworks-repo-template.name}"
   enforce_admins = false
 
   required_status_checks {
