@@ -24,8 +24,7 @@ resource "github_branch_protection" "dataworks-terraform-repo-template_master" {
   enforce_admins = false
 
   required_status_checks {
-    strict = true
-    # The contexts line should only be kept for Terraform repos.
+    strict   = true
     contexts = ["concourse-ci/status"]
   }
 
