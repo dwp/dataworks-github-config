@@ -1,6 +1,6 @@
 resource "github_repository" "dataworks_repo_template" {
   name        = "dataworks_repo_template"
-  description = "Template repository for Dataworks GitHub"
+  description = "Template repository for DataWorks GitHub"
   auto_init   = true
   is_template = true
 

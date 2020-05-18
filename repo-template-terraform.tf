@@ -1,6 +1,6 @@
 resource "github_repository" "dataworks-terraform-repo-template" {
   name        = "dataworks-terraform-repo-template"
-  description = "Template Terraform repository for Dataworks GitHub"
+  description = "Template Terraform repository for DataWorks GitHub"
   auto_init   = true
   is_template = true
 
