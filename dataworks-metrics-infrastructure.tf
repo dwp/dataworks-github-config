@@ -7,7 +7,7 @@ resource "github_repository" "dataworks_metrics_infrastructure" {
   has_issues         = true
 
   lifecycle {
-    prevent_destroy = false
+    prevent_destroy = true
   }
 }
 
