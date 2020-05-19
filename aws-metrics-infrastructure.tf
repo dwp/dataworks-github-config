@@ -7,7 +7,7 @@ resource "github_repository" "aws-metrics-infrastructure" {
   has_issues         = true
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
