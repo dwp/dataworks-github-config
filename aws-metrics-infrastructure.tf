@@ -25,7 +25,7 @@ resource "github_branch_protection" "aws-metrics-infrastructure_master" {
   required_status_checks {
     strict = true
     # The contexts line should only be kept for Terraform repos.
-    contexts = ["concourse-ci/aws-metrics-infrastructure-pr"]
+    contexts = ["concourse-ci/status"]
   }
 
   required_pull_request_reviews {

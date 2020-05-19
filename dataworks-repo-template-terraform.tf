@@ -1,5 +1,5 @@
-resource "github_repository" "dataworks-terraform-repo-template" {
-  name        = "dataworks-terraform-repo-template"
+resource "github_repository" "dataworks_repo_template_terraform" {
+  name        = "dataworks-repo-template-terraform"
   description = "Template Terraform repository for DataWorks GitHub"
   auto_init   = true
   is_template = true
@@ -12,15 +12,15 @@ resource "github_repository" "dataworks-terraform-repo-template" {
   }
 }
 
-resource "github_team_repository" "dataworks-terraform-repo-template_dataworks" {
-  repository = "${github_repository.dataworks-terraform-repo-template.name}"
+resource "github_team_repository" "dataworks_repo_template_terraform_dataworks" {
+  repository = "${github_repository.dataworks_repo_template_terraform.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "push"
 }
 
-resource "github_branch_protection" "dataworks-terraform-repo-template_master" {
-  branch         = "${github_repository.dataworks-terraform-repo-template.default_branch}"
-  repository     = "${github_repository.dataworks-terraform-repo-template.name}"
+resource "github_branch_protection" "dataworks_repo_template_terraform_master" {
+  branch         = "${github_repository.dataworks_repo_template_terraform.default_branch}"
+  repository     = "${github_repository.dataworks_repo_template_terraform.name}"
   enforce_admins = false
 
   required_status_checks {
