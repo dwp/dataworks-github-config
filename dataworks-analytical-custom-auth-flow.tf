@@ -11,13 +11,13 @@ resource "github_repository" "dataworks-analytical-custom-auth-flow" {
   }
 }
 
-resource "github_team_repository" "example_dataworks" {
+resource "github_team_repository" "custom-auth-flow-dataworks" {
   repository = "${github_repository.dataworks-analytical-custom-auth-flow.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "push"
 }
 
-resource "github_branch_protection" "example_master" {
+resource "github_branch_protection" "custom-auth-flow-master" {
   branch         = "${github_repository.dataworks-analytical-custom-auth-flow.default_branch}"
   repository     = "${github_repository.dataworks-analytical-custom-auth-flow.name}"
   enforce_admins = false
