@@ -24,8 +24,6 @@ resource "github_branch_protection" "dataworks-analytical-custom-auth-flow-maste
 
   required_status_checks {
     strict = true
-    # The contexts line should only be kept for Terraform repos
-    contexts = ["concourse-ci/dataworks-analytical-custom-auth-flow-pr"]
   }
 
   required_pull_request_reviews {
