@@ -33,3 +33,9 @@ resource "github_branch_protection" "custom-auth-flow-master" {
     require_code_owner_reviews = true
   }
 }
+
+resource "github_actions_secret" "custom-auth-flow-snyk-token" {
+  repository      = "${github_repository.dataworks-analytical-custom-auth-flow.name}"
+  secret_name     = "SNYK_TOKEN"
+  plaintext_value = "${var.snyk_token}"
+}
