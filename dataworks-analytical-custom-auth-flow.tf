@@ -11,13 +11,13 @@ resource "github_repository" "dataworks-analytical-custom-auth-flow" {
   }
 }
 
-resource "github_team_repository" "custom-auth-flow-dataworks" {
+resource "github_team_repository" "dataworks-analytical-custom-auth-flow-dataworks" {
   repository = "${github_repository.dataworks-analytical-custom-auth-flow.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "push"
 }
 
-resource "github_branch_protection" "custom-auth-flow-master" {
+resource "github_branch_protection" "dataworks-analytical-custom-auth-flow-master" {
   branch         = "${github_repository.dataworks-analytical-custom-auth-flow.default_branch}"
   repository     = "${github_repository.dataworks-analytical-custom-auth-flow.name}"
   enforce_admins = false
@@ -34,7 +34,7 @@ resource "github_branch_protection" "custom-auth-flow-master" {
   }
 }
 
-resource "github_actions_secret" "custom-auth-flow-snyk-token" {
+resource "github_actions_secret" "dataworks-analytical-custom-auth-flow-snyk-token" {
   repository      = "${github_repository.dataworks-analytical-custom-auth-flow.name}"
   secret_name     = "SNYK_TOKEN"
   plaintext_value = "${var.snyk_token}"
