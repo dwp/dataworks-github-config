@@ -29,7 +29,7 @@ resource "github_branch_protection" "example_master" {
 
   required_status_checks {
     strict = true
-    contexts = ["concourse-ci/example-pr"]
+    contexts = ["concourse-ci/status"]
   }
 
   required_pull_request_reviews {
