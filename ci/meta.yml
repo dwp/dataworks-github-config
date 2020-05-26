@@ -96,9 +96,9 @@ meta:
         image_resource:
           type: docker-image
           source:
-            repository: ((terraform.repository))
-            version: ((terraform12.version))
-            tag: ((terraform12.version))
+            repository: hashicorp/terraform
+            version: ((dataworks.terraform_11_version))
+            tag: ((dataworks.terraform_11_version))
         run:
           path: sh
           args:
@@ -117,35 +117,17 @@ meta:
       params:
         TF_CLI_ARGS_plan: -lock-timeout=300s
         TF_INPUT: "false"
-    get-repo-name:
-      task: get-repo-name
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source: { repository: dwpdigital/docker-jq-curl, tag: "latest" }
-        run:
-          path: sh
-          args:
-            - -exc
-            - |
-              jq ../terraform-output-repositories/outputs.json
-        inputs:
-          - name: terraform-output-repositories
     new-repo-pipeline:
-      task: commit-and-push
+      task: new-repo-pipeline
       config:
         inputs:
-          - name: new-repo-pipeline
-            source:
-              uri: https://github.com/dwp/$NEW_REPO_NAME.git
           - name: terraform-output-repositories
         outputs:
           - name: new-repo-pipeline-modified
         platform: linux
         image_resource:
           type: docker-image
-          source: { repository: alpine/git, tag: "latest" }
+          source: { repository: makocchi/alpine-git-curl-jq, tag: "latest" }
         run:
           path: /bin/sh
           args:
@@ -153,27 +135,33 @@ meta:
             - |
               git config --global user.name "${GIT_USERNAME}"
               git config --global user.email "${GIT_EMAIL}"
-              git clone $NEW_REPO_NAME $NEW_REPO_NAME-modified
-              cd $NEW_REPO_NAME-modified
-              git remote set-url origin https://github.com/dwp/$NEW_REPO_NAME.git
-
               REPO_NAME=dataworks-repo-template
               TF_REPO_NAME=dataworks-repo-template-terraform
-              if [ ! -z 'grep -rnw $TF_REPO_NAME ci' ]; then
-                find ci -type f -exec sed -i 's/$TF_REPO_NAME/$NEW_REPO_NAME/g' {} +
-                git add ci/
-                git diff --quiet && git diff --staged --quiet || git commit -m "renamed pipeline to fit repository"
-              else
-                echo "Not required or not a Terraform repository"
-              fi
-              if [ ! -z 'grep -rnw $REPO_NAME ci' ]; then
-                find ci -type f -exec sed -i 's/$REPO_NAME/$NEW_REPO_NAME/g' {} +
-                git add ci/
-                git diff --quiet && git diff --staged --quiet || git commit -m "renamed pipeline to fit repository"
-              else
-                echo "Not required"
-              fi
+
+              REPO=`jq -r .repository ../terraform-output-repositories/outputs.json`
+              for $NEW_REPO_NAME in REPO do;
+                git clone $NEW_REPO_NAME $NEW_REPO_NAME-modified
+                cd $NEW_REPO_NAME-modified
+                git remote set-url origin https://github.com/dwp/$NEW_REPO_NAME.git
+
+                  if [ ! -z 'grep -rnw $TF_REPO_NAME ci' ]; then
+                    find ci -type f -exec sed -i 's/$TF_REPO_NAME/$NEW_REPO_NAME/g' {} +
+                    git add ci/
+                    git diff --quiet && git diff --staged --quiet || git commit -m "renamed pipeline to fit repository"
+                  else
+                    echo "Not required or not a Terraform repository"
+                  fi
+                  if [ ! -z 'grep -rnw $REPO_NAME ci' ]; then
+                    find ci -type f -exec sed -i 's/$REPO_NAME/$NEW_REPO_NAME/g' {} +
+                    git add ci/
+                    git diff --quiet && git diff --staged --quiet || git commit -m "renamed pipeline to fit repository"
+                  else
+                    echo "Not required"
+                  fi
+              done
+
               cd ..
         params:
           GIT_USERNAME: ((dataworks.concourse_github_username))
           GIT_EMAIL: ((dataworks.concourse_github_email))
+        put: new-repo-pipeline-modified
