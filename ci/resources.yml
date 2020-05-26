@@ -14,10 +14,3 @@ resources:
       access_token: ((dataworks-secrets.concourse_github_pat))
     webhook_token: ((dataworks.concourse_github_webhook_token))
     check_every: 720h
-  - name: new-repo-pipeline
-    type: git
-    source:
-      branch: master
-      uri: https://github.com/dwp/dataworks-repo-template.git
-    webhook_token: ((dataworks.concourse_github_webhook_token))
-    check_every: 5m
