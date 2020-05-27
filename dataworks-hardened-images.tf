@@ -31,3 +31,22 @@ resource "github_branch_protection" "dataworks_hardened_images_master" {
     require_code_owner_reviews = true
   }
 }
+
+resource "github_actions_secret" "dataworks_hardened_images_dockerhub_password" {
+  repository      = "${github_repository.dataworks_hardened_images.name}"
+  secret_name     = "DOCKERHUB_PASSWORD"
+  plaintext_value = "${var.dockerhub_password}"
+}
+
+resource "github_actions_secret" "dataworks_hardened_images_dockerhub_username" {
+  repository      = "${github_repository.dataworks_hardened_images.name}"
+  secret_name     = "DOCKERHUB_USERNAME"
+  plaintext_value = "${var.dockerhub_username}"
+}
+
+resource "github_actions_secret" "dataworks_hardened_images_snyk_token" {
+  repository      = "${github_repository.dataworks_hardened_images.name}"
+  secret_name     = "SNYK_TOKEN"
+  plaintext_value = "${var.snyk_token}"
+}
+
