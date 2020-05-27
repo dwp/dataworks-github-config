@@ -145,6 +145,7 @@ meta:
 
                   if [ ! -z 'grep -rnw $TF_REPO_NAME ci' ]; then
                     find ci -type f -exec sed -i 's/$TF_REPO_NAME/$NEW_REPO_NAME/g' {} +
+                    find terraform -type f -exec sed -i 's/$TF_REPO_NAME/$NEW_REPO_NAME/g' {} +
                     git add ci/
                     git diff --quiet && git diff --staged --quiet || git commit -m "renamed pipeline to fit repository"
                   else
