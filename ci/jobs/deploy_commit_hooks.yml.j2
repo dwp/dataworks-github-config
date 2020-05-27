@@ -3,16 +3,14 @@ jobs:
     max_in_flight: 1
     plan:
       - in_parallel:
-          - get: dataworks-github-config
+          - get: dataworks-github-config-webhooks
             trigger: true
-            passed:
-              - master
           {% for repo in repos %}
           - get: {{ repo }}{% endfor %}
       - task: commit-and-push
         config:
           inputs:
-            - name: dataworks-github-config
+            - name: dataworks-github-config-webhooks
             {% for repo in repos %}
             - name: {{ repo }}{% endfor %}
           outputs:
@@ -35,11 +33,11 @@ jobs:
                 git clone {{ repo }} {{ repo }}-modified
                 cd {{ repo }}-modified
                 git remote set-url origin https://github.com/dwp/{{ repo }}.git
-                cp -r ../dataworks-github-config/.githooks .
+                cp -r ../dataworks-github-config-webhooks/.githooks .
                 git add .githooks
                 git diff --quiet && git diff --staged --quiet || git commit -m "update .githooks from dataworks-github-config"
                 if [ ! -f Makefile ]; then
-                  cp -r ../dataworks-github-config/Makefile.sample ./Makefile
+                  cp -r ../dataworks-github-config-webhooks/Makefile.sample ./Makefile
                   git add Makefile
                   git diff --quiet && git diff --staged --quiet || git commit -m "create Makefile from dataworks-github-config/Makefile.sample"
                 fi
