@@ -1,0 +1,38 @@
+# REPO=my-new-repo fly -t concourse execute -c ci/create-tf-repo.yml --input dataworks-github-config=.
+
+platform: linux
+image_resource:
+  type: docker-image
+  source: { repository: makocchi/alpine-git-curl-jq, tag: "latest" }
+outputs:
+  - name: new-repo-pipeline-modified
+params:
+  GIT_USERNAME: ((dataworks.concourse_github_username))
+  GIT_EMAIL: ((dataworks.concourse_github_email))
+put: new-repo-pipeline-modified
+run:
+  path: /bin/sh
+  args:
+    - -exc
+    - |
+      git config --global user.name "${GIT_USERNAME}"
+      git config --global user.email "${GIT_EMAIL}"
+      TF_REPO_NAME=dataworks-repo-template-terraform
+
+      REPO=`jq -r .repository ../terraform-output-repositories/outputs.json`
+      for NEW_REPO_NAME in $REPO do;
+        git clone $NEW_REPO_NAME $NEW_REPO_NAME-modified
+        cd $NEW_REPO_NAME-modified
+        git remote set-url origin https://github.com/dwp/$NEW_REPO_NAME.git
+
+          if [ ! -z 'grep -rnw $TF_REPO_NAME ci' ]; then
+            find ci -type f -exec sed -i 's/$TF_REPO_NAME/$NEW_REPO_NAME/g' {} +
+            find terraform -type f -exec sed -i 's/$TF_REPO_NAME/$NEW_REPO_NAME/g' {} +
+            git add ci/
+            git diff --quiet && git diff --staged --quiet || git commit -m "renamed pipeline to fit repository"
+          else
+            echo "Not required, or not a Terraform repository"
+          fi
+      done
+
+      cd ..
