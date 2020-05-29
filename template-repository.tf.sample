@@ -9,6 +9,11 @@ resource "github_repository" "example" {
   lifecycle {
     prevent_destroy = true
   }
+
+  template {
+    owner = "${var.github_organization}"
+    repository = "dataworks-repo-template"
+  }
 }
 
 resource "github_team_repository" "example_dataworks" {
@@ -24,12 +29,14 @@ resource "github_branch_protection" "example_master" {
 
   required_status_checks {
     strict = true
-    # The contexts line should only be kept for Terraform repos.
-    contexts = ["concourse-ci/example-pr"]
   }
 
   required_pull_request_reviews {
     dismiss_stale_reviews      = true
     require_code_owner_reviews = true
   }
+}
+
+output "repository" {
+  value = "${github_repository.example.name}"
 }
