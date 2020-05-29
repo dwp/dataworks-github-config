@@ -1,5 +1,5 @@
 resources:
-{% for repo in repos %}
+{% for repo in repos %}{% if not 'dataworks-githooks' in repo  %}
 - name: {{ repo }}
   type: git
   source:
@@ -13,4 +13,4 @@ resources:
       - name: user.email
         value: ((dataworks.concourse_github_email))
   check_every: 5m
-{% endfor %}
+{% endif %}{% endfor %}
