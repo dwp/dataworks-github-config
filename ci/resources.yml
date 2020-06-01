@@ -10,9 +10,7 @@ resources:
     type: git
     source:
       branch: master
-      uri: https://github.com/dwp/dataworks-github-config.git
-      paths:
-        - .githooks/**
+      uri: https://github.com/dwp/dataworks-githooks.git
     webhook_token: ((dataworks.concourse_github_webhook_token))
     check_every: 720h
   - name: dataworks-github-config-pr
