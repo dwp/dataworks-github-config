@@ -11,6 +11,8 @@ resources:
     source:
       branch: master
       uri: https://github.com/dwp/dataworks-githooks.git
+      ignore_paths:
+        - README.md
     webhook_token: ((dataworks.concourse_github_webhook_token))
     check_every: 720h
   - name: dataworks-github-config-pr
