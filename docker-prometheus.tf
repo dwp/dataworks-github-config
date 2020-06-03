@@ -1,7 +1,8 @@
 resource "github_repository" "docker_prometheus" {
-  name        = "docker-prometheus"
-  description = "Repo for the DataWorks Prometheus Docker image"
-  auto_init   = true
+  name             = "docker-prometheus"
+  description      = "Repo for the DataWorks Prometheus Docker image"
+  auto_init        = true
+  license_template = "isc"
 
   allow_merge_commit = false
   has_issues         = true
