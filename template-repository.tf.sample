@@ -1,7 +1,8 @@
 resource "github_repository" "example" {
-  name        = "example"
-  description = "example"
-  auto_init   = true
+  name             = "example"
+  description      = "example"
+  auto_init        = true
+  license_template = "isc"
 
   allow_merge_commit = false
   has_issues         = true
