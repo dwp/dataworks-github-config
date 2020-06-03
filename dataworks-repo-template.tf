@@ -1,8 +1,9 @@
 resource "github_repository" "dataworks-repo-template" {
-  name        = "dataworks-repo-template"
-  description = "Template repository for DataWorks GitHub"
-  auto_init   = true
-  is_template = true
+  name             = "dataworks-repo-template"
+  description      = "Template repository for DataWorks GitHub"
+  auto_init        = true
+  is_template      = true
+  license_template = "isc"
 
   allow_merge_commit = false
   has_issues         = true
