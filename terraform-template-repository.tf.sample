@@ -40,7 +40,7 @@ resource "github_branch_protection" "example_master" {
 
 resource "null_resource" "example" {
   triggers = {
-    repo = "${github_repository.example}"
+    repo = "${github_repository.example.name}"
   }
   provisioner "local-exec" {
     command = "initial-commit-tf.sh ${github_repository.example.name}"
