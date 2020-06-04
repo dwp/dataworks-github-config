@@ -9,7 +9,6 @@ git clone https://github.com/dwp/$NEW_REPO_NAME
 cd $NEW_REPO_NAME
 
 if [ ! -z 'grep -rnw $TF_REPO_NAME ci' ]; then
-    git checkout -b initial-commit
     git submodule add https://github.com/dwp/dataworks-githooks .githooks
     make git-hooks
     

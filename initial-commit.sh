@@ -6,7 +6,6 @@ git config --global user.email "${GIT_EMAIL}"
 
 git clone https://github.com/dwp/$NEW_REPO_NAME
 cd $NEW_REPO_NAME
-git checkout -b initial-commit
 git submodule add https://github.com/dwp/dataworks-githooks .githooks
 make git-hooks
 
