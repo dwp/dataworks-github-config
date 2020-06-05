@@ -13,4 +13,4 @@ rm initial-commit.sh
 
 git add --all
 git commit -m "Initial commit, adding githooks submodule"
-git push --quiet --set-upstream origin initial-commit
+git push https://${TF_VAR_github_token}:x-oauth-basic@github.com/dwp/$NEW_REPO_NAME
