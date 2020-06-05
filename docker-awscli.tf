@@ -1,7 +1,7 @@
 resource "github_repository" "docker_awscli" {
-  name             = "docker-awscli"
-  description      = "Docker container for awscli. Includes a file to source at /assumerole which expects to be provided `AWS_ROLE_ARN` env var and will export `AWS_SECRET_ACCESS_KEY`, `AWS_ACCESS_KEY_ID` and `AWS_SESSION_TOKEN` env vars."
-  auto_init        = true
+  name        = "docker-awscli"
+  description = "Docker container for awscli. Includes a file to source at /assumerole which expects to be provided `AWS_ROLE_ARN` env var and will export `AWS_SECRET_ACCESS_KEY`, `AWS_ACCESS_KEY_ID` and `AWS_SESSION_TOKEN` env vars."
+  auto_init   = true
 
   allow_merge_commit = false
   has_issues         = true
@@ -11,24 +11,24 @@ resource "github_repository" "docker_awscli" {
   }
 
   template {
-    owner = "${var.github_organization}"
+    owner      = "${var.github_organization}"
     repository = "dataworks-repo-template-terraform"
   }
 }
 
-resource "github_team_repository" "example_dataworks" {
-  repository = "${github_repository.example.name}"
+resource "github_team_repository" "docker_awscli_dataworks" {
+  repository = "${github_repository.docker_awscli.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "push"
 }
 
-resource "github_branch_protection" "example_master" {
-  branch         = "${github_repository.example.default_branch}"
-  repository     = "${github_repository.example.name}"
+resource "github_branch_protection" "docker_awscli_master" {
+  branch         = "${github_repository.docker_awscli.default_branch}"
+  repository     = "${github_repository.docker_awscli.name}"
   enforce_admins = false
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["concourse-ci/status"]
   }
 
@@ -36,8 +36,4 @@ resource "github_branch_protection" "example_master" {
     dismiss_stale_reviews      = true
     require_code_owner_reviews = true
   }
-}
-
-output "repository" {
-  value = "${github_repository.example.name}"
 }
