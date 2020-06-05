@@ -38,6 +38,11 @@ resource "github_branch_protection" "example_master" {
   }
 }
 
-output "repository" {
-  value = "${github_repository.example.name}"
+resource "null_resource" "example" {
+  triggers = {
+    repo = "${github_repository.example.name}"
+  }
+  provisioner "local-exec" {
+    command = "initial-commit-tf.sh ${github_repository.example.name}"
+  }
 }

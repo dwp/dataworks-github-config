@@ -57,6 +57,8 @@ meta:
         TF_VAR_dockerhub_username: ((dataworks.dockerhub_username))
         TF_VAR_dockerhub_password: ((dataworks-secrets.dockerhub_token))
         TF_VAR_snyk_token: ((dataworks-secrets.snyk_token))
+        GIT_USERNAME: ((dataworks.concourse_github_username))
+        GIT_EMAIL: ((dataworks.concourse_github_email))
     terraform-plan:
       task: terraform-plan
       config:

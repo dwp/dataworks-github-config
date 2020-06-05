@@ -37,7 +37,3 @@ resource "github_branch_protection" "docker_prometheus_master" {
     require_code_owner_reviews = true
   }
 }
-
-output "repository" {
-  value = "${github_repository.docker_prometheus.name}"
-}

@@ -10,7 +10,6 @@ Manage GitHub team and repository configuration for DataWorks
 1. Replace every instance of `example` with the name of your repo using underscores.
 1. Raise a PR with your changes
 1. Once approved and merged, the concourse job for this repo (not your new one) will run and create your new repository. This takes a while as it checks all repos configured here.
-1. Checkout your new repo and run `make initial-commit` from within the top level directory of your new repo, followed by `aviator` if creating a Terraform repository.  This will rename template files, install the githooks submodule, then create a PR in your new repo.
 
 # Notes
 
