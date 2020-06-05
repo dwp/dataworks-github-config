@@ -9,7 +9,6 @@ Manage GitHub team and repository configuration for DataWorks
 1. Find and replace all occurrences of the sample Terraform resource (example) using underscores as separators if required. your repos `name`  should use hyphen separators if required, and `description` attributes should be a single sentence. *Do not* make any other changes.
 1. Raise a PR with your changes
 1. Once approved and merged, the concourse job for this repo (not your new one) will run and create your new repository. This takes a while as it checks all repos configured here.
-1. Finally, if you have used the Terraform template, you will want to run `aviator` if you require a pipeline.
 
 # Notes
 
