@@ -8,6 +8,7 @@ resource "github_repository" "my_test_repo" {
 
   lifecycle {
     prevent_destroy = false
+
   }
 
   template {
