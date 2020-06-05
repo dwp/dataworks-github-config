@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 TF_REPO_NAME=dataworks-repo-template-terraform
 NEW_REPO_NAME=$1
 
@@ -19,4 +19,4 @@ rm initial-commit.sh
 
 git add --all
 git commit -m "Renamed pipeline and Terraform to fit repository"
-git push --quiet --set-upstream origin initial-commit
+git push https://${TF_VAR_github_token}:x-oauth-basic@github.com/dwp/$NEW_REPO_NAME
