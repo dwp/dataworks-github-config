@@ -23,7 +23,7 @@ resource "github_branch_protection" "dataworks-analytical-service-infra_master" 
   enforce_admins = false
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["concourse-ci/dataworks-analytical-service-infra-pr"]
   }
 

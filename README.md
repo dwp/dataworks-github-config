@@ -6,7 +6,8 @@ Manage GitHub team and repository configuration for DataWorks
 1. There are now two standards, for creating a new repository:
    1. _*Non-Terraform repositories:*_ Copy `template-repository.tf.sample` to a new `.tf` file to create a standard empty repository [1]
    1. _*Terraform repositories:*_ Copy `terraform-template-repository.tf.sample` to a new `.tf` file to create a standard Terraform repository, including Terraform templates and CI pipeline. [1]
-1. Find and replace all occurrences of the sample Terraform resource (example) using underscores as separators if required. your repos `name`  should use hyphen separators if required, and `description` attributes should be a single sentence. *Do not* make any other changes.
+1. Update the `github_repository` resource name (example) using underscores as separators if required. Its `name`  should use hyphen separators if required, and `description` attributes should be a single sentence. 
+1. Replace every instance of `example` with the name of your repo using underscores.
 1. Raise a PR with your changes
 1. Once approved and merged, the concourse job for this repo (not your new one) will run and create your new repository. This takes a while as it checks all repos configured here.
 
