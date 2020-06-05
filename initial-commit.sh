@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 NEW_REPO_NAME=$1
 
 git config --global user.name "${GIT_USERNAME}"

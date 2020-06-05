@@ -43,6 +43,6 @@ resource "null_resource" "example" {
     repo = "${github_repository.example.name}"
   }
   provisioner "local-exec" {
-    command = "dataworks-github-config/initial-commit-tf.sh ${github_repository.example.name}"
+    command = "initial-commit-tf.sh ${github_repository.example.name}"
   }
 }

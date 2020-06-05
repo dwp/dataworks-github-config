@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 TF_REPO_NAME=dataworks-repo-template-terraform
 NEW_REPO_NAME=$1
 
