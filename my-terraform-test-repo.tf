@@ -7,7 +7,7 @@ resource "github_repository" "my_terraform_test_repo" {
   has_issues         = true
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   template {
@@ -43,6 +43,6 @@ resource "null_resource" "my_terraform_test_repo" {
     repo = "${github_repository.my_terraform_test_repo.name}"
   }
   provisioner "local-exec" {
-    command = "initial-commit-tf.sh ${github_repository.my_terraform_test_repo.name}"
+    command = "dataworks-github-config/initial-commit-tf.sh ${github_repository.my_terraform_test_repo.name}"
   }
 }
