@@ -7,7 +7,7 @@ resource "github_repository" "docker_awscli" {
   has_issues         = true
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   template {
