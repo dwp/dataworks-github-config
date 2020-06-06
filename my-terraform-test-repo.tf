@@ -43,6 +43,6 @@ resource "null_resource" "my_terraform_test_repo" {
     repo = "${github_repository.my_terraform_test_repo.name}"
   }
   provisioner "local-exec" {
-    command = "dataworks-github-config/initial-commit-tf.sh ${github_repository.my_terraform_test_repo.name}"
+    command = "initial-commit-tf.sh ${github_repository.my_terraform_test_repo.name}"
   }
 }
