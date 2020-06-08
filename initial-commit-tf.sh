@@ -14,10 +14,9 @@ make git-hooks
 find ci -type f -exec sed -i '' "s/$TF_REPO_NAME/$NEW_REPO_NAME/g" {} +
 find terraform -type f -exec sed -i '' "s/$TF_REPO_NAME/$NEW_REPO_NAME/g" {} +
 find aviator.yml -type f -exec sed -i '' "s/$TF_REPO_NAME/$NEW_REPO_NAME/g" {} +
+find README.md -type -f -exec sed -i '' "s/#\ dataworks-repo-template/#\ my-new-repo/" {} +
 
 rm initial-commit.sh
-rm README.md
-cat $NEW_REPO_NAME > README.md
 
 git add --all
 git commit -m "Renamed pipeline and Terraform to fit repository"

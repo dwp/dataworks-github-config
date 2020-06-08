@@ -9,9 +9,9 @@ cd $NEW_REPO_NAME
 git submodule add https://github.com/dwp/dataworks-githooks .githooks
 make git-hooks
 
+find README.md -type f -exec sed -i '' "s/#\ dataworks-repo-template/#\ my-new-repo/" {} +
+
 rm initial-commit.sh
-rm README.md
-cat $NEW_REPO_NAME > README.md
 
 git add --all
 git commit -m "Initial commit, adding githooks submodule"
