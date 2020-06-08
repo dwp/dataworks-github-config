@@ -14,7 +14,7 @@ make git-hooks
 find ci -type f -exec sed -i '' "s/$TF_REPO_NAME/$NEW_REPO_NAME/g" {} +
 find terraform -type f -exec sed -i '' "s/$TF_REPO_NAME/$NEW_REPO_NAME/g" {} +
 find aviator.yml -type f -exec sed -i '' "s/$TF_REPO_NAME/$NEW_REPO_NAME/g" {} +
-find README.md -type -f -exec sed -i '' "s/#\ dataworks-repo-template/#\ my-new-repo/" {} +
+find README.md -type -f -exec sed -i '' "s/#\ $TF_REPO_NAME/#\ $NEW_REPO_NAME/" {} +
 
 rm initial-commit.sh
 
