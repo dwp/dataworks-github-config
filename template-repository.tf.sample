@@ -42,6 +42,6 @@ resource "null_resource" "example" {
     repo = "${github_repository.example.name}"
   }
   provisioner "local-exec" {
-    command = "./initial-commit.sh ${github_repository.example.name}"
+    command = "./initial-commit.sh ${github_repository.example.name} '${github_repository.example.description}'"
   }
 }
