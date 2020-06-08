@@ -1,6 +1,6 @@
 resource "github_repository" "docker_awscli" {
   name               = "docker-awscli"
-  description        = "Docker container for awscli. Includes a file to source at `/assumerole` which expects to be provided `AWS_ROLE_ARN` env var and will export `AWS_SECRET_ACCESS_KEY`, `AWS_ACCESS_KEY_ID` and `AWS_SESSION_TOKEN` env vars."
+  description        = "Docker container for awscli. Includes a file to source at `/assumerole`, see Readme for more."
   auto_init          = true
   allow_merge_commit = false
   has_issues         = true
