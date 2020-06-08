@@ -1,4 +1,5 @@
 #!/bin/sh
+REPO_NAME=dataworks-repo-template
 NEW_REPO_NAME=$1
 
 git config --global user.name "${GIT_USERNAME}"
@@ -9,7 +10,7 @@ cd $NEW_REPO_NAME
 git submodule add https://github.com/dwp/dataworks-githooks .githooks
 make git-hooks
 
-find README.md -type -f -exec sed -i '' "s/#\ $TF_REPO_NAME/#\ $NEW_REPO_NAME/" {} +
+find README.md -type -f -exec sed -i '' "s/#\ $REPO_NAME/#\ $NEW_REPO_NAME/" {} +
 
 rm initial-commit.sh
 
