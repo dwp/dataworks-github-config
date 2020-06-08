@@ -10,6 +10,8 @@ git submodule add https://github.com/dwp/dataworks-githooks .githooks
 make git-hooks
 
 rm initial-commit.sh
+rm README.md
+cat $NEW_REPO_NAME > README.md
 
 git add --all
 git commit -m "Initial commit, adding githooks submodule"
