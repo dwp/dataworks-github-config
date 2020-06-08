@@ -1,9 +1,8 @@
 resource "github_repository" "dataworks_repo_template_docker" {
-  name        = "dataworks-repo-template-docker"
-  description = "Template Docker repository for DataWorks GitHub"
-  auto_init   = true
-  is_template = true
-
+  name               = "dataworks-repo-template-docker"
+  description        = "Template Docker repository for DataWorks GitHub"
+  auto_init          = true
+  is_template        = true
   allow_merge_commit = false
   has_issues         = true
 
@@ -12,7 +11,7 @@ resource "github_repository" "dataworks_repo_template_docker" {
   }
 
   template {
-    owner = "${var.github_organization}"
+    owner      = "${var.github_organization}"
     repository = "dataworks-repo-template"
   }
 }
