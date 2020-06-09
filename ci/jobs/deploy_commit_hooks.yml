@@ -5,7 +5,7 @@ jobs:
       - in_parallel:
           - get: dataworks-github-config-githooks
             trigger: true
-          
+
           - get: docker-cloudwatch-exporter
           - get: dataworks-development-tools
           - get: mock-nifi
@@ -80,7 +80,6 @@ jobs:
           - get: concourse-control-tower
           - get: docker-jupyterhub
           - get: ami-builder-configs
-          - get: dataworks-repo-template
           - get: aws-authentication
           - get: packer-egress-test
           - get: docker-jinja-yaml-aws
@@ -91,7 +90,7 @@ jobs:
         config:
           inputs:
             - name: dataworks-github-config-githooks
-            
+
             - name: docker-cloudwatch-exporter
             - name: dataworks-development-tools
             - name: mock-nifi
@@ -166,7 +165,6 @@ jobs:
             - name: concourse-control-tower
             - name: docker-jupyterhub
             - name: ami-builder-configs
-            - name: dataworks-repo-template
             - name: aws-authentication
             - name: packer-egress-test
             - name: docker-jinja-yaml-aws
@@ -174,7 +172,6 @@ jobs:
             - name: dataworks-open-source-policy
             - name: docker-jq-curl
           outputs:
-            
             - name: docker-cloudwatch-exporter-modified
             - name: dataworks-development-tools-modified
             - name: mock-nifi-modified
@@ -249,7 +246,6 @@ jobs:
             - name: concourse-control-tower-modified
             - name: docker-jupyterhub-modified
             - name: ami-builder-configs-modified
-            - name: dataworks-repo-template-modified
             - name: aws-authentication-modified
             - name: packer-egress-test-modified
             - name: docker-jinja-yaml-aws-modified
@@ -269,7 +265,7 @@ jobs:
               - |
                 git config --global user.name "${GIT_USERNAME}"
                 git config --global user.email "${GIT_EMAIL}"
-                
+
                 git clone docker-cloudwatch-exporter docker-cloudwatch-exporter-modified
                 cd docker-cloudwatch-exporter-modified
                 if [[ -f .gitmodules ]]; then
@@ -1728,252 +1724,248 @@ jobs:
                   git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 fi
                 cd ..
-                
+
         params:
           GIT_USERNAME: ((dataworks.concourse_github_username))
           GIT_EMAIL: ((dataworks.concourse_github_email))
       - in_parallel:
-        
-        - put: docker-cloudwatch-exporter
-          params:
-            repository: docker-cloudwatch-exporter-modified
-        - put: dataworks-development-tools
-          params:
-            repository: dataworks-development-tools-modified
-        - put: mock-nifi
-          params:
-            repository: mock-nifi-modified
-        - put: dataworks-admin-utils
-          params:
-            repository: dataworks-admin-utils-modified
-        - put: aws-analytical-env
-          params:
-            repository: aws-analytical-env-modified
-        - put: docker-kafka-connect-s3
-          params:
-            repository: docker-kafka-connect-s3-modified
-        - put: dataworks-analytical-frontend-service
-          params:
-            repository: dataworks-analytical-frontend-service-modified
-        - put: cognito-guacamole-extension
-          params:
-            repository: cognito-guacamole-extension-modified
-        - put: docker-ruby-rspec-aws-sdk
-          params:
-            repository: docker-ruby-rspec-aws-sdk-modified
-        - put: docker-prometheus
-          params:
-            repository: docker-prometheus-modified
-        - put: dataworks-metrics-infrastructure
-          params:
-            repository: dataworks-metrics-infrastructure-modified
-        - put: docker-alertmanager
-          params:
-            repository: docker-alertmanager-modified
-        - put: emr-cluster-broker-client
-          params:
-            repository: emr-cluster-broker-client-modified
-        - put: docker-headless-chrome
-          params:
-            repository: docker-headless-chrome-modified
-        - put: kafka-to-s3
-          params:
-            repository: kafka-to-s3-modified
-        - put: hbase-to-mongo-export
-          params:
-            repository: hbase-to-mongo-export-modified
-        - put: docker-python-boto-behave
-          params:
-            repository: docker-python-boto-behave-modified
-        - put: emr-launcher
-          params:
-            repository: emr-launcher-modified
-        - put: dataworks-analytical-custom-auth-flow
-          params:
-            repository: dataworks-analytical-custom-auth-flow-modified
-        - put: docker-thanos
-          params:
-            repository: docker-thanos-modified
-        - put: aws-sns-to-ses-mailer
-          params:
-            repository: aws-sns-to-ses-mailer-modified
-        - put: aws-pdm-dataset-generation
-          params:
-            repository: aws-pdm-dataset-generation-modified
-        - put: dataworks-analytical-service-infra
-          params:
-            repository: dataworks-analytical-service-infra-modified
-        - put: hardened-guac-chrome
-          params:
-            repository: hardened-guac-chrome-modified
-        - put: docker-ansible-git
-          params:
-            repository: docker-ansible-git-modified
-        - put: kafka-producer
-          params:
-            repository: kafka-producer-modified
-        - put: docker-python-pyspark-pytest
-          params:
-            repository: docker-python-pyspark-pytest-modified
-        - put: mysql-query-lambda
-          params:
-            repository: mysql-query-lambda-modified
-        - put: cloudwatch-event-dispatcher
-          params:
-            repository: cloudwatch-event-dispatcher-modified
-        - put: terraform-aws-metric-filter-alarm
-          params:
-            repository: terraform-aws-metric-filter-alarm-modified
-        - put: dataworks-repo-template-docker
-          params:
-            repository: dataworks-repo-template-docker-modified
-        - put: configure-confluent-kafka-consumer
-          params:
-            repository: configure-confluent-kafka-consumer-modified
-        - put: aws-analytical-dataset-generation
-          params:
-            repository: aws-analytical-dataset-generation-modified
-        - put: dataworks-hardened-images
-          params:
-            repository: dataworks-hardened-images-modified
-        - put: orchestration-service
-          params:
-            repository: orchestration-service-modified
-        - put: docker-squid-s3
-          params:
-            repository: docker-squid-s3-modified
-        - put: dataworks-common-logging
-          params:
-            repository: dataworks-common-logging-modified
-        - put: docker-spark-gpg
-          params:
-            repository: docker-spark-gpg-modified
-        - put: ucfs-claimant-get-award-details
-          params:
-            repository: ucfs-claimant-get-award-details-modified
-        - put: terraform-aws-vpc
-          params:
-            repository: terraform-aws-vpc-modified
-        - put: terraform-aws-emr-cluster
-          params:
-            repository: terraform-aws-emr-cluster-modified
-        - put: emr-cluster-broker
-          params:
-            repository: emr-cluster-broker-modified
-        - put: aws-internet-egress
-          params:
-            repository: aws-internet-egress-modified
-        - put: uc-historic-data-importer
-          params:
-            repository: uc-historic-data-importer-modified
-        - put: snapshot-sender
-          params:
-            repository: snapshot-sender-modified
-        - put: docker-awscli
-          params:
-            repository: docker-awscli-modified
-        - put: dataworks-repo-template-terraform
-          params:
-            repository: dataworks-repo-template-terraform-modified
-        - put: github-repo-config-examples
-          params:
-            repository: github-repo-config-examples-modified
-        - put: ucfs-claimant-api-load-data
-          params:
-            repository: ucfs-claimant-api-load-data-modified
-        - put: ssm-parameter-store
-          params:
-            repository: ssm-parameter-store-modified
-        - put: docker-hiverunner
-          params:
-            repository: docker-hiverunner-modified
-        - put: docker-grafana
-          params:
-            repository: docker-grafana-modified
-        - put: emr-encryption-materials-provider
-          params:
-            repository: emr-encryption-materials-provider-modified
-        - put: tactical-aws-user-creation
-          params:
-            repository: tactical-aws-user-creation-modified
-        - put: kafka-to-hbase
-          params:
-            repository: kafka-to-hbase-modified
-        - put: aws-concourse
-          params:
-            repository: aws-concourse-modified
-        - put: aws-cloudwatch-alerting
-          params:
-            repository: aws-cloudwatch-alerting-modified
-        - put: hbase-retriever
-          params:
-            repository: hbase-retriever-modified
-        - put: terraform-aws-wafv2
-          params:
-            repository: terraform-aws-wafv2-modified
-        - put: docker-ansible-pass-gpg
-          params:
-            repository: docker-ansible-pass-gpg-modified
-        - put: acm-pca-cert-generator
-          params:
-            repository: acm-pca-cert-generator-modified
-        - put: data-key-service
-          params:
-            repository: data-key-service-modified
-        - put: ami-builder
-          params:
-            repository: ami-builder-modified
-        - put: dataworks-pdm
-          params:
-            repository: dataworks-pdm-modified
-        - put: docker-aws-openssl
-          params:
-            repository: docker-aws-openssl-modified
-        - put: dataworks-internet-ingress
-          params:
-            repository: dataworks-internet-ingress-modified
-        - put: dataworks-config
-          params:
-            repository: dataworks-config-modified
-        - put: docker-nifi-s3
-          params:
-            repository: docker-nifi-s3-modified
-        - put: terraform-aws-ses-notification-service
-          params:
-            repository: terraform-aws-ses-notification-service-modified
-        - put: docker-ecs-service_discovery
-          params:
-            repository: docker-ecs-service_discovery-modified
-        - put: terraform-aws-prowler-monitoring
-          params:
-            repository: terraform-aws-prowler-monitoring-modified
-        - put: concourse-control-tower
-          params:
-            repository: concourse-control-tower-modified
-        - put: docker-jupyterhub
-          params:
-            repository: docker-jupyterhub-modified
-        - put: ami-builder-configs
-          params:
-            repository: ami-builder-configs-modified
-        - put: dataworks-repo-template
-          params:
-            repository: dataworks-repo-template-modified
-        - put: aws-authentication
-          params:
-            repository: aws-authentication-modified
-        - put: packer-egress-test
-          params:
-            repository: packer-egress-test-modified
-        - put: docker-jinja-yaml-aws
-          params:
-            repository: docker-jinja-yaml-aws-modified
-        - put: manage-mysql-user
-          params:
-            repository: manage-mysql-user-modified
-        - put: dataworks-open-source-policy
-          params:
-            repository: dataworks-open-source-policy-modified
-        - put: docker-jq-curl
-          params:
-            repository: docker-jq-curl-modified
+          - put: docker-cloudwatch-exporter
+            params:
+              repository: docker-cloudwatch-exporter-modified
+          - put: dataworks-development-tools
+            params:
+              repository: dataworks-development-tools-modified
+          - put: mock-nifi
+            params:
+              repository: mock-nifi-modified
+          - put: dataworks-admin-utils
+            params:
+              repository: dataworks-admin-utils-modified
+          - put: aws-analytical-env
+            params:
+              repository: aws-analytical-env-modified
+          - put: docker-kafka-connect-s3
+            params:
+              repository: docker-kafka-connect-s3-modified
+          - put: dataworks-analytical-frontend-service
+            params:
+              repository: dataworks-analytical-frontend-service-modified
+          - put: cognito-guacamole-extension
+            params:
+              repository: cognito-guacamole-extension-modified
+          - put: docker-ruby-rspec-aws-sdk
+            params:
+              repository: docker-ruby-rspec-aws-sdk-modified
+          - put: docker-prometheus
+            params:
+              repository: docker-prometheus-modified
+          - put: dataworks-metrics-infrastructure
+            params:
+              repository: dataworks-metrics-infrastructure-modified
+          - put: docker-alertmanager
+            params:
+              repository: docker-alertmanager-modified
+          - put: emr-cluster-broker-client
+            params:
+              repository: emr-cluster-broker-client-modified
+          - put: docker-headless-chrome
+            params:
+              repository: docker-headless-chrome-modified
+          - put: kafka-to-s3
+            params:
+              repository: kafka-to-s3-modified
+          - put: hbase-to-mongo-export
+            params:
+              repository: hbase-to-mongo-export-modified
+          - put: docker-python-boto-behave
+            params:
+              repository: docker-python-boto-behave-modified
+          - put: emr-launcher
+            params:
+              repository: emr-launcher-modified
+          - put: dataworks-analytical-custom-auth-flow
+            params:
+              repository: dataworks-analytical-custom-auth-flow-modified
+          - put: docker-thanos
+            params:
+              repository: docker-thanos-modified
+          - put: aws-sns-to-ses-mailer
+            params:
+              repository: aws-sns-to-ses-mailer-modified
+          - put: aws-pdm-dataset-generation
+            params:
+              repository: aws-pdm-dataset-generation-modified
+          - put: dataworks-analytical-service-infra
+            params:
+              repository: dataworks-analytical-service-infra-modified
+          - put: hardened-guac-chrome
+            params:
+              repository: hardened-guac-chrome-modified
+          - put: docker-ansible-git
+            params:
+              repository: docker-ansible-git-modified
+          - put: kafka-producer
+            params:
+              repository: kafka-producer-modified
+          - put: docker-python-pyspark-pytest
+            params:
+              repository: docker-python-pyspark-pytest-modified
+          - put: mysql-query-lambda
+            params:
+              repository: mysql-query-lambda-modified
+          - put: cloudwatch-event-dispatcher
+            params:
+              repository: cloudwatch-event-dispatcher-modified
+          - put: terraform-aws-metric-filter-alarm
+            params:
+              repository: terraform-aws-metric-filter-alarm-modified
+          - put: dataworks-repo-template-docker
+            params:
+              repository: dataworks-repo-template-docker-modified
+          - put: configure-confluent-kafka-consumer
+            params:
+              repository: configure-confluent-kafka-consumer-modified
+          - put: aws-analytical-dataset-generation
+            params:
+              repository: aws-analytical-dataset-generation-modified
+          - put: dataworks-hardened-images
+            params:
+              repository: dataworks-hardened-images-modified
+          - put: orchestration-service
+            params:
+              repository: orchestration-service-modified
+          - put: docker-squid-s3
+            params:
+              repository: docker-squid-s3-modified
+          - put: dataworks-common-logging
+            params:
+              repository: dataworks-common-logging-modified
+          - put: docker-spark-gpg
+            params:
+              repository: docker-spark-gpg-modified
+          - put: ucfs-claimant-get-award-details
+            params:
+              repository: ucfs-claimant-get-award-details-modified
+          - put: terraform-aws-vpc
+            params:
+              repository: terraform-aws-vpc-modified
+          - put: terraform-aws-emr-cluster
+            params:
+              repository: terraform-aws-emr-cluster-modified
+          - put: emr-cluster-broker
+            params:
+              repository: emr-cluster-broker-modified
+          - put: aws-internet-egress
+            params:
+              repository: aws-internet-egress-modified
+          - put: uc-historic-data-importer
+            params:
+              repository: uc-historic-data-importer-modified
+          - put: snapshot-sender
+            params:
+              repository: snapshot-sender-modified
+          - put: docker-awscli
+            params:
+              repository: docker-awscli-modified
+          - put: dataworks-repo-template-terraform
+            params:
+              repository: dataworks-repo-template-terraform-modified
+          - put: github-repo-config-examples
+            params:
+              repository: github-repo-config-examples-modified
+          - put: ucfs-claimant-api-load-data
+            params:
+              repository: ucfs-claimant-api-load-data-modified
+          - put: ssm-parameter-store
+            params:
+              repository: ssm-parameter-store-modified
+          - put: docker-hiverunner
+            params:
+              repository: docker-hiverunner-modified
+          - put: docker-grafana
+            params:
+              repository: docker-grafana-modified
+          - put: emr-encryption-materials-provider
+            params:
+              repository: emr-encryption-materials-provider-modified
+          - put: tactical-aws-user-creation
+            params:
+              repository: tactical-aws-user-creation-modified
+          - put: kafka-to-hbase
+            params:
+              repository: kafka-to-hbase-modified
+          - put: aws-concourse
+            params:
+              repository: aws-concourse-modified
+          - put: aws-cloudwatch-alerting
+            params:
+              repository: aws-cloudwatch-alerting-modified
+          - put: hbase-retriever
+            params:
+              repository: hbase-retriever-modified
+          - put: terraform-aws-wafv2
+            params:
+              repository: terraform-aws-wafv2-modified
+          - put: docker-ansible-pass-gpg
+            params:
+              repository: docker-ansible-pass-gpg-modified
+          - put: acm-pca-cert-generator
+            params:
+              repository: acm-pca-cert-generator-modified
+          - put: data-key-service
+            params:
+              repository: data-key-service-modified
+          - put: ami-builder
+            params:
+              repository: ami-builder-modified
+          - put: dataworks-pdm
+            params:
+              repository: dataworks-pdm-modified
+          - put: docker-aws-openssl
+            params:
+              repository: docker-aws-openssl-modified
+          - put: dataworks-internet-ingress
+            params:
+              repository: dataworks-internet-ingress-modified
+          - put: dataworks-config
+            params:
+              repository: dataworks-config-modified
+          - put: docker-nifi-s3
+            params:
+              repository: docker-nifi-s3-modified
+          - put: terraform-aws-ses-notification-service
+            params:
+              repository: terraform-aws-ses-notification-service-modified
+          - put: docker-ecs-service_discovery
+            params:
+              repository: docker-ecs-service_discovery-modified
+          - put: terraform-aws-prowler-monitoring
+            params:
+              repository: terraform-aws-prowler-monitoring-modified
+          - put: concourse-control-tower
+            params:
+              repository: concourse-control-tower-modified
+          - put: docker-jupyterhub
+            params:
+              repository: docker-jupyterhub-modified
+          - put: ami-builder-configs
+            params:
+              repository: ami-builder-configs-modified
+          - put: aws-authentication
+            params:
+              repository: aws-authentication-modified
+          - put: packer-egress-test
+            params:
+              repository: packer-egress-test-modified
+          - put: docker-jinja-yaml-aws
+            params:
+              repository: docker-jinja-yaml-aws-modified
+          - put: manage-mysql-user
+            params:
+              repository: manage-mysql-user-modified
+          - put: dataworks-open-source-policy
+            params:
+              repository: dataworks-open-source-policy-modified
+          - put: docker-jq-curl
+            params:
+              repository: docker-jq-curl-modified
