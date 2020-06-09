@@ -1,0 +1,59 @@
+jobs:
+  - name: deploy-commit-hooks
+    max_in_flight: 1
+    plan:
+      - in_parallel:
+          - get: dataworks-github-config-githooks
+            trigger: true
+          {% for repo in repos %}{% if not 'dataworks-githooks' in repo  %}
+          - get: {{ repo }}{% endif %}{% endfor %}
+      - task: commit-and-push
+        config:
+          inputs:
+            - name: dataworks-github-config-githooks
+            {% for repo in repos %}{% if not 'dataworks-githooks' in repo  %}
+            - name: {{ repo }}{% endif %}{% endfor %}
+          outputs:
+            {% for repo in repos %}{% if not 'dataworks-githooks' in repo  %}
+            - name: {{ repo }}-modified{% endif %}{% endfor %}
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: alpine/git
+              tag: 1.0.7
+          run:
+            path: /bin/sh
+            args:
+              - -exc
+              - |
+                git config --global user.name "${GIT_USERNAME}"
+                git config --global user.email "${GIT_EMAIL}"
+                {% for repo in repos %}{% if not 'dataworks-githooks' in repo  %}
+                git clone {{ repo }} {{ repo }}-modified
+                cd {{ repo }}-modified
+                if [[ -f .gitmodules ]]; then
+                  git remote set-url origin https://github.com/dwp/{{ repo }}.git
+                  git rm -r .githooks
+                  git submodule add https://github.com/dwp/dataworks-githooks .githooks
+                  sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
+                  cat << 'EOF' >> Makefile
+                  .PHONY: git-hooks
+                  git-hooks: ## Set up hooks in .githooks
+                    @git submodule update --init .githooks ; \
+                    git config core.hooksPath .githooks \
+
+                  EOF
+                  git add Makefile
+                  git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
+                fi
+                cd ..{% endif %}{% endfor %}
+                
+        params:
+          GIT_USERNAME: ((dataworks.concourse_github_username))
+          GIT_EMAIL: ((dataworks.concourse_github_email))
+      - in_parallel:
+        {% for repo in repos %}{% if not 'dataworks-githooks' in repo  %}
+        - put: {{ repo }}
+          params:
+            repository: {{ repo }}-modified{% endif %}{% endfor %}
