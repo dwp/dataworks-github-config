@@ -3,21 +3,19 @@ jobs:
     max_in_flight: 1
     plan:
       - in_parallel:
-          - get: dataworks-github-config
+          - get: dataworks-github-config-githooks
             trigger: true
-            passed:
-              - master
-          {% for repo in repos %}
-          - get: {{ repo }}{% endfor %}
+          {% for repo in repos %}{% if not 'dataworks-githooks' in repo  %}
+          - get: {{ repo }}{% endif %}{% endfor %}
       - task: commit-and-push
         config:
           inputs:
-            - name: dataworks-github-config
-            {% for repo in repos %}
-            - name: {{ repo }}{% endfor %}
+            - name: dataworks-github-config-githooks
+            {% for repo in repos %}{% if not 'dataworks-githooks' in repo  %}
+            - name: {{ repo }}{% endif %}{% endfor %}
           outputs:
-            {% for repo in repos %}
-            - name: {{ repo }}-modified{% endfor %}
+            {% for repo in repos %}{% if not 'dataworks-githooks' in repo  %}
+            - name: {{ repo }}-modified{% endif %}{% endfor %}
           platform: linux
           image_resource:
             type: docker-image
@@ -31,7 +29,7 @@ jobs:
               - |
                 git config --global user.name "${GIT_USERNAME}"
                 git config --global user.email "${GIT_EMAIL}"
-                {% for repo in repos %}
+                {% for repo in repos %}{% if not 'dataworks-githooks' in repo  %}
                 git clone {{ repo }} {{ repo }}-modified
                 cd {{ repo }}-modified
                 git remote set-url origin https://github.com/dwp/{{ repo }}.git
@@ -50,12 +48,12 @@ jobs:
                     fi \
 
                 EOF
-                cd ..{% endfor %}
+                cd ..{% endif %}{% endfor %}
         params:
           GIT_USERNAME: ((dataworks.concourse_github_username))
           GIT_EMAIL: ((dataworks.concourse_github_email))
       - in_parallel:
-        {% for repo in repos %}
+        {% for repo in repos %}{% if not 'dataworks-githooks' in repo  %}
         - put: {{ repo }}
           params:
-            repository: {{ repo }}-modified{% endfor %}
+            repository: {{ repo }}-modified{% endif %}{% endfor %}
