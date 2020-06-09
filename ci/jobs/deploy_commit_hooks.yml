@@ -3,8 +3,9 @@ jobs:
     max_in_flight: 1
     plan:
       - in_parallel:
-          - get: dataworks-github-config
+          - get: dataworks-github-config-githooks
             trigger: true
+          
           - get: mock-nifi
           - get: dataworks-admin-utils
           - get: aws-analytical-env
@@ -42,7 +43,6 @@ jobs:
           - get: emr-cluster-broker
           - get: uc-historic-data-importer
           - get: snapshot-sender
-          - get: dataworks-repo-template-terraform
           - get: github-repo-config-examples
           - get: ucfs-claimant-api-load-data
           - get: ssm-parameter-store
@@ -65,7 +65,6 @@ jobs:
           - get: ecs-check-running-containers
           - get: docker-jupyterhub
           - get: ami-builder-configs
-          - get: dataworks-repo-template
           - get: aws-authentication
           - get: packer-egress-test
           - get: validate-terraform-012
@@ -76,7 +75,8 @@ jobs:
       - task: commit-and-push
         config:
           inputs:
-            - name: dataworks-github-config
+            - name: dataworks-github-config-githooks
+            
             - name: mock-nifi
             - name: dataworks-admin-utils
             - name: aws-analytical-env
@@ -114,7 +114,6 @@ jobs:
             - name: emr-cluster-broker
             - name: uc-historic-data-importer
             - name: snapshot-sender
-            - name: dataworks-repo-template-terraform
             - name: github-repo-config-examples
             - name: ucfs-claimant-api-load-data
             - name: ssm-parameter-store
@@ -137,7 +136,6 @@ jobs:
             - name: ecs-check-running-containers
             - name: docker-jupyterhub
             - name: ami-builder-configs
-            - name: dataworks-repo-template
             - name: aws-authentication
             - name: packer-egress-test
             - name: validate-terraform-012
@@ -146,6 +144,7 @@ jobs:
             - name: dataworks-open-source-policy
             - name: docker-jq-curl
           outputs:
+            
             - name: mock-nifi-modified
             - name: dataworks-admin-utils-modified
             - name: aws-analytical-env-modified
@@ -183,7 +182,6 @@ jobs:
             - name: emr-cluster-broker-modified
             - name: uc-historic-data-importer-modified
             - name: snapshot-sender-modified
-            - name: dataworks-repo-template-terraform-modified
             - name: github-repo-config-examples-modified
             - name: ucfs-claimant-api-load-data-modified
             - name: ssm-parameter-store-modified
@@ -206,7 +204,6 @@ jobs:
             - name: ecs-check-running-containers-modified
             - name: docker-jupyterhub-modified
             - name: ami-builder-configs-modified
-            - name: dataworks-repo-template-modified
             - name: aws-authentication-modified
             - name: packer-egress-test-modified
             - name: validate-terraform-012-modified
@@ -231,1294 +228,1322 @@ jobs:
                 git clone mock-nifi mock-nifi-modified
                 cd mock-nifi-modified
                 git remote set-url origin https://github.com/dwp/mock-nifi.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone dataworks-admin-utils dataworks-admin-utils-modified
                 cd dataworks-admin-utils-modified
                 git remote set-url origin https://github.com/dwp/dataworks-admin-utils.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone aws-analytical-env aws-analytical-env-modified
                 cd aws-analytical-env-modified
                 git remote set-url origin https://github.com/dwp/aws-analytical-env.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-kafka-connect-s3 docker-kafka-connect-s3-modified
                 cd docker-kafka-connect-s3-modified
                 git remote set-url origin https://github.com/dwp/docker-kafka-connect-s3.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone dataworks-analytical-frontend-service dataworks-analytical-frontend-service-modified
                 cd dataworks-analytical-frontend-service-modified
                 git remote set-url origin https://github.com/dwp/dataworks-analytical-frontend-service.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone cognito-guacamole-extension cognito-guacamole-extension-modified
                 cd cognito-guacamole-extension-modified
                 git remote set-url origin https://github.com/dwp/cognito-guacamole-extension.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-ruby-rspec-aws-sdk docker-ruby-rspec-aws-sdk-modified
                 cd docker-ruby-rspec-aws-sdk-modified
                 git remote set-url origin https://github.com/dwp/docker-ruby-rspec-aws-sdk.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone dataworks-metrics-infrastructure dataworks-metrics-infrastructure-modified
                 cd dataworks-metrics-infrastructure-modified
                 git remote set-url origin https://github.com/dwp/dataworks-metrics-infrastructure.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone emr-cluster-broker-client emr-cluster-broker-client-modified
                 cd emr-cluster-broker-client-modified
                 git remote set-url origin https://github.com/dwp/emr-cluster-broker-client.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-headless-chrome docker-headless-chrome-modified
                 cd docker-headless-chrome-modified
                 git remote set-url origin https://github.com/dwp/docker-headless-chrome.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone kafka-to-s3 kafka-to-s3-modified
                 cd kafka-to-s3-modified
                 git remote set-url origin https://github.com/dwp/kafka-to-s3.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone hbase-to-mongo-export hbase-to-mongo-export-modified
                 cd hbase-to-mongo-export-modified
                 git remote set-url origin https://github.com/dwp/hbase-to-mongo-export.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-python-boto-behave docker-python-boto-behave-modified
                 cd docker-python-boto-behave-modified
                 git remote set-url origin https://github.com/dwp/docker-python-boto-behave.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone emr-launcher emr-launcher-modified
                 cd emr-launcher-modified
                 git remote set-url origin https://github.com/dwp/emr-launcher.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone dataworks-analytical-custom-auth-flow dataworks-analytical-custom-auth-flow-modified
                 cd dataworks-analytical-custom-auth-flow-modified
                 git remote set-url origin https://github.com/dwp/dataworks-analytical-custom-auth-flow.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone aws-sns-to-ses-mailer aws-sns-to-ses-mailer-modified
                 cd aws-sns-to-ses-mailer-modified
                 git remote set-url origin https://github.com/dwp/aws-sns-to-ses-mailer.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone aws-pdm-dataset-generation aws-pdm-dataset-generation-modified
                 cd aws-pdm-dataset-generation-modified
                 git remote set-url origin https://github.com/dwp/aws-pdm-dataset-generation.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone dataworks-analytical-service-infra dataworks-analytical-service-infra-modified
                 cd dataworks-analytical-service-infra-modified
                 git remote set-url origin https://github.com/dwp/dataworks-analytical-service-infra.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone hardened-guac-chrome hardened-guac-chrome-modified
                 cd hardened-guac-chrome-modified
                 git remote set-url origin https://github.com/dwp/hardened-guac-chrome.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-ansible-git docker-ansible-git-modified
                 cd docker-ansible-git-modified
                 git remote set-url origin https://github.com/dwp/docker-ansible-git.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone kafka-producer kafka-producer-modified
                 cd kafka-producer-modified
                 git remote set-url origin https://github.com/dwp/kafka-producer.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-python-pyspark-pytest docker-python-pyspark-pytest-modified
                 cd docker-python-pyspark-pytest-modified
                 git remote set-url origin https://github.com/dwp/docker-python-pyspark-pytest.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone cloudwatch-event-dispatcher cloudwatch-event-dispatcher-modified
                 cd cloudwatch-event-dispatcher-modified
                 git remote set-url origin https://github.com/dwp/cloudwatch-event-dispatcher.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone terraform-aws-metric-filter-alarm terraform-aws-metric-filter-alarm-modified
                 cd terraform-aws-metric-filter-alarm-modified
                 git remote set-url origin https://github.com/dwp/terraform-aws-metric-filter-alarm.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone configure-confluent-kafka-consumer configure-confluent-kafka-consumer-modified
                 cd configure-confluent-kafka-consumer-modified
                 git remote set-url origin https://github.com/dwp/configure-confluent-kafka-consumer.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone aws-analytical-dataset-generation aws-analytical-dataset-generation-modified
                 cd aws-analytical-dataset-generation-modified
                 git remote set-url origin https://github.com/dwp/aws-analytical-dataset-generation.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone dataworks-hardened-images dataworks-hardened-images-modified
                 cd dataworks-hardened-images-modified
                 git remote set-url origin https://github.com/dwp/dataworks-hardened-images.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone orchestration-service orchestration-service-modified
                 cd orchestration-service-modified
                 git remote set-url origin https://github.com/dwp/orchestration-service.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-squid-s3 docker-squid-s3-modified
                 cd docker-squid-s3-modified
                 git remote set-url origin https://github.com/dwp/docker-squid-s3.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone dataworks-common-logging dataworks-common-logging-modified
                 cd dataworks-common-logging-modified
                 git remote set-url origin https://github.com/dwp/dataworks-common-logging.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-spark-gpg docker-spark-gpg-modified
                 cd docker-spark-gpg-modified
                 git remote set-url origin https://github.com/dwp/docker-spark-gpg.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone ucfs-claimant-get-award-details ucfs-claimant-get-award-details-modified
                 cd ucfs-claimant-get-award-details-modified
                 git remote set-url origin https://github.com/dwp/ucfs-claimant-get-award-details.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone terraform-aws-vpc terraform-aws-vpc-modified
                 cd terraform-aws-vpc-modified
                 git remote set-url origin https://github.com/dwp/terraform-aws-vpc.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone terraform-aws-emr-cluster terraform-aws-emr-cluster-modified
                 cd terraform-aws-emr-cluster-modified
                 git remote set-url origin https://github.com/dwp/terraform-aws-emr-cluster.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone emr-cluster-broker emr-cluster-broker-modified
                 cd emr-cluster-broker-modified
                 git remote set-url origin https://github.com/dwp/emr-cluster-broker.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone uc-historic-data-importer uc-historic-data-importer-modified
                 cd uc-historic-data-importer-modified
                 git remote set-url origin https://github.com/dwp/uc-historic-data-importer.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone snapshot-sender snapshot-sender-modified
                 cd snapshot-sender-modified
                 git remote set-url origin https://github.com/dwp/snapshot-sender.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
-                cd ..
-                git clone dataworks-repo-template-terraform dataworks-repo-template-terraform-modified
-                cd dataworks-repo-template-terraform-modified
-                git remote set-url origin https://github.com/dwp/dataworks-repo-template-terraform.git
-                sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
-                cat << 'EOF' >> Makefile
-
-                .PHONY: git-hooks
-                git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
-
-                EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone github-repo-config-examples github-repo-config-examples-modified
                 cd github-repo-config-examples-modified
                 git remote set-url origin https://github.com/dwp/github-repo-config-examples.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone ucfs-claimant-api-load-data ucfs-claimant-api-load-data-modified
                 cd ucfs-claimant-api-load-data-modified
                 git remote set-url origin https://github.com/dwp/ucfs-claimant-api-load-data.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone ssm-parameter-store ssm-parameter-store-modified
                 cd ssm-parameter-store-modified
                 git remote set-url origin https://github.com/dwp/ssm-parameter-store.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone emr-encryption-materials-provider emr-encryption-materials-provider-modified
                 cd emr-encryption-materials-provider-modified
                 git remote set-url origin https://github.com/dwp/emr-encryption-materials-provider.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone tactical-aws-user-creation tactical-aws-user-creation-modified
                 cd tactical-aws-user-creation-modified
                 git remote set-url origin https://github.com/dwp/tactical-aws-user-creation.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone kafka-to-hbase kafka-to-hbase-modified
                 cd kafka-to-hbase-modified
                 git remote set-url origin https://github.com/dwp/kafka-to-hbase.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone aws-concourse aws-concourse-modified
                 cd aws-concourse-modified
                 git remote set-url origin https://github.com/dwp/aws-concourse.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone aws-cloudwatch-alerting aws-cloudwatch-alerting-modified
                 cd aws-cloudwatch-alerting-modified
                 git remote set-url origin https://github.com/dwp/aws-cloudwatch-alerting.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone hbase-retriever hbase-retriever-modified
                 cd hbase-retriever-modified
                 git remote set-url origin https://github.com/dwp/hbase-retriever.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-ansible-pass-gpg docker-ansible-pass-gpg-modified
                 cd docker-ansible-pass-gpg-modified
                 git remote set-url origin https://github.com/dwp/docker-ansible-pass-gpg.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone acm-pca-cert-generator acm-pca-cert-generator-modified
                 cd acm-pca-cert-generator-modified
                 git remote set-url origin https://github.com/dwp/acm-pca-cert-generator.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone data-key-service data-key-service-modified
                 cd data-key-service-modified
                 git remote set-url origin https://github.com/dwp/data-key-service.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone ami-builder ami-builder-modified
                 cd ami-builder-modified
                 git remote set-url origin https://github.com/dwp/ami-builder.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-aws-openssl docker-aws-openssl-modified
                 cd docker-aws-openssl-modified
                 git remote set-url origin https://github.com/dwp/docker-aws-openssl.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone dataworks-config dataworks-config-modified
                 cd dataworks-config-modified
                 git remote set-url origin https://github.com/dwp/dataworks-config.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-nifi-s3 docker-nifi-s3-modified
                 cd docker-nifi-s3-modified
                 git remote set-url origin https://github.com/dwp/docker-nifi-s3.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone terraform-aws-ses-notification-service terraform-aws-ses-notification-service-modified
                 cd terraform-aws-ses-notification-service-modified
                 git remote set-url origin https://github.com/dwp/terraform-aws-ses-notification-service.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone terraform-aws-prowler-monitoring terraform-aws-prowler-monitoring-modified
                 cd terraform-aws-prowler-monitoring-modified
                 git remote set-url origin https://github.com/dwp/terraform-aws-prowler-monitoring.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone concourse-control-tower concourse-control-tower-modified
                 cd concourse-control-tower-modified
                 git remote set-url origin https://github.com/dwp/concourse-control-tower.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone ecs-check-running-containers ecs-check-running-containers-modified
                 cd ecs-check-running-containers-modified
                 git remote set-url origin https://github.com/dwp/ecs-check-running-containers.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-jupyterhub docker-jupyterhub-modified
                 cd docker-jupyterhub-modified
                 git remote set-url origin https://github.com/dwp/docker-jupyterhub.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone ami-builder-configs ami-builder-configs-modified
                 cd ami-builder-configs-modified
                 git remote set-url origin https://github.com/dwp/ami-builder-configs.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
-                cd ..
-                git clone dataworks-repo-template dataworks-repo-template-modified
-                cd dataworks-repo-template-modified
-                git remote set-url origin https://github.com/dwp/dataworks-repo-template.git
-                sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
-                cat << 'EOF' >> Makefile
-
-                .PHONY: git-hooks
-                git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
-
-                EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone aws-authentication aws-authentication-modified
                 cd aws-authentication-modified
                 git remote set-url origin https://github.com/dwp/aws-authentication.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone packer-egress-test packer-egress-test-modified
                 cd packer-egress-test-modified
                 git remote set-url origin https://github.com/dwp/packer-egress-test.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone validate-terraform-012 validate-terraform-012-modified
                 cd validate-terraform-012-modified
                 git remote set-url origin https://github.com/dwp/validate-terraform-012.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-jinja-yaml-aws docker-jinja-yaml-aws-modified
                 cd docker-jinja-yaml-aws-modified
                 git remote set-url origin https://github.com/dwp/docker-jinja-yaml-aws.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone manage-mysql-user manage-mysql-user-modified
                 cd manage-mysql-user-modified
                 git remote set-url origin https://github.com/dwp/manage-mysql-user.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone dataworks-open-source-policy dataworks-open-source-policy-modified
                 cd dataworks-open-source-policy-modified
                 git remote set-url origin https://github.com/dwp/dataworks-open-source-policy.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
                 git clone docker-jq-curl docker-jq-curl-modified
                 cd docker-jq-curl-modified
                 git remote set-url origin https://github.com/dwp/docker-jq-curl.git
+                git rm -r .githooks
                 sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
                 cat << 'EOF' >> Makefile
-
                 .PHONY: git-hooks
                 git-hooks: ## Set up hooks in .githooks
-                    @if [[ ! -f .gitmodules ]]; then \
-                        git rm -r .githooks ; \
-                        git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                        git submodule update --init .githooks ; \
-                        git config core.hooksPath .githooks ; \
-                    else \
-                        git submodule update --remote .githooks ; \
-                    fi \
+                	@if [[ ! -f .gitmodules ]]; then \
+                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
+                 		git submodule update --init .githooks ; \
+                		git config core.hooksPath .githooks ; \
+                	else \
+                		git submodule update --remote .githooks ; \
+                	fi \
 
                 EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
                 cd ..
         params:
           GIT_USERNAME: ((dataworks.concourse_github_username))
@@ -1636,9 +1661,6 @@ jobs:
         - put: snapshot-sender
           params:
             repository: snapshot-sender-modified
-        - put: dataworks-repo-template-terraform
-          params:
-            repository: dataworks-repo-template-terraform-modified
         - put: github-repo-config-examples
           params:
             repository: github-repo-config-examples-modified
@@ -1705,9 +1727,6 @@ jobs:
         - put: ami-builder-configs
           params:
             repository: ami-builder-configs-modified
-        - put: dataworks-repo-template
-          params:
-            repository: dataworks-repo-template-modified
         - put: aws-authentication
           params:
             repository: aws-authentication-modified
