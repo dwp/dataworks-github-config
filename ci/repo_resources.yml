@@ -1,953 +1,924 @@
 resources:
-
-- name: mock-nifi
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/mock-nifi.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: dataworks-admin-utils
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/dataworks-admin-utils.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: aws-analytical-env
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/aws-analytical-env.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-kafka-connect-s3
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-kafka-connect-s3.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: dataworks-analytical-frontend-service
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/dataworks-analytical-frontend-service.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: cognito-guacamole-extension
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/cognito-guacamole-extension.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-ruby-rspec-aws-sdk
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-ruby-rspec-aws-sdk.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: dataworks-metrics-infrastructure
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/dataworks-metrics-infrastructure.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: emr-cluster-broker-client
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/emr-cluster-broker-client.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-headless-chrome
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-headless-chrome.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: kafka-to-s3
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/kafka-to-s3.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: hbase-to-mongo-export
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/hbase-to-mongo-export.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-python-boto-behave
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-python-boto-behave.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: emr-launcher
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/emr-launcher.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: dataworks-analytical-custom-auth-flow
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/dataworks-analytical-custom-auth-flow.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: aws-sns-to-ses-mailer
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/aws-sns-to-ses-mailer.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: aws-pdm-dataset-generation
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/aws-pdm-dataset-generation.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: dataworks-analytical-service-infra
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/dataworks-analytical-service-infra.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: hardened-guac-chrome
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/hardened-guac-chrome.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-ansible-git
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-ansible-git.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: kafka-producer
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/kafka-producer.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-python-pyspark-pytest
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-python-pyspark-pytest.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: cloudwatch-event-dispatcher
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/cloudwatch-event-dispatcher.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: terraform-aws-metric-filter-alarm
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/terraform-aws-metric-filter-alarm.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: configure-confluent-kafka-consumer
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/configure-confluent-kafka-consumer.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: aws-analytical-dataset-generation
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/aws-analytical-dataset-generation.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: dataworks-hardened-images
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/dataworks-hardened-images.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: orchestration-service
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/orchestration-service.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-squid-s3
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-squid-s3.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: dataworks-common-logging
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/dataworks-common-logging.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-spark-gpg
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-spark-gpg.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: ucfs-claimant-get-award-details
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/ucfs-claimant-get-award-details.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: terraform-aws-vpc
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/terraform-aws-vpc.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: terraform-aws-emr-cluster
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/terraform-aws-emr-cluster.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: emr-cluster-broker
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/emr-cluster-broker.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: uc-historic-data-importer
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/uc-historic-data-importer.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: snapshot-sender
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/snapshot-sender.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: dataworks-repo-template-terraform
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/dataworks-repo-template-terraform.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: github-repo-config-examples
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/github-repo-config-examples.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: ucfs-claimant-api-load-data
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/ucfs-claimant-api-load-data.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: ssm-parameter-store
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/ssm-parameter-store.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: emr-encryption-materials-provider
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/emr-encryption-materials-provider.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: tactical-aws-user-creation
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/tactical-aws-user-creation.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: kafka-to-hbase
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/kafka-to-hbase.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: aws-concourse
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/aws-concourse.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: aws-cloudwatch-alerting
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/aws-cloudwatch-alerting.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: hbase-retriever
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/hbase-retriever.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-ansible-pass-gpg
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-ansible-pass-gpg.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: acm-pca-cert-generator
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/acm-pca-cert-generator.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: data-key-service
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/data-key-service.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: ami-builder
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/ami-builder.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-aws-openssl
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-aws-openssl.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: dataworks-config
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/dataworks-config.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-nifi-s3
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-nifi-s3.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: terraform-aws-ses-notification-service
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/terraform-aws-ses-notification-service.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: terraform-aws-prowler-monitoring
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/terraform-aws-prowler-monitoring.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: concourse-control-tower
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/concourse-control-tower.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: ecs-check-running-containers
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/ecs-check-running-containers.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-jupyterhub
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-jupyterhub.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: ami-builder-configs
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/ami-builder-configs.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: dataworks-repo-template
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/dataworks-repo-template.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: aws-authentication
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/aws-authentication.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: packer-egress-test
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/packer-egress-test.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: validate-terraform-012
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/validate-terraform-012.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-jinja-yaml-aws
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-jinja-yaml-aws.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: manage-mysql-user
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/manage-mysql-user.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: dataworks-open-source-policy
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/dataworks-open-source-policy.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
-
-- name: docker-jq-curl
-  type: git
-  source:
-    branch: master
-    uri: https://github.com/dwp/docker-jq-curl.git
-    username: ((dataworks.concourse_github_username))
-    password: ((dataworks-secrets.concourse_github_pat))
-    git_config:
-      - name: user.name
-        value: ((dataworks.concourse_github_username))
-      - name: user.email
-        value: ((dataworks.concourse_github_email))
-  check_every: 5m
+  - name: mock-nifi
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/mock-nifi.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: dataworks-admin-utils
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/dataworks-admin-utils.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: aws-analytical-env
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/aws-analytical-env.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-kafka-connect-s3
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-kafka-connect-s3.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: dataworks-analytical-frontend-service
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/dataworks-analytical-frontend-service.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: cognito-guacamole-extension
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/cognito-guacamole-extension.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-ruby-rspec-aws-sdk
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-ruby-rspec-aws-sdk.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: dataworks-metrics-infrastructure
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/dataworks-metrics-infrastructure.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: emr-cluster-broker-client
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/emr-cluster-broker-client.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-headless-chrome
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-headless-chrome.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: kafka-to-s3
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/kafka-to-s3.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: hbase-to-mongo-export
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/hbase-to-mongo-export.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-python-boto-behave
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-python-boto-behave.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: emr-launcher
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/emr-launcher.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: dataworks-analytical-custom-auth-flow
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/dataworks-analytical-custom-auth-flow.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: aws-sns-to-ses-mailer
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/aws-sns-to-ses-mailer.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: aws-pdm-dataset-generation
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/aws-pdm-dataset-generation.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: dataworks-analytical-service-infra
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/dataworks-analytical-service-infra.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: hardened-guac-chrome
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/hardened-guac-chrome.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-ansible-git
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-ansible-git.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: kafka-producer
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/kafka-producer.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-python-pyspark-pytest
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-python-pyspark-pytest.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: cloudwatch-event-dispatcher
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/cloudwatch-event-dispatcher.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: terraform-aws-metric-filter-alarm
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/terraform-aws-metric-filter-alarm.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: configure-confluent-kafka-consumer
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/configure-confluent-kafka-consumer.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: aws-analytical-dataset-generation
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/aws-analytical-dataset-generation.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: dataworks-hardened-images
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/dataworks-hardened-images.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: orchestration-service
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/orchestration-service.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-squid-s3
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-squid-s3.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: dataworks-common-logging
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/dataworks-common-logging.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-spark-gpg
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-spark-gpg.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: ucfs-claimant-get-award-details
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/ucfs-claimant-get-award-details.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: terraform-aws-vpc
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/terraform-aws-vpc.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: terraform-aws-emr-cluster
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/terraform-aws-emr-cluster.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: emr-cluster-broker
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/emr-cluster-broker.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: uc-historic-data-importer
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/uc-historic-data-importer.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: snapshot-sender
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/snapshot-sender.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: github-repo-config-examples
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/github-repo-config-examples.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: ucfs-claimant-api-load-data
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/ucfs-claimant-api-load-data.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: ssm-parameter-store
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/ssm-parameter-store.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: emr-encryption-materials-provider
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/emr-encryption-materials-provider.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: tactical-aws-user-creation
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/tactical-aws-user-creation.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: kafka-to-hbase
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/kafka-to-hbase.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: aws-concourse
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/aws-concourse.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: aws-cloudwatch-alerting
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/aws-cloudwatch-alerting.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: hbase-retriever
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/hbase-retriever.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-ansible-pass-gpg
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-ansible-pass-gpg.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: acm-pca-cert-generator
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/acm-pca-cert-generator.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: data-key-service
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/data-key-service.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: ami-builder
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/ami-builder.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-aws-openssl
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-aws-openssl.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: dataworks-config
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/dataworks-config.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-nifi-s3
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-nifi-s3.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: terraform-aws-ses-notification-service
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/terraform-aws-ses-notification-service.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: terraform-aws-prowler-monitoring
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/terraform-aws-prowler-monitoring.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: concourse-control-tower
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/concourse-control-tower.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: ecs-check-running-containers
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/ecs-check-running-containers.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-jupyterhub
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-jupyterhub.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: ami-builder-configs
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/ami-builder-configs.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: aws-authentication
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/aws-authentication.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: packer-egress-test
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/packer-egress-test.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: validate-terraform-012
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/validate-terraform-012.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-jinja-yaml-aws
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-jinja-yaml-aws.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: manage-mysql-user
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/manage-mysql-user.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: dataworks-open-source-policy
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/dataworks-open-source-policy.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
+
+  - name: docker-jq-curl
+    type: git
+    source:
+      branch: master
+      uri: https://github.com/dwp/docker-jq-curl.git
+      username: ((dataworks.concourse_github_username))
+      password: ((dataworks-secrets.concourse_github_pat))
+      git_config:
+        - name: user.name
+          value: ((dataworks.concourse_github_username))
+        - name: user.email
+          value: ((dataworks.concourse_github_email))
+    check_every: 5m
