@@ -1,7 +1,7 @@
 #!/bin/sh
-REPO_NAME=dataworks-repo-template
 NEW_REPO_NAME=$1
 REPO_DESCRIPTION=$2
+REPO_NAME=$3
 
 git config --global user.name "${GIT_USERNAME}"
 git config --global user.email "${GIT_EMAIL}"
@@ -14,7 +14,13 @@ git submodule add https://github.com/dwp/dataworks-githooks .githooks
 find README.md -type f -exec sed -i "s/#\ $REPO_NAME/#\ $NEW_REPO_NAME/" {} +
 find README.md -type f -exec sed -i "s/##\ Description/##\ ${REPO_DESCRIPTION}/g" {} +
 
-rm initial-commit.sh
+case "$REPO_NAME" in
+    *-terraform)
+        find ci -type f -exec sed -i "s/$REPO_NAME/$NEW_REPO_NAME/g" {} +
+        find terraform -type f -exec sed -i "s/$REPO_NAME/$NEW_REPO_NAME/g" {} +
+        find aviator.yml -type f -exec sed -i "s/$REPO_NAME/$NEW_REPO_NAME/g" {} +
+    ;;
+esac
 
 git add --all
 git commit -m "Initial commit, adding githooks submodule"
