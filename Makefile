@@ -19,7 +19,7 @@ bootstrap-terraform: ## Bootstrap local environment for first use
 	@{ \
 		export AWS_PROFILE=$(aws_profile); \
 		export AWS_REGION=$(aws_region); \
-		python bootstrap_terraform.py; \
+		python3 bootstrap_terraform.py; \
 	}
 
 .PHONY: git-hooks
@@ -37,4 +37,4 @@ git-hooks: ## Set up hooks in .git/hooks
 
 .PHONY: pipeline
 pipeline: ## Generate and apply Concourse pipeline
-	python generate_pipeline_code.py && aviator
+	python3 generate_pipeline_code.py && aviator
