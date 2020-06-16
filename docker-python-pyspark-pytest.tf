@@ -3,8 +3,9 @@ resource "github_repository" "docker-python-pyspark-pytest" {
   description = "Docker python/3.6-alpine image with pyspark and pytest."
   auto_init   = true
 
-  allow_merge_commit = false
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

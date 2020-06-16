@@ -2,9 +2,10 @@ resource "github_repository" "cloudwatch-event-dispatcher" {
   name        = "cloudwatch-event-dispatcher"
   description = "Lambda to receive CloudWatch events and post to SNS with additional message attributes"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

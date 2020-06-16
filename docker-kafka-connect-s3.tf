@@ -2,9 +2,10 @@ resource "github_repository" "docker-kafka-connect-s3" {
   name        = "docker-kafka-connect-s3"
   description = "Docker Container for Confluent Connect with S3 Plugin"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

@@ -2,9 +2,10 @@ resource "github_repository" "docker-python-boto-behave" {
   name        = "docker-python-boto-behave"
   description = "Docker python/3.7-alpine image with Boto and Behave."
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

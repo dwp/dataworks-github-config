@@ -2,9 +2,10 @@ resource "github_repository" "hardened-guac-chrome" {
   name        = "hardened-guac-chrome"
   description = "The hardened Guacamole Chrome container"
 
-  allow_merge_commit = false
-  has_issues         = true
-  auto_init          = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
+  auto_init              = true
 
   lifecycle {
     prevent_destroy = false

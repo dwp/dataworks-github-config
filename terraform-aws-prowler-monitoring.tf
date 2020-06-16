@@ -2,9 +2,10 @@ resource "github_repository" "terraform-aws-prowler-monitoring" {
   name        = "terraform-aws-prowler-monitoring"
   description = "A collection of log metric filters and alarms to satisfy Prowler Monitoring checks"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

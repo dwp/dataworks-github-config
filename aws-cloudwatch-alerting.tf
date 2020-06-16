@@ -2,9 +2,10 @@ resource "github_repository" "aws-cloudwatch-alerting" {
   name        = "aws-cloudwatch-alerting"
   description = "Lambda function to send CloudWatch alerts to Slack"
 
-  allow_merge_commit = false
-  auto_init          = true
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  auto_init              = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

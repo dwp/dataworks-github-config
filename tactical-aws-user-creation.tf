@@ -3,8 +3,9 @@ resource "github_repository" "tactical-aws-user-creation" {
   description = "Temporary app to create and assign MFA software token code to a user in AWS cognito."
   auto_init   = true
 
-  allow_merge_commit = false
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

@@ -2,9 +2,10 @@ resource "github_repository" "docker-headless-chrome" {
   name        = "docker-headless-chrome"
   description = "Dataworks hardened headless Chrome container"
 
-  allow_merge_commit = false
-  has_issues         = true
-  auto_init          = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
+  auto_init              = true
 
   lifecycle {
     prevent_destroy = true

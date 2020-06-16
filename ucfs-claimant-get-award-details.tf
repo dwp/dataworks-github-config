@@ -3,9 +3,10 @@ resource "github_repository" "ucfs-claimant-get-award-details" {
   description = "Get Award Details Lambda code for UCFS Claimant API endpoint"
   auto_init   = true
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

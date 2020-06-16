@@ -3,8 +3,9 @@ resource "github_repository" "docker-nifi-s3" {
   description = "Docker container for Apache NiFi that retrieves config from S3 location on launch. Container images published to https://hub.docker.com/r/dwpdigital/nifi-s3."
   auto_init   = true
 
-  allow_merge_commit = false
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

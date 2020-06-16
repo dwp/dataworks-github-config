@@ -3,8 +3,9 @@ resource "github_repository" "emr-cluster-broker-client" {
   description = "Lambda for sending JSON payloads to the Cluster Broker API"
   auto_init   = true
 
-  allow_merge_commit = false
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true
@@ -24,6 +25,7 @@ resource "github_branch_protection" "emr-cluster-broker-client_master" {
 
   required_status_checks {
     strict = true
+
     # The contexts line should only be kept for Terraform repos.
     # contexts = ["concourse-ci/emr-cluster-broker-client-pr"]
   }

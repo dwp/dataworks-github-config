@@ -3,8 +3,9 @@ resource "github_repository" "ucfs-claimant-api-load-data" {
   description = "Python Lambda to orchestrate loading data into RDS from S3 for UCFS Claimant API service"
   auto_init   = true
 
-  allow_merge_commit = false
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

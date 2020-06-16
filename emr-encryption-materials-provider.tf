@@ -2,9 +2,10 @@ resource "github_repository" "emr-encryption-materials-provider" {
   name        = "emr-encryption-materials-provider"
   description = "An EMR Security Configuration plugin implementing transparent client-side encryption and decryption between EMR and data persisted in S3 (via EMRFS)"
 
-  allow_merge_commit = false
-  auto_init          = true
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  auto_init              = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

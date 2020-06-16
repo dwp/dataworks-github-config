@@ -2,9 +2,10 @@ resource "github_repository" "aws-sns-to-ses-mailer" {
   name        = "aws-sns-to-ses-mailer"
   description = "AWS Lambda application to send emails via AWS SES using information recieved from AWS SNS notification"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

@@ -3,8 +3,9 @@ resource "github_repository" "dataworks_metrics_infrastructure" {
   description = "Repo for storing the Metrics Infrastructure to be used in AWS"
   auto_init   = true
 
-  allow_merge_commit = false
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true
@@ -24,6 +25,7 @@ resource "github_branch_protection" "dataworks_metrics_infrastructure_master" {
 
   required_status_checks {
     strict = true
+
     # The contexts line should only be kept for Terraform repos.
     contexts = ["concourse-ci/status"]
   }

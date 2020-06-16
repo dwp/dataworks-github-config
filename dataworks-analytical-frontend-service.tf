@@ -2,9 +2,10 @@ resource "github_repository" "frontend-service" {
   name        = "dataworks-analytical-frontend-service"
   description = "Frontend service providing user authentication and interface with orchestration service"
 
-  allow_merge_commit = false
-  has_issues         = true
-  auto_init          = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
+  auto_init              = true
 
   lifecycle {
     prevent_destroy = true

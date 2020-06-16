@@ -2,9 +2,10 @@ resource "github_repository" "docker-jupyterhub" {
   name        = "docker-jupyterhub"
   description = "A JupyterHub container with required extensions and libraries"
 
-  allow_merge_commit = false
-  auto_init          = true
-  has_issues         = false
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  auto_init              = true
+  has_issues             = false
 
   lifecycle {
     prevent_destroy = true

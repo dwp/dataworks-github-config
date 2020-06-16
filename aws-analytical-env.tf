@@ -2,9 +2,10 @@ resource "github_repository" "aws-analytical-env" {
   name        = "aws-analytical-env"
   description = "Infrastucure for the AWS Analytical Environment"
 
-  allow_merge_commit = false
-  has_issues         = true
-  auto_init          = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
+  auto_init              = true
 
   lifecycle {
     prevent_destroy = true

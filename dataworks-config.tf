@@ -3,9 +3,10 @@ resource "github_repository" "dataworks-config" {
   description = "Repo for storing SSM Parameter Store content"
   auto_init   = true
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

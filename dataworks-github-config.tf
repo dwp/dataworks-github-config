@@ -2,9 +2,10 @@ resource "github_repository" "dataworks-github-config" {
   name        = "dataworks-github-config"
   description = "Manage GitHub team and repository configuration for DataWorks"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true
@@ -35,6 +36,7 @@ resource "github_branch_protection" "dataworks-github-config-master" {
 resource "github_repository_webhook" "dataworks-github-config" {
   repository = "${github_repository.dataworks-github-config.name}"
   events     = ["push"]
+
   configuration {
     url          = "https://ci.dataworks.dwp.gov.uk/api/v1/teams/dataworks/pipelines/dataworks-github-config/resources/dataworks-github-config/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
@@ -44,6 +46,7 @@ resource "github_repository_webhook" "dataworks-github-config" {
 resource "github_repository_webhook" "dataworks-github-config-pr" {
   repository = "${github_repository.dataworks-github-config.name}"
   events     = ["pull_request"]
+
   configuration {
     url          = "https://ci.dataworks.dwp.gov.uk/api/v1/teams/dataworks/pipelines/dataworks-github-config/resources/dataworks-github-config-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"

@@ -2,9 +2,10 @@ resource "github_repository" "hbase-to-mongo-export" {
   name        = "hbase-to-mongo-export"
   description = ""
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

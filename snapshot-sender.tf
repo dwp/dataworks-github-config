@@ -2,9 +2,10 @@ resource "github_repository" "snapshot-sender" {
   name        = "snapshot-sender"
   description = "Decrypts and delivers mongo exports created by hbase-to-mongo-export"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

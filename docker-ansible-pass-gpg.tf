@@ -2,9 +2,10 @@ resource "github_repository" "docker-ansible-pass-gpg" {
   name        = "docker-ansible-pass-gpg"
   description = "Docker CentOS image with Ansible, Pass and GPG. Used in CI pipeline to run Ansible playbooks."
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

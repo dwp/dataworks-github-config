@@ -2,9 +2,10 @@ resource "github_repository" "terraform-aws-ses-notification-service" {
   name        = "terraform-aws-ses-notification-service"
   description = "Terraform module that creates a service to recieve notifications and distrubute emails via AWS SES"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

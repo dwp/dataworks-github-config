@@ -2,9 +2,10 @@ resource "github_repository" "terraform-aws-vpc" {
   name        = "terraform-aws-vpc"
   description = "A Terraform module to create an AWS VPC with consistent features"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true
