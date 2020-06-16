@@ -47,12 +47,10 @@ jobs:
         on_failure:
           put: dataworks-github-config-pr
           params:
-            context: $BUILD_JOB_NAME
             path: dataworks-github-config-pr
             status: failure
         on_success:
           put: dataworks-github-config-pr
           params:
-            context: $BUILD_JOB_NAME
             path: dataworks-github-config-pr
             status: success
