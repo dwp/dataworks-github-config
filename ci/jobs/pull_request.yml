@@ -6,7 +6,6 @@ jobs:
         version: every
       - put: dataworks-github-config-pr
         params:
-          context: $BUILD_JOB_NAME
           path: dataworks-github-config-pr
           status: pending
       - .: (( inject meta.plan.terraform-bootstrap ))
@@ -36,7 +35,9 @@ jobs:
             args:
               - -exc
               - |
+                cp ../terraform-config/terraform.tf .
                 terraform init
+                terraform workspace show
                 terraform plan
           inputs:
             - name: dataworks-github-config
