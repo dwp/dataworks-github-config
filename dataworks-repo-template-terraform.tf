@@ -1,10 +1,11 @@
 resource "github_repository" "dataworks_repo_template_terraform" {
-  name               = "dataworks-repo-template-terraform"
-  description        = "Template Terraform repository for DataWorks GitHub"
-  auto_init          = true
-  is_template        = true
-  allow_merge_commit = false
-  has_issues         = true
+  name                   = "dataworks-repo-template-terraform"
+  description            = "Template Terraform repository for DataWorks GitHub"
+  auto_init              = true
+  is_template            = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

@@ -2,9 +2,10 @@ resource "github_repository" "packer-egress-test" {
   name        = "packer-egress-test"
   description = "Lambda to test the internet egress endpoints required by Packer"
 
-  allow_merge_commit = false
-  auto_init          = true
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  auto_init              = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

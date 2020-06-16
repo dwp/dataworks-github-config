@@ -2,9 +2,10 @@ resource "github_repository" "kafka-to-s3" {
   name        = "kafka-to-s3"
   description = "Read from Kafka topic and store in S3"
 
-  allow_merge_commit = false
-  auto_init          = true
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  auto_init              = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

@@ -4,8 +4,9 @@ resource "github_repository" "docker_prometheus" {
   auto_init        = true
   license_template = "isc"
 
-  allow_merge_commit = false
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

@@ -2,9 +2,10 @@ resource "github_repository" "data-key-service" {
   name        = "data-key-service"
   description = "A service to assist with the generating and decrypting of data keys, backed by either AWS KMS or AWS CloudHSM v2"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

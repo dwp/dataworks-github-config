@@ -2,9 +2,10 @@ resource "github_repository" "terraform-aws-emr-cluster" {
   name        = "terraform-aws-emr-cluster"
   description = "A Terraform module to create an Amazon Web Services (AWS) Elastic MapReduce (EMR) cluster."
 
-  allow_merge_commit = false
-  default_branch     = "develop"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "develop"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

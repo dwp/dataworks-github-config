@@ -2,10 +2,11 @@ resource "github_repository" "aws-authentication" {
   name        = "aws-authentication"
   description = "AWS Cognito management"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
-  auto_init          = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
+  auto_init              = true
 
   lifecycle {
     prevent_destroy = true

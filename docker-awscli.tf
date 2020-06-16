@@ -1,9 +1,10 @@
 resource "github_repository" "docker_awscli" {
-  name               = "docker-awscli"
-  description        = "Docker container for awscli. Includes a file to source at `/assumerole`, see Readme for more."
-  auto_init          = true
-  allow_merge_commit = false
-  has_issues         = true
+  name                   = "docker-awscli"
+  description            = "Docker container for awscli. Includes a file to source at `/assumerole`, see Readme for more."
+  auto_init              = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true
@@ -40,6 +41,7 @@ resource "null_resource" "docker_awscli" {
   triggers = {
     repo = "${github_repository.docker_awscli.name}"
   }
+
   provisioner "local-exec" {
     command = "./initial-commit.sh ${github_repository.docker_awscli.name}"
   }

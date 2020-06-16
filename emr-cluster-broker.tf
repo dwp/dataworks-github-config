@@ -2,9 +2,10 @@ resource "github_repository" "emr-cluster-broker" {
   name        = "emr-cluster-broker"
   description = "A lightweight API to passthrough requests to AWS SDK and create EMR clusters"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

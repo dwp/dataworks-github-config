@@ -2,9 +2,10 @@ resource "github_repository" "terraform-aws-metric-filter-alarm" {
   name        = "terraform-aws-metric-filter-alarm"
   description = "Terraform module that creates AWS CloudWatch metric filters and alarms"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

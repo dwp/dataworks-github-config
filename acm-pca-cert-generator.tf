@@ -2,9 +2,10 @@ resource "github_repository" "acm-pca-cert-generator" {
   name        = "acm-pca-cert-generator"
   description = "Automatic creation of TLS certs generated with AWS' ACM PCA service"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

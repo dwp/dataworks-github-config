@@ -3,8 +3,9 @@ resource "github_repository" "dataworks_hardened_images" {
   description = "Dataworks specific container images which remove vulnerabilities from their base."
   auto_init   = true
 
-  allow_merge_commit = false
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true
@@ -49,4 +50,3 @@ resource "github_actions_secret" "dataworks_hardened_images_snyk_token" {
   secret_name     = "SNYK_TOKEN"
   plaintext_value = "${var.snyk_token}"
 }
-

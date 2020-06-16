@@ -2,9 +2,10 @@ resource "github_repository" "orchestration-service" {
   name        = "orchestration-service"
   description = "The service orchestrator for providing remote access into the analytical environment"
 
-  allow_merge_commit = false
-  has_issues         = true
-  auto_init          = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
+  auto_init              = true
 
   lifecycle {
     prevent_destroy = true

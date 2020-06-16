@@ -2,9 +2,10 @@ resource "github_repository" "docker-spark-gpg" {
   name        = "docker-spark-gpg"
   description = "Docker Alpine image with Spark, Python, Java and gpg. Used for local dev environment."
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

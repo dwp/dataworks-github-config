@@ -2,9 +2,10 @@ resource "github_repository" "docker-jinja-yaml-aws" {
   name        = "docker-jinja-yaml-aws"
   description = "Docker container with Jinja2, YAML and AWS SDK for populating templates with values from AWS"
 
-  allow_merge_commit = false
-  auto_init          = true
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  auto_init              = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

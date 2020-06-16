@@ -2,9 +2,10 @@ resource "github_repository" "docker-squid-s3" {
   name        = "docker-squid-s3"
   description = "Docker container with Squid + config files retrieved from S3"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

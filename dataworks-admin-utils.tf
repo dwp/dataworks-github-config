@@ -3,8 +3,9 @@ resource "github_repository" "dataworks-admin-utils" {
   description = "Contains DataWorks administrative utilities"
   auto_init   = true
 
-  allow_merge_commit = false
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

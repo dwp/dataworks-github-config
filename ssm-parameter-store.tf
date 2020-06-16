@@ -3,9 +3,10 @@ resource "github_repository" "ssm-parameter-store" {
   description = "Private data stored in SSM's parameter store"
   auto_init   = true
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

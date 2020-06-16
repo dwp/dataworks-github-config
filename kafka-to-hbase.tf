@@ -2,9 +2,10 @@ resource "github_repository" "kafka-to-hbase" {
   name        = "kafka-to-hbase"
   description = "Simple shovel utility to move messages from a Kafka topic to Hbase with versioning"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

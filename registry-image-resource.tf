@@ -2,9 +2,10 @@ resource "github_repository" "registry-image-resource" {
   name        = "registry-image-resource"
   description = "a resource for images in a Docker registry"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

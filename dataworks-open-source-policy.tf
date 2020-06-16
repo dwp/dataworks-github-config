@@ -2,9 +2,10 @@ resource "github_repository" "dataworks-open-source-policy" {
   name        = "dataworks-open-source-policy"
   description = "Policy and Guidance from the DWP DataWorks team on working with Open-Source code"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

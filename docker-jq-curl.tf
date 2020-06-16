@@ -3,9 +3,10 @@ resource "github_repository" "docker-jq-curl" {
   description = "Docker container with JQ and Curl"
   auto_init   = true
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

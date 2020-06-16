@@ -2,9 +2,10 @@ resource "github_repository" "ami-builder-configs" {
   name        = "ami-builder-configs"
   description = "Configuration files for building various AMIs using ami-builder"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

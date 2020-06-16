@@ -2,9 +2,10 @@ resource "github_repository" "docker-ruby-rspec-aws-sdk" {
   name        = "docker-ruby-rspec-aws-sdk"
   description = "Official Ruby container with rspec and aws-sdk installed"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

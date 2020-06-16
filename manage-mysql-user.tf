@@ -3,8 +3,9 @@ resource "github_repository" "manage-mysql-user" {
   description = "Manages MySQL users"
   auto_init   = true
 
-  allow_merge_commit = false
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

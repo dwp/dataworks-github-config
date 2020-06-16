@@ -3,8 +3,9 @@ resource "github_repository" "cognito-guacamole-extension" {
   description = "Integration between cognito and Apache Guacamole"
   auto_init   = true
 
-  allow_merge_commit = false
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

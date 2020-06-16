@@ -2,9 +2,10 @@ resource "github_repository" "kafka-producer" {
   name        = "kafka-producer"
   description = "Converts files in S3 to Kafka messages"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

@@ -3,8 +3,9 @@ resource "github_repository" "dataworks-analytical-custom-auth-flow" {
   description = "Three lambdas to create a custom authentication flow in cognito for the analytical environment"
   auto_init   = true
 
-  allow_merge_commit = false
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

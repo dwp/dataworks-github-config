@@ -2,9 +2,10 @@ resource "github_repository" "validate-terraform-012" {
   name        = "validate-terraform-012"
   description = "Simple job to run Terraform 0.12 checklist against all Terraform repos"
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true

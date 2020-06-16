@@ -2,9 +2,10 @@ resource "github_repository" "docker-ansible-git" {
   name        = "docker-ansible-git"
   description = "Docker CentOS image with Ansible and Git. Used in CI pipeline to install required Ansible roles."
 
-  allow_merge_commit = false
-  default_branch     = "master"
-  has_issues         = true
+  allow_merge_commit     = false
+  delete_branch_on_merge = true
+  default_branch         = "master"
+  has_issues             = true
 
   lifecycle {
     prevent_destroy = true
