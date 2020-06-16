@@ -5,10 +5,9 @@ resource "github_repository" "analytical_env_templates" {
 
   allow_merge_commit = false
   has_issues         = true
-  private            = true
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   template {
