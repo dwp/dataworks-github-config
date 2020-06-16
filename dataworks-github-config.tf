@@ -24,7 +24,8 @@ resource "github_branch_protection" "dataworks-github-config-master" {
   enforce_admins = false
 
   required_status_checks {
-    strict = true
+    strict   = true
+    contexts = ["concourse-ci/status"]
   }
 
   required_pull_request_reviews {
