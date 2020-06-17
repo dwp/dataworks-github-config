@@ -44,6 +44,6 @@ resource "null_resource" "dataworks_development_tools" {
     repo = "${github_repository.dataworks_development_tools.name}"
   }
   provisioner "local-exec" {
-    command = "./initial-commit.sh ${github_repository.dataworks_development_tools.name} '${github_repository.dataworks_development_tools.description}' ${github_repository.dataworks_development_tools.template.repository}"
+    command = "./initial-commit.sh ${github_repository.dataworks_development_tools.name} '${github_repository.dataworks_development_tools.description}' ${github_repository.dataworks_development_tools.template.0.repository}"
   }
 }
