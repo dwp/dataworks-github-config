@@ -1,4 +1,4 @@
-resource "github_repository" "dataworks-development-tools" {
+resource "github_repository" "dataworks_development_tools" {
   name             = "dataworks-development-tools"
   description      = "Infrastructure for development tools"
   auto_init        = true
@@ -17,15 +17,15 @@ resource "github_repository" "dataworks-development-tools" {
   }
 }
 
-resource "github_team_repository" "dataworks-development-tools-dataworks" {
-  repository = "${github_repository.dataworks-development-tools.name}"
+resource "github_team_repository" "dataworks_development_tools_dataworks" {
+  repository = "${github_repository.dataworks_development_tools.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "push"
 }
 
-resource "github_branch_protection" "dataworks-development-tools-master" {
-  branch         = "${github_repository.dataworks-development-tools.default_branch}"
-  repository     = "${github_repository.dataworks-development-tools.name}"
+resource "github_branch_protection" "dataworks_development_tools_master" {
+  branch         = "${github_repository.dataworks_development_tools.default_branch}"
+  repository     = "${github_repository.dataworks_development_tools.name}"
   enforce_admins = false
 
   required_status_checks {
@@ -39,11 +39,11 @@ resource "github_branch_protection" "dataworks-development-tools-master" {
   }
 }
 
-resource "null_resource" "dataworks-development-tools" {
+resource "null_resource" "dataworks_development_tools" {
   triggers = {
-    repo = "${github_repository.dataworks-development-tools.name}"
+    repo = "${github_repository.dataworks_development_tools.name}"
   }
   provisioner "local-exec" {
-    command = "./initial-commit.sh ${github_repository.dataworks-development-tools.name} '${github_repository.dataworks-development-tools.description}' ${github_repository.dataworks-development-tools.template.repository}"
+    command = "./initial-commit.sh ${github_repository.dataworks_development_tools.name} '${github_repository.dataworks_development_tools.description}' ${github_repository.dataworks_development_tools.template.repository}"
   }
 }
