@@ -58,7 +58,7 @@ resource "github_repository_webhook" "dataworks_development_tools" {
   }
 }
 
-resource "github_repository_webhook" "dataworks_development_tools-pr" {
+resource "github_repository_webhook" "dataworks_development_tools_pr" {
   repository = "${github_repository.dataworks_development_tools.name}"
   events     = ["pull_request"]
 
