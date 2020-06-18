@@ -17,3 +17,15 @@ variable "github_webhook_token" {
   type        = "string"
   description = "GitHub token to auth with CI"
 }
+
+variable "aws_concourse_domain_name" {
+  type        = "string"
+  description = "Concource CI domain name"
+  default     = "ci.dataworks.dwp.gov.uk"
+}
+
+variable "aws_concourse_team" {
+  type        = "string"
+  description = "Concource CI team name"
+  default     = "dataworks"
+}
