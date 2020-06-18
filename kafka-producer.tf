@@ -47,6 +47,6 @@ resource "github_actions_secret" "kafka-producer_github_username" {
 
 resource "github_actions_secret" "kafka-producer_github_token" {
   repository      = "${github_repository.kafka-producer.name}"
-  secret_name     = "GITHUB__TOKEN"
+  secret_name     = "GITHUB_TOKEN"
   plaintext_value = "${var.github_token}"
 }
