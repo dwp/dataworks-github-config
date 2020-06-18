@@ -39,7 +39,7 @@ resource "github_actions_secret" "kafka-producer_github_email" {
   plaintext_value = "${var.github_email}"
 }
 
-resource "github_actions_secret" "kafka-producer_github_pusername" {
+resource "github_actions_secret" "kafka-producer_github_username" {
   repository      = "${github_repository.kafka-producer.name}"
   secret_name     = "GITHUB_USERNAME"
   plaintext_value = "${var.github_username}"
