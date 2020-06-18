@@ -47,3 +47,23 @@ resource "null_resource" "dataworks_development_tools" {
     command = "./initial-commit.sh ${github_repository.dataworks_development_tools.name} '${github_repository.dataworks_development_tools.description}' ${github_repository.dataworks_development_tools.template.0.repository}"
   }
 }
+
+resource "github_repository_webhook" "dataworks_development_tools" {
+  repository = "${github_repository.dataworks_development_tools.name}"
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.dataworks_development_tools.name}/resources/${github_repository.dataworks_development_tools.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
+resource "github_repository_webhook" "dataworks_development_tools-pr" {
+  repository = "${github_repository.dataworks_development_tools.name}"
+  events     = ["pull_request"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.dataworks_development_tools.name}/resources/${github_repository.dataworks_development_tools.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
