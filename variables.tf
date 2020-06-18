@@ -29,3 +29,23 @@ variable "aws_concourse_team" {
   description = "Concource CI team name"
   default     = "dataworks"
 }
+
+variable "github_token" {
+  type        = "string"
+  description = "GitHub personal access token for managing repos and committing code"
+}
+
+variable "github_email" {
+  type        = "string"
+  description = "GitHub Email Address for committing code"
+}
+
+variable "github_username" {
+  type        = "string"
+  description = "GitHub Username for committing code"
+}
+
+variable "github_organization" {
+  type        = "string"
+  description = "GitHub Organisation to create repos in"
+}
