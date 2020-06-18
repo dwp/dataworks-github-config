@@ -1,7 +1,7 @@
 resource "github_repository" "dataworks_development_tools" {
-  name             = "dataworks-development-tools"
-  description      = "Infrastructure for development tools"
-  auto_init        = true
+  name        = "dataworks-development-tools"
+  description = "Infrastructure for development tools"
+  auto_init   = true
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -12,7 +12,7 @@ resource "github_repository" "dataworks_development_tools" {
   }
 
   template {
-    owner = "${var.github_organization}"
+    owner      = "${var.github_organization}"
     repository = "dataworks-repo-template-terraform"
   }
 }
@@ -29,7 +29,7 @@ resource "github_branch_protection" "dataworks_development_tools_master" {
   enforce_admins = false
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["concourse-ci/status"]
   }
 
