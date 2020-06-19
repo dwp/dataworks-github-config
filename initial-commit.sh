@@ -17,8 +17,8 @@ find README.md -type f -exec sed -i "s/##\ Description/##\ ${REPO_DESCRIPTION}/g
 case "$REPO_NAME" in
     *-terraform)
         find ci -type f -exec sed -i "s/$REPO_NAME/$NEW_REPO_NAME/g" {} +
-        find ci -type f -exec sed -i s/"#ENABLE "/""/g {} +
-        find ci -type f -exec sed -i /"^.*#REMOVE.*"/d {} +
+        find ci -type f -exec sed -i s/"#ENABLE_BY_INITIAL_COMMIT "/""/g {} +
+        find ci -type f -exec sed -i /"^.*#REMOVE_BY_INITIAL_COMMIT.*"/d {} +
         find *.tf -type f -exec sed -i "s/$REPO_NAME/$NEW_REPO_NAME/g" {} +
         find aviator.yml -type f -exec sed -i "s/$REPO_NAME/$NEW_REPO_NAME/g" {} +
     ;;
