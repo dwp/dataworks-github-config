@@ -35,22 +35,22 @@ resource "github_branch_protection" "aws-analytical-dataset-generation_master" {
   }
 }
 
-resource "github_repository_webhook" "aws-analytical-dataset-generation" {
+resource "github_repository_webhook" "aws_analytical_dataset_generation" {
   repository = "${github_repository.aws-analytical-dataset-generation.name}"
   events     = ["push"]
 
   configuration {
-    url          = "https://ci.dataworks.dwp.gov.uk/api/v1/teams/dataworks/pipelines/aws-analytical-dataset-generation/resources/aws-analytical-dataset-generation/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.aws-analytical-dataset-generation.name}/resources/${github_repository.aws-analytical-dataset-generation.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
 
-resource "github_repository_webhook" "aws-analytical-dataset-generation-pr" {
+resource "github_repository_webhook" "aws_analytical_dataset_generation_pr" {
   repository = "${github_repository.aws-analytical-dataset-generation.name}"
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://ci.dataworks.dwp.gov.uk/api/v1/teams/dataworks/pipelines/aws-analytical-dataset-generation/resources/aws-analytical-dataset-generation-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.aws-analytical-dataset-generation.name}/resources/${github_repository.aws-analytical-dataset-generation.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
