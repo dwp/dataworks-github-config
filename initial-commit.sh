@@ -17,7 +17,7 @@ find README.md -type f -exec sed -i "s/##\ Description/##\ ${REPO_DESCRIPTION}/g
 case "$REPO_NAME" in
     *-terraform)
         find ci -type f -exec sed -i "s/$REPO_NAME/$NEW_REPO_NAME/g" {} +
-        find terraform -type f -exec sed -i "s/$REPO_NAME/$NEW_REPO_NAME/g" {} +
+        find *.tf -type f -exec sed -i "s/$REPO_NAME/$NEW_REPO_NAME/g" {} +
         find aviator.yml -type f -exec sed -i "s/$REPO_NAME/$NEW_REPO_NAME/g" {} +
     ;;
 esac
