@@ -34,3 +34,23 @@ resource "github_branch_protection" "aws-analytical-dataset-generation_master" {
     require_code_owner_reviews = true
   }
 }
+
+resource "github_repository_webhook" "aws-analytical-dataset-generation" {
+  repository = "${github_repository.aws-analytical-dataset-generation.name}"
+  events     = ["push"]
+
+  configuration {
+    url          = "https://ci.dataworks.dwp.gov.uk/api/v1/teams/dataworks/pipelines/aws-analytical-dataset-generation/resources/aws-analytical-dataset-generation/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
+resource "github_repository_webhook" "aws-analytical-dataset-generation-pr" {
+  repository = "${github_repository.aws-analytical-dataset-generation.name}"
+  events     = ["pull_request"]
+
+  configuration {
+    url          = "https://ci.dataworks.dwp.gov.uk/api/v1/teams/dataworks/pipelines/aws-analytical-dataset-generation/resources/aws-analytical-dataset-generation-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
