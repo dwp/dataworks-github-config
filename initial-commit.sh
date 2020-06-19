@@ -22,6 +22,12 @@ case "$REPO_NAME" in
     ;;
 esac
 
+case "$REPO_NAME" in
+    *-docker)
+        find .github/workflows -type f -exec sed -i "s/$REPO_NAME/$NEW_REPO_NAME/g" {} +
+    ;;
+esac
+
 git add --all
 git commit -m "Initial commit, adding githooks submodule"
 git push https://${TF_VAR_github_token}:x-oauth-basic@github.com/dwp/$NEW_REPO_NAME
