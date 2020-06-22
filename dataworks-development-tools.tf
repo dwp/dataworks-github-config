@@ -67,3 +67,21 @@ resource "github_repository_webhook" "dataworks_development_tools_pr" {
     content_type = "form"
   }
 }
+
+resource "github_actions_secret" "dataworks_development_tools_github_email" {
+  repository      = "${github_repository.dataworks_development_tools.name}"
+  secret_name     = "CI_GITHUB_EMAIL"
+  plaintext_value = "${var.github_email}"
+}
+
+resource "github_actions_secret" "dataworks_development_tools_github_username" {
+  repository      = "${github_repository.dataworks_development_tools.name}"
+  secret_name     = "CI_GITHUB_USERNAME"
+  plaintext_value = "${var.github_username}"
+}
+
+resource "github_actions_secret" "dataworks_development_tools_github_token" {
+  repository      = "${github_repository.dataworks_development_tools.name}"
+  secret_name     = "CI_GITHUB_TOKEN"
+  plaintext_value = "${var.github_token}"
+}
