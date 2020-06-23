@@ -1,7 +1,7 @@
 #!/bin/sh
 NEW_REPO_NAME=$1
 REPO_DESCRIPTION=$2
-REPO_NAME=$3
+TEMPLATE_REPO_NAME=$3
 
 git config --global user.name "${GIT_USERNAME}"
 git config --global user.email "${GIT_EMAIL}"
