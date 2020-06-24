@@ -50,3 +50,23 @@ resource "github_actions_secret" "frontend-service-snyk-token" {
   secret_name     = "SNYK_TOKEN"
   plaintext_value = "${var.snyk_token}"
 }
+
+resource "github_repository_webhook" "frontend-service" {
+  repository = "${github_repository.frontend-service.name}"
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.frontend-service.name}/resources/${github_repository.frontend-service.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
+resource "github_repository_webhook" "frontend-service_pr" {
+  repository = "${github_repository.frontend-service.name}"
+  events     = ["pull_request"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.frontend-service.name}/resources/${github_repository.frontend-service.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
