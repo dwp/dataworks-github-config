@@ -32,3 +32,23 @@ resource "github_branch_protection" "aws-analytical-env-master" {
     require_code_owner_reviews = true
   }
 }
+
+resource "github_repository_webhook" "aws-analytical-env" {
+  repository = "${github_repository.aws-analytical-env.name}"
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.aws-analytical-env.name}/resources/${github_repository.aws-analytical-env.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
+resource "github_repository_webhook" "aws-analytical-env_pr" {
+  repository = "${github_repository.aws-analytical-env.name}"
+  events     = ["pull_request"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.aws-analytical-env.name}/resources/${github_repository.aws-analytical-env.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}

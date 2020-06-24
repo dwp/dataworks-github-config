@@ -33,3 +33,23 @@ resource "github_branch_protection" "dataworks-analytical-service-infra_master" 
     require_code_owner_reviews = true
   }
 }
+
+resource "github_repository_webhook" "dataworks-analytical-service-infra" {
+  repository = "${github_repository.dataworks-analytical-service-infra.name}"
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.dataworks-analytical-service-infra.name}/resources/${github_repository.dataworks-analytical-service-infra.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
+resource "github_repository_webhook" "dataworks-analytical-service-infra_pr" {
+  repository = "${github_repository.dataworks-analytical-service-infra.name}"
+  events     = ["pull_request"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.dataworks-analytical-service-infra.name}/resources/${github_repository.dataworks-analytical-service-infra.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}

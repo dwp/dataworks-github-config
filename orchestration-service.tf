@@ -32,3 +32,24 @@ resource "github_branch_protection" "orchestration-service-master" {
     require_code_owner_reviews = true
   }
 }
+
+
+resource "github_repository_webhook" "orchestration-service" {
+  repository = "${github_repository.orchestration-service.name}"
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.orchestration-service.name}/resources/${github_repository.orchestration-service.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
+resource "github_repository_webhook" "orchestration-service_pr" {
+  repository = "${github_repository.orchestration-service.name}"
+  events     = ["pull_request"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.orchestration-service.name}/resources/${github_repository.orchestration-service.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
