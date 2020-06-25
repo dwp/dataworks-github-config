@@ -35,18 +35,18 @@ resource "github_branch_protection" "cloudwatch-event-dispatcher-master" {
 
 resource "github_actions_secret" "cloudwatch-event-dispatcher_github_email" {
   repository      = "${github_repository.cloudwatch-event-dispatcher.name}"
-  secret_name     = "GITHUB_EMAIL"
+  secret_name     = "CI_GITHUB_EMAIL"
   plaintext_value = "${var.github_email}"
 }
 
 resource "github_actions_secret" "cloudwatch-event-dispatcher_github_username" {
   repository      = "${github_repository.cloudwatch-event-dispatcher.name}"
-  secret_name     = "GITHUB_USERNAME"
+  secret_name     = "CI_GITHUB_USERNAME"
   plaintext_value = "${var.github_username}"
 }
 
 resource "github_actions_secret" "cloudwatch-event-dispatcher_github_token" {
   repository      = "${github_repository.cloudwatch-event-dispatcher.name}"
-  secret_name     = "GITHUB_TOKEN"
+  secret_name     = "CI_GITHUB_TOKEN"
   plaintext_value = "${var.github_token}"
 }

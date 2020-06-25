@@ -1,7 +1,7 @@
 resource "github_repository" "docker_grafana" {
-  name             = "docker-grafana"
-  description      = "Rebuild of Grafana Docker image on Alpine"
-  auto_init        = true
+  name        = "docker-grafana"
+  description = "Rebuild of Grafana Docker image on Alpine"
+  auto_init   = true
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -12,7 +12,7 @@ resource "github_repository" "docker_grafana" {
   }
 
   template {
-    owner = "${var.github_organization}"
+    owner      = "${var.github_organization}"
     repository = "dataworks-repo-template-docker"
   }
 }

@@ -1,7 +1,7 @@
 resource "github_repository" "docker_thanos" {
-  name             = "docker-thanos"
-  description      = "Rebuild of Thanos Docker image for DataWorks"
-  auto_init        = true
+  name        = "docker-thanos"
+  description = "Rebuild of Thanos Docker image for DataWorks"
+  auto_init   = true
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -12,7 +12,7 @@ resource "github_repository" "docker_thanos" {
   }
 
   template {
-    owner = "${var.github_organization}"
+    owner      = "${var.github_organization}"
     repository = "dataworks-repo-template-docker"
   }
 }
