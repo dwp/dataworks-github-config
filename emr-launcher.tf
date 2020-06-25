@@ -34,3 +34,21 @@ resource "github_branch_protection" "emr-launcher_master" {
     require_code_owner_reviews = true
   }
 }
+
+resource "github_actions_secret" "emr-launcher_github_email" {
+  repository      = "${github_repository.emr-launcher.name}"
+  secret_name     = "GITHUB_EMAIL"
+  plaintext_value = "${var.github_email}"
+}
+
+resource "github_actions_secret" "emr-launcher_github_username" {
+  repository      = "${github_repository.emr-launcher.name}"
+  secret_name     = "GITHUB_USERNAME"
+  plaintext_value = "${var.github_username}"
+}
+
+resource "github_actions_secret" "emr-launcher_github_token" {
+  repository      = "${github_repository.emr-launcher.name}"
+  secret_name     = "GITHUB_TOKEN"
+  plaintext_value = "${var.github_token}"
+}

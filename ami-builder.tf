@@ -32,3 +32,21 @@ resource "github_branch_protection" "ami-builder-master" {
     require_code_owner_reviews = true
   }
 }
+
+resource "github_actions_secret" "ami-builder_github_email" {
+  repository      = "${github_repository.ami-builder.name}"
+  secret_name     = "GITHUB_EMAIL"
+  plaintext_value = "${var.github_email}"
+}
+
+resource "github_actions_secret" "ami-builder_github_username" {
+  repository      = "${github_repository.ami-builder.name}"
+  secret_name     = "GITHUB_USERNAME"
+  plaintext_value = "${var.github_username}"
+}
+
+resource "github_actions_secret" "ami-builder_github_token" {
+  repository      = "${github_repository.ami-builder.name}"
+  secret_name     = "GITHUB_TOKEN"
+  plaintext_value = "${var.github_token}"
+}
