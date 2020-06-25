@@ -50,3 +50,21 @@ resource "github_actions_secret" "ucfs-claimant-api-load-data_snyk_token" {
   secret_name     = "SNYK_TOKEN"
   plaintext_value = "${var.snyk_token}"
 }
+
+resource "github_actions_secret" "ucfs-claimant-api-load-data_github_email" {
+  repository      = "${github_repository.ucfs-claimant-api-load-data.name}"
+  secret_name     = "CI_GITHUB_EMAIL"
+  plaintext_value = "${var.github_email}"
+}
+
+resource "github_actions_secret" "ucfs-claimant-api-load-data_github_username" {
+  repository      = "${github_repository.ucfs-claimant-api-load-data.name}"
+  secret_name     = "CI_GITHUB_USERNAME"
+  plaintext_value = "${var.github_username}"
+}
+
+resource "github_actions_secret" "ucfs-claimant-api-load-data_github_token" {
+  repository      = "${github_repository.ucfs-claimant-api-load-data.name}"
+  secret_name     = "CI_GITHUB_TOKEN"
+  plaintext_value = "${var.github_token}"
+}

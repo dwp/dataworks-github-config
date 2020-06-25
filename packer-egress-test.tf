@@ -32,3 +32,21 @@ resource "github_branch_protection" "packer-egress-test-master" {
     require_code_owner_reviews = true
   }
 }
+
+resource "github_actions_secret" "packer-egress-test_github_email" {
+  repository      = "${github_repository.packer-egress-test.name}"
+  secret_name     = "CI_GITHUB_EMAIL"
+  plaintext_value = "${var.github_email}"
+}
+
+resource "github_actions_secret" "packer-egress-test_github_username" {
+  repository      = "${github_repository.packer-egress-test.name}"
+  secret_name     = "CI_GITHUB_USERNAME"
+  plaintext_value = "${var.github_username}"
+}
+
+resource "github_actions_secret" "packer-egress-test_github_token" {
+  repository      = "${github_repository.packer-egress-test.name}"
+  secret_name     = "CI_GITHUB_TOKEN"
+  plaintext_value = "${var.github_token}"
+}
