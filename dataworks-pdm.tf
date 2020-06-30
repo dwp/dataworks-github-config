@@ -1,14 +1,19 @@
 resource "github_repository" "dataworks_pdm" {
-  name                   = "dataworks-pdm"
-  description            = "This repo holds the Physical Data Model (PDM) and its tests"
-  auto_init              = true
-  is_template            = true
+  name             = "dataworks-pdm"
+  description      = "This repo holds the Physical Data Model (PDM) code and tests"
+  auto_init        = true
+
   allow_merge_commit     = false
   delete_branch_on_merge = true
   has_issues             = true
 
   lifecycle {
     prevent_destroy = true
+  }
+
+  template {
+    owner = "${var.github_organization}"
+    repository = "dataworks-repo-template"
   }
 }
 
@@ -30,5 +35,14 @@ resource "github_branch_protection" "dataworks_pdm_master" {
   required_pull_request_reviews {
     dismiss_stale_reviews      = true
     require_code_owner_reviews = true
+  }
+}
+
+resource "null_resource" "dataworks_pdm" {
+  triggers = {
+    repo = "${github_repository.dataworks_pdm.name}"
+  }
+  provisioner "local-exec" {
+    command = "./initial-commit.sh ${github_repository.dataworks_pdm.name} '${github_repository.dataworks_pdm.description}' ${github_repository.dataworks_pdm.template.0.repository}"
   }
 }
