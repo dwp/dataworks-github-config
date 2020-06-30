@@ -65,3 +65,4 @@ resource "github_actions_secret" "docker_hiverunner_snyk_token" {
   secret_name     = "SNYK_TOKEN"
   plaintext_value = "${var.snyk_token}"
 }
+
