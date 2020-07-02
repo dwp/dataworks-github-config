@@ -5,10 +5,11 @@ Manage GitHub team and repository configuration for DataWorks
 
 This process is currently intended for use with *public*, not private repositories.
 
-1. There are now two standards, for creating a new repository:
-   1. _*Terraform repositories:*_ Copy `terraform-template-repository.tf.sample` to a new `.tf` file to create a standard Terraform repository, including Terraform templates and CI pipeline.
-   1. _*Docker repositories:*_ Copy `docker-template-repository.tf.sample` to a new `.tf` file to create a standard Docker repository, including GitHub Actions pipeline.
-   1. _*All other repositories:*_ Copy `template-repository.tf.sample` to a new `.tf` file to create a standard empty repository
+1. There are now standards for creating a new repository, dependant on type:
+   - _*Terraform repositories:*_ Copy `terraform-template-repository.tf.sample` to a new `.tf` file to create a standard Terraform repository, including Terraform templates and CI pipeline.
+   - _*Docker repositories:*_ Copy `docker-template-repository.tf.sample` to a new `.tf` file to create a standard Docker repository, including GitHub Actions pipeline.  
+      - Follow the standard naming policy for container images and their VCS repositories to be identically named.
+   - _*All other repositories:*_ Copy `template-repository.tf.sample` to a new `.tf` file to create a standard empty repository
 1. Update the `github_repository` resource name (example) using underscores as separators if required. Its `name`  should use hyphen separators if required, and `description` attributes should be a single sentence. 
 1. Replace every instance of `example` with the name of your repo using underscores.
 1. Raise a PR with your changes
