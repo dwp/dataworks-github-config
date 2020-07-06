@@ -1,6 +1,6 @@
 resource "github_repository" "aws-pdm-dataset-generation" {
   name        = "aws-pdm-dataset-generation"
-  description = "Repo for PDM dataset generation"
+  description = "Infra for Physical Data Model generation"
   auto_init   = true
 
   allow_merge_commit     = false
@@ -31,5 +31,25 @@ resource "github_branch_protection" "aws-pdm-dataset-generation_master" {
   required_pull_request_reviews {
     dismiss_stale_reviews      = true
     require_code_owner_reviews = true
+  }
+}
+
+resource "github_repository_webhook" "aws-pdm-dataset-generation" {
+  repository = "${github_repository.aws-pdm-dataset-generation.name}"
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.aws-pdm-dataset-generation.name}/resources/${github_repository.aws-pdm-dataset-generation.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
+resource "github_repository_webhook" "aws-pdm-dataset-generation_pr" {
+  repository = "${github_repository.aws-pdm-dataset-generation.name}"
+  events     = ["pull_request"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.aws-pdm-dataset-generation.name}/resources/${github_repository.aws-pdm-dataset-generation.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
   }
 }
