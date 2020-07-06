@@ -10,11 +10,6 @@ resource "github_repository" "aws-pdm-dataset-generation" {
   lifecycle {
     prevent_destroy = true
   }
-
-  template {
-    owner      = "${var.github_organization}"
-    repository = "dataworks-repo-template-terraform"
-  }
 }
 
 resource "github_team_repository" "aws-pdm-dataset-generation_dataworks" {
@@ -36,15 +31,6 @@ resource "github_branch_protection" "aws-pdm-dataset-generation_master" {
   required_pull_request_reviews {
     dismiss_stale_reviews      = true
     require_code_owner_reviews = true
-  }
-}
-
-resource "null_resource" "aws-pdm-dataset-generation" {
-  triggers = {
-    repo = "${github_repository.aws-pdm-dataset-generation.name}"
-  }
-  provisioner "local-exec" {
-    command = "./initial-commit.sh ${github_repository.aws-pdm-dataset-generation.name} '${github_repository.aws-pdm-dataset-generation.description}' ${github_repository.aws-pdm-dataset-generation.template.0.repository}"
   }
 }
 
