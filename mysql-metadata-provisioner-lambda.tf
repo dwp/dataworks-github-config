@@ -1,6 +1,6 @@
 resource "github_repository" "mysql_metadata_provisioner_lambda" {
   name             = "mysql-query-lambda"
-  description      = "AWS Lambda to connect to MySQL database, execute query, and return results"
+  description      = "AWS Lambda to provision the database tables and users, for use by the Hbase reconciler as it's metadata store."
   auto_init        = true
 
   allow_merge_commit     = false
