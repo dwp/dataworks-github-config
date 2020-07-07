@@ -1,7 +1,7 @@
-resource "github_repository" "mysql_query_lambda" {
-  name             = "mysql-query-lambda"
+resource "github_repository" "dataworks_ingestion_metadata_interface" {
+  name             = "dataworks-ingestion-metadata-interface"
   description      = "AWS Lambda to connect to MySQL database, execute query, and return results"
-  auto_init        = true
+  auto_init        = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -17,15 +17,15 @@ resource "github_repository" "mysql_query_lambda" {
   }
 }
 
-resource "github_team_repository" "mysql_query_lambda_dataworks" {
-  repository = "${github_repository.mysql_query_lambda.name}"
+resource "github_team_repository" "dataworks_ingestion_metadata_interface_dataworks" {
+  repository = "${github_repository.dataworks_ingestion_metadata_interface.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "push"
 }
 
-resource "github_branch_protection" "mysql_query_lambda_master" {
-  branch         = "${github_repository.mysql_query_lambda.default_branch}"
-  repository     = "${github_repository.mysql_query_lambda.name}"
+resource "github_branch_protection" "dataworks_ingestion_metadata_interface_master" {
+  branch         = "${github_repository.dataworks_ingestion_metadata_interface.default_branch}"
+  repository     = "${github_repository.dataworks_ingestion_metadata_interface.name}"
   enforce_admins = false
 
   required_status_checks {
@@ -38,29 +38,20 @@ resource "github_branch_protection" "mysql_query_lambda_master" {
   }
 }
 
-resource "null_resource" "mysql_query_lambda" {
-  triggers = {
-    repo = "${github_repository.mysql_query_lambda.name}"
-  }
-  provisioner "local-exec" {
-    command = "./initial-commit.sh ${github_repository.mysql_query_lambda.name} '${github_repository.mysql_query_lambda.description}' ${github_repository.mysql_query_lambda.template.0.repository}"
-  }
-}
-
-resource "github_actions_secret" "mysql_query_lambda_github_email" {
-  repository      = "${github_repository.mysql_query_lambda.name}"
+resource "github_actions_secret" "dataworks_ingestion_metadata_interface_github_email" {
+  repository      = "${github_repository.dataworks_ingestion_metadata_interface.name}"
   secret_name     = "CI_GITHUB_EMAIL"
   plaintext_value = "${var.github_email}"
 }
 
-resource "github_actions_secret" "mysql_query_lambda_github_username" {
-  repository      = "${github_repository.mysql_query_lambda.name}"
+resource "github_actions_secret" "dataworks_ingestion_metadata_interface_github_username" {
+  repository      = "${github_repository.dataworks_ingestion_metadata_interface.name}"
   secret_name     = "CI_GITHUB_USERNAME"
   plaintext_value = "${var.github_username}"
 }
 
-resource "github_actions_secret" "mysql_query_lambda_github_token" {
-  repository      = "${github_repository.mysql_query_lambda.name}"
+resource "github_actions_secret" "dataworks_ingestion_metadata_interface_github_token" {
+  repository      = "${github_repository.dataworks_ingestion_metadata_interface.name}"
   secret_name     = "CI_GITHUB_TOKEN"
   plaintext_value = "${var.github_token}"
 }
