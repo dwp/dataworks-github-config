@@ -1,6 +1,6 @@
 resource "github_repository" "dataworks_ingestion_metadata_interface" {
   name             = "dataworks-ingestion-metadata-interface"
-  description      = "AWS Lambda to connect to MySQL database, execute query, and return results"
+  description      = "AWS Lambda to provide an interface to MySQL database that holds ingestion metadata"
   auto_init        = false
 
   allow_merge_commit     = false
