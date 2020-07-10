@@ -13,7 +13,7 @@ spruce:
           - deploy_commit_hooks.yml.j2
     to: aviator_pipeline.yml
 fly:
-  name: dataworks-github-config
+  name: github-config
   target: aws-concourse
   config: aviator_pipeline.yml
   expose: true
