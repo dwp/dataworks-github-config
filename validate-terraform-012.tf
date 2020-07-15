@@ -8,7 +8,7 @@ resource "github_repository" "validate-terraform-012" {
   has_issues             = true
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 

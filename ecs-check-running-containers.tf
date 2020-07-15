@@ -8,7 +8,7 @@ resource "github_repository" "ecs-check-running-containers" {
   has_issues             = true
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
