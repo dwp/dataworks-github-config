@@ -1,6 +1,6 @@
 resource "github_repository" "cloudwatch_exporter" {
   name             = "cloudwatch-exporter"
-  description      = "cloudwatch-exporter"
+  description      = "Repo for the DataWorks Cloudwatch Exporter Docker image"
   auto_init        = true
 
   allow_merge_commit     = false
