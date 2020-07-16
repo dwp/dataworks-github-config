@@ -18,14 +18,14 @@ resource "github_repository" "cloudwatch_exporter" {
 }
 
 resource "github_team_repository" "cloudwatch_exporter_dataworks" {
-  repository = "${github_repository.cloudwatch-exporter.name}"
+  repository = "${github_repository.cloudwatch_exporter.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "push"
 }
 
 resource "github_branch_protection" "cloudwatch_exporter_master" {
-  branch         = "${github_repository.cloudwatch-exporter.default_branch}"
-  repository     = "${github_repository.cloudwatch-exporter.name}"
+  branch         = "${github_repository.cloudwatch_exporter.default_branch}"
+  repository     = "${github_repository.cloudwatch_exporter.name}"
   enforce_admins = false
 
   required_status_checks {
@@ -40,27 +40,27 @@ resource "github_branch_protection" "cloudwatch_exporter_master" {
 
 resource "null_resource" "cloudwatch_exporter" {
   triggers = {
-    repo = "${github_repository.cloudwatch-exporter.name}"
+    repo = "${github_repository.cloudwatch_exporter.name}"
   }
   provisioner "local-exec" {
-    command = "./initial-commit.sh ${github_repository.cloudwatch-exporter.name} '${github_repository.cloudwatch-exporter.description}' ${github_repository.cloudwatch-exporter.template.0.repository}"
+    command = "./initial-commit.sh ${github_repository.cloudwatch_exporter.name} '${github_repository.cloudwatch_exporter.description}' ${github_repository.cloudwatch_exporter.template.0.repository}"
   }
 }
 
 resource "github_actions_secret" "cloudwatch_exporter_dockerhub_password" {
-  repository      = "${github_repository.cloudwatch-exporter.name}"
+  repository      = "${github_repository.cloudwatch_exporter.name}"
   secret_name     = "DOCKERHUB_PASSWORD"
   plaintext_value = "${var.dockerhub_password}"
 }
 
 resource "github_actions_secret" "cloudwatch_exporter_dockerhub_username" {
-  repository      = "${github_repository.cloudwatch-exporter.name}"
+  repository      = "${github_repository.cloudwatch_exporter.name}"
   secret_name     = "DOCKERHUB_USERNAME"
   plaintext_value = "${var.dockerhub_username}"
 }
 
 resource "github_actions_secret" "cloudwatch_exporter_snyk_token" {
-  repository      = "${github_repository.cloudwatch-exporter.name}"
+  repository      = "${github_repository.cloudwatch_exporter.name}"
   secret_name     = "SNYK_TOKEN"
   plaintext_value = "${var.snyk_token}"
 }
