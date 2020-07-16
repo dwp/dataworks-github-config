@@ -18,14 +18,14 @@ resource "github_repository" "docker_pushgateway" {
 }
 
 resource "github_team_repository" "docker_pushgateway_dataworks" {
-  repository = "${github_repository.pushgateway.name}"
+  repository = "${github_repository.docker_pushgateway.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "push"
 }
 
 resource "github_branch_protection" "docker_pushgateway_master" {
-  branch         = "${github_repository.pushgateway.default_branch}"
-  repository     = "${github_repository.pushgateway.name}"
+  branch         = "${github_repository.docker_pushgateway.default_branch}"
+  repository     = "${github_repository.docker_pushgateway.name}"
   enforce_admins = false
 
   required_status_checks {
@@ -40,27 +40,27 @@ resource "github_branch_protection" "docker_pushgateway_master" {
 
 resource "null_resource" "docker_pushgateway" {
   triggers = {
-    repo = "${github_repository.pushgateway.name}"
+    repo = "${github_repository.docker_pushgateway.name}"
   }
   provisioner "local-exec" {
-    command = "./initial-commit.sh ${github_repository.pushgateway.name} '${github_repository.pushgateway.description}' ${github_repository.pushgateway.template.0.repository}"
+    command = "./initial-commit.sh ${github_repository.docker_pushgateway.name} '${github_repository.docker_pushgateway.description}' ${github_repository.docker_pushgateway.template.0.repository}"
   }
 }
 
 resource "github_actions_secret" "docker_pushgateway_dockerhub_password" {
-  repository      = "${github_repository.pushgateway.name}"
+  repository      = "${github_repository.docker_pushgateway.name}"
   secret_name     = "DOCKERHUB_PASSWORD"
   plaintext_value = "${var.dockerhub_password}"
 }
 
 resource "github_actions_secret" "docker_pushgateway_dockerhub_username" {
-  repository      = "${github_repository.pushgateway.name}"
+  repository      = "${github_repository.docker_pushgateway.name}"
   secret_name     = "DOCKERHUB_USERNAME"
   plaintext_value = "${var.dockerhub_username}"
 }
 
 resource "github_actions_secret" "docker_pushgateway_snyk_token" {
-  repository      = "${github_repository.pushgateway.name}"
+  repository      = "${github_repository.docker_pushgateway.name}"
   secret_name     = "SNYK_TOKEN"
   plaintext_value = "${var.snyk_token}"
 }
