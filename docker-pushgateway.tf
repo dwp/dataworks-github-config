@@ -1,4 +1,4 @@
-resource "github_repository" "pushgateway" {
+resource "github_repository" "docker_pushgateway" {
   name             = "docker-pushgateway"
   description      = "Repo for the DataWorks Pushgateway Docker image"
   auto_init        = true
@@ -17,13 +17,13 @@ resource "github_repository" "pushgateway" {
   }
 }
 
-resource "github_team_repository" "pushgateway_dataworks" {
+resource "github_team_repository" "docker_pushgateway_dataworks" {
   repository = "${github_repository.pushgateway.name}"
   team_id    = "${github_team.dataworks.id}"
   permission = "push"
 }
 
-resource "github_branch_protection" "pushgateway_master" {
+resource "github_branch_protection" "docker_pushgateway_master" {
   branch         = "${github_repository.pushgateway.default_branch}"
   repository     = "${github_repository.pushgateway.name}"
   enforce_admins = false
@@ -38,7 +38,7 @@ resource "github_branch_protection" "pushgateway_master" {
   }
 }
 
-resource "null_resource" "pushgateway" {
+resource "null_resource" "docker_pushgateway" {
   triggers = {
     repo = "${github_repository.pushgateway.name}"
   }
@@ -47,19 +47,19 @@ resource "null_resource" "pushgateway" {
   }
 }
 
-resource "github_actions_secret" "pushgateway_dockerhub_password" {
+resource "github_actions_secret" "docker_pushgateway_dockerhub_password" {
   repository      = "${github_repository.pushgateway.name}"
   secret_name     = "DOCKERHUB_PASSWORD"
   plaintext_value = "${var.dockerhub_password}"
 }
 
-resource "github_actions_secret" "pushgateway_dockerhub_username" {
+resource "github_actions_secret" "docker_pushgateway_dockerhub_username" {
   repository      = "${github_repository.pushgateway.name}"
   secret_name     = "DOCKERHUB_USERNAME"
   plaintext_value = "${var.dockerhub_username}"
 }
 
-resource "github_actions_secret" "pushgateway_snyk_token" {
+resource "github_actions_secret" "docker_pushgateway_snyk_token" {
   repository      = "${github_repository.pushgateway.name}"
   secret_name     = "SNYK_TOKEN"
   plaintext_value = "${var.snyk_token}"
