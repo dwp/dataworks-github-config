@@ -25,7 +25,7 @@ resource "github_branch_protection" "dataworks-analytical-service-infra_master" 
 
   required_status_checks {
     strict   = true
-    contexts = ["concourse-ci/dataworks-analytical-service-infra-pr"]
+    contexts = ["concourse-ci/status"]
   }
 
   required_pull_request_reviews {
