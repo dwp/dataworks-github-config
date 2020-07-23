@@ -33,21 +33,24 @@ jobs:
                 git clone {{ repo }} {{ repo }}-modified
                 cd {{ repo }}-modified
                 if [[ -f .gitmodules ]]; then
-                  git remote set-url origin https://github.com/dwp/{{ repo }}.git
-                  git rm -r .githooks
-                  git submodule add https://github.com/dwp/dataworks-githooks .githooks
-                  sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
-                  cat << 'EOF' >> Makefile
-                  .PHONY: git-hooks
-                  git-hooks: ## Set up hooks in .githooks
-                    @git submodule update --init .githooks ; \
-                    git config core.hooksPath .githooks \
+                git remote set-url origin https://github.com/dwp/{{ repo }}.git
+                git rm -r .githooks
+                git submodule add https://github.com/dwp/dataworks-githooks .githooks
+                sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
+                cat << 'EOF' >> Makefile
+                .PHONY: git-hooks
+                git-hooks: ## Set up hooks in .githooks
+                  @git submodule update --init .githooks ; \
+                  git config core.hooksPath .githooks \
 
-                  EOF
-                  git add Makefile
-                  git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
-                fi
-                cd ..{% endif %}{% endfor %}
+                EOF
+                git add Makefile
+                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
+                cd ..
+                else
+                echo "submodule exists"
+                cd ..
+                fi{% endif %}{% endfor %}
                 
         params:
           GIT_USERNAME: ((dataworks.concourse_github_username))
