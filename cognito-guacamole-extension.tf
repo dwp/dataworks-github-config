@@ -32,3 +32,27 @@ resource "github_branch_protection" "cognito-guacamole-extension-master" {
     require_code_owner_reviews = true
   }
 }
+
+resource "github_actions_secret" "cognito-guacamole-extension-dockerhub-password" {
+  repository      = "${github_repository.cognito-guacamole-extension.name}"
+  secret_name     = "DOCKERHUB_PASSWORD"
+  plaintext_value = "${var.dockerhub_password}"
+}
+
+resource "github_actions_secret" "cognito-guacamole-extension-dockerhub-username" {
+  repository      = "${github_repository.cognito-guacamole-extension.name}"
+  secret_name     = "DOCKERHUB_USERNAME"
+  plaintext_value = "${var.dockerhub_username}"
+}
+
+resource "github_actions_secret" "cognito-guacamole-extension-snyk-token" {
+  repository      = "${github_repository.cognito-guacamole-extension.name}"
+  secret_name     = "SNYK_TOKEN"
+  plaintext_value = "${var.snyk_token}"
+}
+
+resource "github_actions_secret" "cognito-guacamole-extension-slack-webhook" {
+  repository      = "${github_repository.cognito-guacamole-extension.name}"
+  secret_name     = "SLACK_WEBHOOK"
+  plaintext_value = "${var.slack_webhook_url}"
+}

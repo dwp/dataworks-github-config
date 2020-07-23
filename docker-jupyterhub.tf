@@ -68,3 +68,9 @@ resource "github_actions_secret" "docker-jupyterhub-snyk-token" {
   secret_name     = "SNYK_TOKEN"
   plaintext_value = "${var.snyk_token}"
 }
+
+resource "github_actions_secret" "docker-jupyterhub-slack-webhook" {
+  repository      = "${github_repository.docker-jupyterhub.name}"
+  secret_name     = "SLACK_WEBHOOK"
+  plaintext_value = "${var.slack_webhook_url}"
+}
