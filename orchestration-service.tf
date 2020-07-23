@@ -71,3 +71,9 @@ resource "github_actions_secret" "orchestration-service-snyk-token" {
   secret_name     = "SNYK_TOKEN"
   plaintext_value = "${var.snyk_token}"
 }
+
+resource "github_actions_secret" "orchestration-service-slack-webhook" {
+  repository      = "${github_repository.orchestration-service.name}"
+  secret_name     = "SLACK_WEBHOOK"
+  plaintext_value = "${var.slack_webhook_url}"
+}

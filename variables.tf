@@ -49,3 +49,8 @@ variable "github_organization" {
   type        = "string"
   description = "GitHub Organisation to create repos in"
 }
+
+variable "slack_webhook_url" {
+  type        = "string"
+  description = "The webhook URL to send to Slack"
+}
