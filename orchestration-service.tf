@@ -53,3 +53,21 @@ resource "github_repository_webhook" "orchestration-service_pr" {
     content_type = "form"
   }
 }
+
+resource "github_actions_secret" "orchestration-service-dockerhub-password" {
+  repository      = "${github_repository.orchestration-service.name}"
+  secret_name     = "DOCKERHUB_PASSWORD"
+  plaintext_value = "${var.dockerhub_password}"
+}
+
+resource "github_actions_secret" "orchestration-service-dockerhub-username" {
+  repository      = "${github_repository.orchestration-service.name}"
+  secret_name     = "DOCKERHUB_USERNAME"
+  plaintext_value = "${var.dockerhub_username}"
+}
+
+resource "github_actions_secret" "orchestration-service-snyk-token" {
+  repository      = "${github_repository.orchestration-service.name}"
+  secret_name     = "SNYK_TOKEN"
+  plaintext_value = "${var.snyk_token}"
+}
