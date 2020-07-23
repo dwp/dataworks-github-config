@@ -32,24 +32,23 @@ jobs:
                 {% for repo in repos %}{% if not 'dataworks-githooks' in repo  %}
                 git clone {{ repo }} {{ repo }}-modified
                 cd {{ repo }}-modified
-                git remote set-url origin https://github.com/dwp/{{ repo }}.git
-                git rm -r .githooks
-                sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
-                cat << 'EOF' >> Makefile
-                .PHONY: git-hooks
-                git-hooks: ## Set up hooks in .githooks
-                	@if [[ ! -f .gitmodules ]]; then \
-                		git submodule add https://github.com/dwp/dataworks-githooks .githooks ; \
-                 		git submodule update --init .githooks ; \
-                		git config core.hooksPath .githooks ; \
-                	else \
-                		git submodule update --remote .githooks ; \
-                	fi \
+                if [[ -f .gitmodules ]]; then
+                  git remote set-url origin https://github.com/dwp/{{ repo }}.git
+                  git rm -r .githooks
+                  git submodule add https://github.com/dwp/dataworks-githooks .githooks
+                  sed -i -e '/.PHONY:\ git-hooks/,+12d' Makefile
+                  cat << 'EOF' >> Makefile
+                  .PHONY: git-hooks
+                  git-hooks: ## Set up hooks in .githooks
+                    @git submodule update --init .githooks ; \
+                    git config core.hooksPath .githooks \
 
-                EOF
-                git add Makefile
-                git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
+                  EOF
+                  git add Makefile
+                  git diff --quiet && git diff --staged --quiet || git commit -m "updated Makefile"
+                fi
                 cd ..{% endif %}{% endfor %}
+                
         params:
           GIT_USERNAME: ((dataworks.concourse_github_username))
           GIT_EMAIL: ((dataworks.concourse_github_email))
