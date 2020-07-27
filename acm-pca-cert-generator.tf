@@ -50,3 +50,13 @@ resource "github_actions_secret" "acm-pca-cert-generator_github_token" {
   secret_name     = "CI_GITHUB_TOKEN"
   plaintext_value = "${var.github_token}"
 }
+
+resource "github_repository_webhook" "acm-pca-cert-generator" {
+  repository = "${github_repository.acm-pca-cert-generator.name}"
+  events     = ["release"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/asset-mgmt-${github_repository.acm-pca-cert-generator.name}/resources/${github_repository.acm-pca-cert-generator.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
