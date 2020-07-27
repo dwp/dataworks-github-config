@@ -56,7 +56,7 @@ resource "github_repository_webhook" "acm-pca-cert-generator" {
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.acm-pca-cert-generator.name}/resources/${github_repository.acm-pca-cert-generator.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/asset-mgmt-${github_repository.acm-pca-cert-generator.name}/resources/${github_repository.acm-pca-cert-generator.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
