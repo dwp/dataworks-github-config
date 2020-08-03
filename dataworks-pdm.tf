@@ -7,6 +7,10 @@ resource "github_repository" "dataworks_pdm" {
   delete_branch_on_merge = true
   has_issues             = true
 
+  lifecycle {
+    prevent_destroy = false
+  }
+
   template {
     owner      = "${var.github_organization}"
     repository = "dataworks-repo-template"
