@@ -1,7 +1,7 @@
 resource "github_repository" "example" {
   name             = "example"
   description      = "example"
-  auto_init        = true
+  auto_init        = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
