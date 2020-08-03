@@ -38,15 +38,6 @@ resource "github_branch_protection" "hive_exporter_master" {
   }
 }
 
-resource "null_resource" "hive_exporter" {
-  triggers = {
-    repo = "${github_repository.hive_exporter.name}"
-  }
-  provisioner "local-exec" {
-    command = "./initial-commit.sh ${github_repository.hive_exporter.name} '${github_repository.hive_exporter.description}' ${github_repository.hive_exporter.template.0.repository}"
-  }
-}
-
 resource "github_actions_secret" "hive_exporter_dockerhub_password" {
   repository      = "${github_repository.hive_exporter.name}"
   secret_name     = "DOCKERHUB_PASSWORD"
