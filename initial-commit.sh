@@ -28,6 +28,12 @@ esac
 case "$TEMPLATE_REPO_NAME" in
     *-docker)
         find .github/workflows -type f -exec sed -i "s/$TEMPLATE_REPO_NAME/$NEW_REPO_NAME/g" {} +
+        find ci -type f -exec sed -i "s/$TEMPLATE_REPO_NAME/$NEW_REPO_NAME/g" {} +
+        find ci -type f -exec sed -i s/"#ENABLE_BY_INITIAL_COMMIT "/""/g {} +
+        find ci -type f -exec sed -i /"^.*#REMOVE_BY_INITIAL_COMMIT.*"/d {} +
+        find *.tf -type f -exec sed -i "s/$TEMPLATE_REPO_NAME/$NEW_REPO_NAME/g" {} +
+        find *.tf.j2 -type f -exec sed -i "s/$TEMPLATE_REPO_NAME/$NEW_REPO_NAME/g" {} +
+        find aviator.yml -type f -exec sed -i "s/$TEMPLATE_REPO_NAME/$NEW_REPO_NAME/g" {} +
     ;;
 esac
 
