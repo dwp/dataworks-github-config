@@ -1,7 +1,7 @@
 resource "github_repository" "dataworks_ingestion_metadata_interface" {
-  name             = "dataworks-ingestion-metadata-interface"
-  description      = "AWS Lambda to provide an interface to MySQL database that holds ingestion metadata"
-  auto_init        = false
+  name        = "dataworks-ingestion-metadata-interface"
+  description = "AWS Lambda to provide an interface to MySQL database that holds ingestion metadata"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -12,20 +12,20 @@ resource "github_repository" "dataworks_ingestion_metadata_interface" {
   }
 
   template {
-    owner = "${var.github_organization}"
+    owner      = var.github_organization
     repository = "dataworks-repo-template"
   }
 }
 
 resource "github_team_repository" "dataworks_ingestion_metadata_interface_dataworks" {
-  repository = "${github_repository.dataworks_ingestion_metadata_interface.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.dataworks_ingestion_metadata_interface.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "dataworks_ingestion_metadata_interface_master" {
-  branch         = "${github_repository.dataworks_ingestion_metadata_interface.default_branch}"
-  repository     = "${github_repository.dataworks_ingestion_metadata_interface.name}"
+  branch         = github_repository.dataworks_ingestion_metadata_interface.default_branch
+  repository     = github_repository.dataworks_ingestion_metadata_interface.name
   enforce_admins = false
 
   required_status_checks {
@@ -39,19 +39,20 @@ resource "github_branch_protection" "dataworks_ingestion_metadata_interface_mast
 }
 
 resource "github_actions_secret" "dataworks_ingestion_metadata_interface_github_email" {
-  repository      = "${github_repository.dataworks_ingestion_metadata_interface.name}"
+  repository      = github_repository.dataworks_ingestion_metadata_interface.name
   secret_name     = "CI_GITHUB_EMAIL"
-  plaintext_value = "${var.github_email}"
+  plaintext_value = local.github_email
 }
 
 resource "github_actions_secret" "dataworks_ingestion_metadata_interface_github_username" {
-  repository      = "${github_repository.dataworks_ingestion_metadata_interface.name}"
+  repository      = github_repository.dataworks_ingestion_metadata_interface.name
   secret_name     = "CI_GITHUB_USERNAME"
-  plaintext_value = "${var.github_username}"
+  plaintext_value = local.github_username
 }
 
 resource "github_actions_secret" "dataworks_ingestion_metadata_interface_github_token" {
-  repository      = "${github_repository.dataworks_ingestion_metadata_interface.name}"
+  repository      = github_repository.dataworks_ingestion_metadata_interface.name
   secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = "${var.github_token}"
+  plaintext_value = local.github_token
 }
+

@@ -13,14 +13,14 @@ resource "github_repository" "hardened-guac-chrome" {
 }
 
 resource "github_team_repository" "hardened-guac-chrome-dataworks" {
-  repository = "${github_repository.hardened-guac-chrome.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.hardened-guac-chrome.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "hardened-guac-chrome-master" {
-  branch         = "${github_repository.hardened-guac-chrome.default_branch}"
-  repository     = "${github_repository.hardened-guac-chrome.name}"
+  branch         = github_repository.hardened-guac-chrome.default_branch
+  repository     = github_repository.hardened-guac-chrome.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "hardened-guac-chrome-master" {
     require_code_owner_reviews = true
   }
 }
+

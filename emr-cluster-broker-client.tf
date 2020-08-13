@@ -13,19 +13,18 @@ resource "github_repository" "emr-cluster-broker-client" {
 }
 
 resource "github_team_repository" "emr-cluster-broker-client_dataworks" {
-  repository = "${github_repository.emr-cluster-broker-client.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.emr-cluster-broker-client.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "emr-cluster-broker-client_master" {
-  branch         = "${github_repository.emr-cluster-broker-client.default_branch}"
-  repository     = "${github_repository.emr-cluster-broker-client.name}"
+  branch         = github_repository.emr-cluster-broker-client.default_branch
+  repository     = github_repository.emr-cluster-broker-client.name
   enforce_admins = false
 
   required_status_checks {
     strict = true
-
     # The contexts line should only be kept for Terraform repos.
     # contexts = ["concourse-ci/emr-cluster-broker-client-pr"]
   }
@@ -35,3 +34,4 @@ resource "github_branch_protection" "emr-cluster-broker-client_master" {
     require_code_owner_reviews = true
   }
 }
+

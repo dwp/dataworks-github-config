@@ -13,14 +13,14 @@ resource "github_repository" "github-repo-config-examples" {
 }
 
 resource "github_team_repository" "github-repo-config-examples-dataworks" {
-  repository = "${github_repository.github-repo-config-examples.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.github-repo-config-examples.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "github-repo-config-examples-master" {
-  branch         = "${github_repository.github-repo-config-examples.default_branch}"
-  repository     = "${github_repository.github-repo-config-examples.name}"
+  branch         = github_repository.github-repo-config-examples.default_branch
+  repository     = github_repository.github-repo-config-examples.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "github-repo-config-examples-master" {
     require_code_owner_reviews = true
   }
 }
+

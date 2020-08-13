@@ -14,14 +14,14 @@ resource "github_repository" "ucfs-claimant-get-award-details" {
 }
 
 resource "github_team_repository" "ucfs-claimant-get-award-details_dataworks" {
-  repository = "${github_repository.ucfs-claimant-get-award-details.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.ucfs-claimant-get-award-details.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "ucfs-claimant-get-award-details_master" {
-  branch         = "${github_repository.ucfs-claimant-get-award-details.default_branch}"
-  repository     = "${github_repository.ucfs-claimant-get-award-details.name}"
+  branch         = github_repository.ucfs-claimant-get-award-details.default_branch
+  repository     = github_repository.ucfs-claimant-get-award-details.name
   enforce_admins = false
 
   required_status_checks {
@@ -33,3 +33,4 @@ resource "github_branch_protection" "ucfs-claimant-get-award-details_master" {
     require_code_owner_reviews = true
   }
 }
+

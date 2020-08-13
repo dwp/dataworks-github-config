@@ -13,14 +13,14 @@ resource "github_repository" "dataworks-analytical-custom-auth-flow" {
 }
 
 resource "github_team_repository" "dataworks-analytical-custom-auth-flow-dataworks" {
-  repository = "${github_repository.dataworks-analytical-custom-auth-flow.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.dataworks-analytical-custom-auth-flow.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "dataworks-analytical-custom-auth-flow-master" {
-  branch         = "${github_repository.dataworks-analytical-custom-auth-flow.default_branch}"
-  repository     = "${github_repository.dataworks-analytical-custom-auth-flow.name}"
+  branch         = github_repository.dataworks-analytical-custom-auth-flow.default_branch
+  repository     = github_repository.dataworks-analytical-custom-auth-flow.name
   enforce_admins = false
 
   required_status_checks {
@@ -34,7 +34,8 @@ resource "github_branch_protection" "dataworks-analytical-custom-auth-flow-maste
 }
 
 resource "github_actions_secret" "dataworks-analytical-custom-auth-flow-snyk-token" {
-  repository      = "${github_repository.dataworks-analytical-custom-auth-flow.name}"
+  repository      = github_repository.dataworks-analytical-custom-auth-flow.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = "${var.snyk_token}"
+  plaintext_value = local.snyk_token
 }
+

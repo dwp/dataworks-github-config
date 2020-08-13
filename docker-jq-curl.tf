@@ -14,14 +14,14 @@ resource "github_repository" "docker-jq-curl" {
 }
 
 resource "github_team_repository" "docker-jq-curl-dataworks" {
-  repository = "${github_repository.docker-jq-curl.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.docker-jq-curl.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "docker-jq-curl-master" {
-  branch         = "${github_repository.docker-jq-curl.default_branch}"
-  repository     = "${github_repository.docker-jq-curl.name}"
+  branch         = github_repository.docker-jq-curl.default_branch
+  repository     = github_repository.docker-jq-curl.name
   enforce_admins = false
 
   required_status_checks {
@@ -33,3 +33,4 @@ resource "github_branch_protection" "docker-jq-curl-master" {
     require_code_owner_reviews = true
   }
 }
+

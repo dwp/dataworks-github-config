@@ -13,14 +13,14 @@ resource "github_repository" "docker-jinja-yaml-aws" {
 }
 
 resource "github_team_repository" "docker-jinja-yaml-aws-dataworks" {
-  repository = "${github_repository.docker-jinja-yaml-aws.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.docker-jinja-yaml-aws.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "docker-jinja-yaml-aws-master" {
-  branch         = "${github_repository.docker-jinja-yaml-aws.default_branch}"
-  repository     = "${github_repository.docker-jinja-yaml-aws.name}"
+  branch         = github_repository.docker-jinja-yaml-aws.default_branch
+  repository     = github_repository.docker-jinja-yaml-aws.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "docker-jinja-yaml-aws-master" {
     require_code_owner_reviews = true
   }
 }
+

@@ -13,14 +13,14 @@ resource "github_repository" "docker-ruby-rspec-aws-sdk" {
 }
 
 resource "github_team_repository" "docker-ruby-rspec-aws-sdk-dataworks" {
-  repository = "${github_repository.docker-ruby-rspec-aws-sdk.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.docker-ruby-rspec-aws-sdk.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "docker-ruby-rspec-aws-sdk-master" {
-  branch         = "${github_repository.docker-ruby-rspec-aws-sdk.default_branch}"
-  repository     = "${github_repository.docker-ruby-rspec-aws-sdk.name}"
+  branch         = github_repository.docker-ruby-rspec-aws-sdk.default_branch
+  repository     = github_repository.docker-ruby-rspec-aws-sdk.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "docker-ruby-rspec-aws-sdk-master" {
     require_code_owner_reviews = true
   }
 }
+

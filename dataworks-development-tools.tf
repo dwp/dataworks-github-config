@@ -12,20 +12,20 @@ resource "github_repository" "dataworks_development_tools" {
   }
 
   template {
-    owner      = "${var.github_organization}"
+    owner      = var.github_organization
     repository = "dataworks-repo-template-terraform"
   }
 }
 
 resource "github_team_repository" "dataworks_development_tools_dataworks" {
-  repository = "${github_repository.dataworks_development_tools.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.dataworks_development_tools.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "dataworks_development_tools_master" {
-  branch         = "${github_repository.dataworks_development_tools.default_branch}"
-  repository     = "${github_repository.dataworks_development_tools.name}"
+  branch         = github_repository.dataworks_development_tools.default_branch
+  repository     = github_repository.dataworks_development_tools.name
   enforce_admins = false
 
   required_status_checks {
@@ -41,47 +41,48 @@ resource "github_branch_protection" "dataworks_development_tools_master" {
 
 resource "null_resource" "dataworks_development_tools" {
   triggers = {
-    repo = "${github_repository.dataworks_development_tools.name}"
+    repo = github_repository.dataworks_development_tools.name
   }
   provisioner "local-exec" {
-    command = "./initial-commit.sh ${github_repository.dataworks_development_tools.name} '${github_repository.dataworks_development_tools.description}' ${github_repository.dataworks_development_tools.template.0.repository}"
+    command = "./initial-commit.sh ${github_repository.dataworks_development_tools.name} '${github_repository.dataworks_development_tools.description}' ${github_repository.dataworks_development_tools.template[0].repository}"
   }
 }
 
 resource "github_repository_webhook" "dataworks_development_tools" {
-  repository = "${github_repository.dataworks_development_tools.name}"
+  repository = github_repository.dataworks_development_tools.name
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/development_tools/resources/${github_repository.dataworks_development_tools.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/development_tools/resources/${github_repository.dataworks_development_tools.name}/check/webhook?webhook_token=${local.github_webhook_token}"
     content_type = "form"
   }
 }
 
 resource "github_repository_webhook" "dataworks_development_tools_pr" {
-  repository = "${github_repository.dataworks_development_tools.name}"
+  repository = github_repository.dataworks_development_tools.name
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/development_tools/resources/${github_repository.dataworks_development_tools.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/development_tools/resources/${github_repository.dataworks_development_tools.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
     content_type = "form"
   }
 }
 
 resource "github_actions_secret" "dataworks_development_tools_github_email" {
-  repository      = "${github_repository.dataworks_development_tools.name}"
+  repository      = github_repository.dataworks_development_tools.name
   secret_name     = "CI_GITHUB_EMAIL"
-  plaintext_value = "${var.github_email}"
+  plaintext_value = local.github_email
 }
 
 resource "github_actions_secret" "dataworks_development_tools_github_username" {
-  repository      = "${github_repository.dataworks_development_tools.name}"
+  repository      = github_repository.dataworks_development_tools.name
   secret_name     = "CI_GITHUB_USERNAME"
-  plaintext_value = "${var.github_username}"
+  plaintext_value = local.github_username
 }
 
 resource "github_actions_secret" "dataworks_development_tools_github_token" {
-  repository      = "${github_repository.dataworks_development_tools.name}"
+  repository      = github_repository.dataworks_development_tools.name
   secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = "${var.github_token}"
+  plaintext_value = local.github_token
 }
+

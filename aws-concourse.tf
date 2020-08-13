@@ -13,14 +13,14 @@ resource "github_repository" "aws-concourse" {
 }
 
 resource "github_team_repository" "aws-concourse-dataworks" {
-  repository = "${github_repository.aws-concourse.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.aws-concourse.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "aws-concourse-master" {
-  branch         = "${github_repository.aws-concourse.default_branch}"
-  repository     = "${github_repository.aws-concourse.name}"
+  branch         = github_repository.aws-concourse.default_branch
+  repository     = github_repository.aws-concourse.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,4 +32,10 @@ resource "github_branch_protection" "aws-concourse-master" {
     dismiss_stale_reviews      = true
     require_code_owner_reviews = true
   }
+}
+
+resource "github_actions_secret" "concourse_aws_profile" {
+  repository      = github_repository.aws-concourse.name
+  secret_name     = "AWS_PROFILE"
+  plaintext_value = "arn:aws:iam::${local.aws_mgmt_dev}:role/ci"
 }

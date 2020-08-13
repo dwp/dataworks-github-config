@@ -13,14 +13,14 @@ resource "github_repository" "dataworks-repo-template" {
 }
 
 resource "github_team_repository" "dataworks-repo-template_dataworks" {
-  repository = "${github_repository.dataworks-repo-template.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.dataworks-repo-template.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "dataworks-repo-template_master" {
-  branch         = "${github_repository.dataworks-repo-template.default_branch}"
-  repository     = "${github_repository.dataworks-repo-template.name}"
+  branch         = github_repository.dataworks-repo-template.default_branch
+  repository     = github_repository.dataworks-repo-template.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "dataworks-repo-template_master" {
     require_code_owner_reviews = true
   }
 }
+

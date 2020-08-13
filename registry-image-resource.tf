@@ -13,14 +13,14 @@ resource "github_repository" "registry-image-resource" {
 }
 
 resource "github_team_repository" "registry-image-resource-dataworks" {
-  repository = "${github_repository.registry-image-resource.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.registry-image-resource.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "registry-image-resource-master" {
-  branch         = "${github_repository.registry-image-resource.default_branch}"
-  repository     = "${github_repository.registry-image-resource.name}"
+  branch         = github_repository.registry-image-resource.default_branch
+  repository     = github_repository.registry-image-resource.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "registry-image-resource-master" {
     require_code_owner_reviews = true
   }
 }
+

@@ -13,14 +13,14 @@ resource "github_repository" "aws-analytical-env" {
 }
 
 resource "github_team_repository" "aws-analytical-dataworks" {
-  repository = "${github_repository.aws-analytical-env.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.aws-analytical-env.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "aws-analytical-env-master" {
-  branch         = "${github_repository.aws-analytical-env.default_branch}"
-  repository     = "${github_repository.aws-analytical-env.name}"
+  branch         = github_repository.aws-analytical-env.default_branch
+  repository     = github_repository.aws-analytical-env.name
   enforce_admins = false
 
   required_status_checks {
@@ -34,21 +34,22 @@ resource "github_branch_protection" "aws-analytical-env-master" {
 }
 
 resource "github_repository_webhook" "aws-analytical-env" {
-  repository = "${github_repository.aws-analytical-env.name}"
+  repository = github_repository.aws-analytical-env.name
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/analytical-env/resources/${github_repository.aws-analytical-env.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/analytical-env/resources/${github_repository.aws-analytical-env.name}/check/webhook?webhook_token=${local.github_webhook_token}"
     content_type = "form"
   }
 }
 
 resource "github_repository_webhook" "aws-analytical-env_pr" {
-  repository = "${github_repository.aws-analytical-env.name}"
+  repository = github_repository.aws-analytical-env.name
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/analytical-env/resources/${github_repository.aws-analytical-env.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/analytical-env/resources/${github_repository.aws-analytical-env.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
     content_type = "form"
   }
 }
+

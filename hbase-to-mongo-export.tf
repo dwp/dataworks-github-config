@@ -13,14 +13,14 @@ resource "github_repository" "hbase-to-mongo-export" {
 }
 
 resource "github_team_repository" "hbase-to-mongo-export-dataworks" {
-  repository = "${github_repository.hbase-to-mongo-export.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.hbase-to-mongo-export.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "hbase-to-mongo-export-master" {
-  branch         = "${github_repository.hbase-to-mongo-export.default_branch}"
-  repository     = "${github_repository.hbase-to-mongo-export.name}"
+  branch         = github_repository.hbase-to-mongo-export.default_branch
+  repository     = github_repository.hbase-to-mongo-export.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "hbase-to-mongo-export-master" {
     require_code_owner_reviews = true
   }
 }
+

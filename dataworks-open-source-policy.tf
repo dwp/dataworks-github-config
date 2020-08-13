@@ -13,14 +13,14 @@ resource "github_repository" "dataworks-open-source-policy" {
 }
 
 resource "github_team_repository" "dataworks-open-source-policy-dataworks" {
-  repository = "${github_repository.dataworks-open-source-policy.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.dataworks-open-source-policy.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "dataworks-open-source-policy-master" {
-  branch         = "${github_repository.dataworks-open-source-policy.default_branch}"
-  repository     = "${github_repository.dataworks-open-source-policy.name}"
+  branch         = github_repository.dataworks-open-source-policy.default_branch
+  repository     = github_repository.dataworks-open-source-policy.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "dataworks-open-source-policy-master" {
     require_code_owner_reviews = true
   }
 }
+

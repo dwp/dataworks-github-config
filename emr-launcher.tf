@@ -13,19 +13,18 @@ resource "github_repository" "emr-launcher" {
 }
 
 resource "github_team_repository" "emr-launcher_dataworks" {
-  repository = "${github_repository.emr-launcher.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.emr-launcher.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "emr-launcher_master" {
-  branch         = "${github_repository.emr-launcher.default_branch}"
-  repository     = "${github_repository.emr-launcher.name}"
+  branch         = github_repository.emr-launcher.default_branch
+  repository     = github_repository.emr-launcher.name
   enforce_admins = false
 
   required_status_checks {
     strict = true
-
     # The contexts line should only be kept for Terraform repos.
   }
 
@@ -36,19 +35,20 @@ resource "github_branch_protection" "emr-launcher_master" {
 }
 
 resource "github_actions_secret" "emr-launcher_github_email" {
-  repository      = "${github_repository.emr-launcher.name}"
+  repository      = github_repository.emr-launcher.name
   secret_name     = "CI_GITHUB_EMAIL"
-  plaintext_value = "${var.github_email}"
+  plaintext_value = local.github_email
 }
 
 resource "github_actions_secret" "emr-launcher_github_username" {
-  repository      = "${github_repository.emr-launcher.name}"
+  repository      = github_repository.emr-launcher.name
   secret_name     = "CI_GITHUB_USERNAME"
-  plaintext_value = "${var.github_username}"
+  plaintext_value = local.github_username
 }
 
 resource "github_actions_secret" "emr-launcher_github_token" {
-  repository      = "${github_repository.emr-launcher.name}"
+  repository      = github_repository.emr-launcher.name
   secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = "${var.github_token}"
+  plaintext_value = local.github_token
 }
+
