@@ -13,14 +13,14 @@ resource "github_repository" "concourse-control-tower" {
 }
 
 resource "github_team_repository" "concourse-control-tower-dataworks" {
-  repository = "${github_repository.concourse-control-tower.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.concourse-control-tower.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "concourse-control-tower-master" {
-  branch         = "${github_repository.concourse-control-tower.default_branch}"
-  repository     = "${github_repository.concourse-control-tower.name}"
+  branch         = github_repository.concourse-control-tower.default_branch
+  repository     = github_repository.concourse-control-tower.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "concourse-control-tower-master" {
     require_code_owner_reviews = true
   }
 }
+

@@ -13,14 +13,14 @@ resource "github_repository" "docker-kafka-connect-s3" {
 }
 
 resource "github_team_repository" "docker-kafka-connect-s3-dataworks" {
-  repository = "${github_repository.docker-kafka-connect-s3.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.docker-kafka-connect-s3.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "docker-kafka-connect-s3-master" {
-  branch         = "${github_repository.docker-kafka-connect-s3.default_branch}"
-  repository     = "${github_repository.docker-kafka-connect-s3.name}"
+  branch         = github_repository.docker-kafka-connect-s3.default_branch
+  repository     = github_repository.docker-kafka-connect-s3.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "docker-kafka-connect-s3-master" {
     require_code_owner_reviews = true
   }
 }
+

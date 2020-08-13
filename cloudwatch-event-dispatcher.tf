@@ -13,14 +13,14 @@ resource "github_repository" "cloudwatch-event-dispatcher" {
 }
 
 resource "github_team_repository" "cloudwatch-event-dispatcher-dataworks" {
-  repository = "${github_repository.cloudwatch-event-dispatcher.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.cloudwatch-event-dispatcher.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "cloudwatch-event-dispatcher-master" {
-  branch         = "${github_repository.cloudwatch-event-dispatcher.default_branch}"
-  repository     = "${github_repository.cloudwatch-event-dispatcher.name}"
+  branch         = github_repository.cloudwatch-event-dispatcher.default_branch
+  repository     = github_repository.cloudwatch-event-dispatcher.name
   enforce_admins = false
 
   required_status_checks {
@@ -34,19 +34,20 @@ resource "github_branch_protection" "cloudwatch-event-dispatcher-master" {
 }
 
 resource "github_actions_secret" "cloudwatch-event-dispatcher_github_email" {
-  repository      = "${github_repository.cloudwatch-event-dispatcher.name}"
+  repository      = github_repository.cloudwatch-event-dispatcher.name
   secret_name     = "CI_GITHUB_EMAIL"
-  plaintext_value = "${var.github_email}"
+  plaintext_value = local.github_email
 }
 
 resource "github_actions_secret" "cloudwatch-event-dispatcher_github_username" {
-  repository      = "${github_repository.cloudwatch-event-dispatcher.name}"
+  repository      = github_repository.cloudwatch-event-dispatcher.name
   secret_name     = "CI_GITHUB_USERNAME"
-  plaintext_value = "${var.github_username}"
+  plaintext_value = local.github_username
 }
 
 resource "github_actions_secret" "cloudwatch-event-dispatcher_github_token" {
-  repository      = "${github_repository.cloudwatch-event-dispatcher.name}"
+  repository      = github_repository.cloudwatch-event-dispatcher.name
   secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = "${var.github_token}"
+  plaintext_value = local.github_token
 }
+

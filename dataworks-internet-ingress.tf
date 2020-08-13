@@ -12,20 +12,20 @@ resource "github_repository" "dataworks_internet_ingress" {
   }
 
   template {
-    owner      = "${var.github_organization}"
+    owner      = var.github_organization
     repository = "dataworks-repo-template-terraform"
   }
 }
 
 resource "github_team_repository" "dataworks_internet_ingress_dataworks" {
-  repository = "${github_repository.dataworks_internet_ingress.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.dataworks_internet_ingress.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "dataworks_internet_ingress_master" {
-  branch         = "${github_repository.dataworks_internet_ingress.default_branch}"
-  repository     = "${github_repository.dataworks_internet_ingress.name}"
+  branch         = github_repository.dataworks_internet_ingress.default_branch
+  repository     = github_repository.dataworks_internet_ingress.name
   enforce_admins = false
 
   required_status_checks {
@@ -41,29 +41,30 @@ resource "github_branch_protection" "dataworks_internet_ingress_master" {
 
 resource "null_resource" "dataworks_internet_ingress" {
   triggers = {
-    repo = "${github_repository.dataworks_internet_ingress.name}"
+    repo = github_repository.dataworks_internet_ingress.name
   }
   provisioner "local-exec" {
-    command = "./initial-commit.sh ${github_repository.dataworks_internet_ingress.name} '${github_repository.dataworks_internet_ingress.description}' ${github_repository.dataworks_internet_ingress.template.0.repository}"
+    command = "./initial-commit.sh ${github_repository.dataworks_internet_ingress.name} '${github_repository.dataworks_internet_ingress.description}' ${github_repository.dataworks_internet_ingress.template[0].repository}"
   }
 }
 
 resource "github_repository_webhook" "dataworks_internet_ingress" {
-  repository = "${github_repository.dataworks_internet_ingress.name}"
+  repository = github_repository.dataworks_internet_ingress.name
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/internet-ingress/resources/${github_repository.dataworks_internet_ingress.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/internet-ingress/resources/${github_repository.dataworks_internet_ingress.name}/check/webhook?webhook_token=${local.github_webhook_token}"
     content_type = "form"
   }
 }
 
 resource "github_repository_webhook" "dataworks_internet_ingress_pr" {
-  repository = "${github_repository.dataworks_internet_ingress.name}"
+  repository = github_repository.dataworks_internet_ingress.name
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/internet-ingress/resources/${github_repository.dataworks_internet_ingress.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/internet-ingress/resources/${github_repository.dataworks_internet_ingress.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
     content_type = "form"
   }
 }
+

@@ -11,15 +11,20 @@ def main():
         ssm = boto3.client('ssm', region_name=os.environ['AWS_REGION'])
     else:
         ssm = boto3.client('ssm')
-    parameter = ssm.get_parameter(Name='terraform_bootstrap_config', WithDecryption=False)
-    config_data = yaml.load(parameter['Parameter']['Value'], Loader=yaml.FullLoader)
+    parameter = ssm.get_parameter(
+        Name='terraform_bootstrap_config', WithDecryption=False)
+    config_data = yaml.load(
+        parameter['Parameter']['Value'], Loader=yaml.FullLoader)
     with open('terraform.tf.j2') as in_template:
         template = jinja2.Template(in_template.read())
     with open('terraform.tf', 'w+') as terraform_tf:
+        terraform_tf.write(template.render(config_data))
+    with open('terraform.tfvars.j2') as in_template:
+        template = jinja2.Template(in_template.read())
+    with open('terraform.tfvars', 'w+') as terraform_tf:
         terraform_tf.write(template.render(config_data))
     print("Terraform config successfully created")
 
 
 if __name__ == "__main__":
     main()
-

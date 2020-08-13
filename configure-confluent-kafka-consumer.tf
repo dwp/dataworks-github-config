@@ -13,14 +13,14 @@ resource "github_repository" "configure-confluent-kafka-consumer" {
 }
 
 resource "github_team_repository" "configure-confluent-kafka-consumer-dataworks" {
-  repository = "${github_repository.configure-confluent-kafka-consumer.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.configure-confluent-kafka-consumer.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "configure-confluent-kafka-consumer-master" {
-  branch         = "${github_repository.configure-confluent-kafka-consumer.default_branch}"
-  repository     = "${github_repository.configure-confluent-kafka-consumer.name}"
+  branch         = github_repository.configure-confluent-kafka-consumer.default_branch
+  repository     = github_repository.configure-confluent-kafka-consumer.name
   enforce_admins = false
 
   required_status_checks {
@@ -34,19 +34,20 @@ resource "github_branch_protection" "configure-confluent-kafka-consumer-master" 
 }
 
 resource "github_actions_secret" "configure-confluent-kafka-consumer_github_email" {
-  repository      = "${github_repository.configure-confluent-kafka-consumer.name}"
+  repository      = github_repository.configure-confluent-kafka-consumer.name
   secret_name     = "CI_GITHUB_EMAIL"
-  plaintext_value = "${var.github_email}"
+  plaintext_value = local.github_email
 }
 
 resource "github_actions_secret" "configure-confluent-kafka-consumer_github_username" {
-  repository      = "${github_repository.configure-confluent-kafka-consumer.name}"
+  repository      = github_repository.configure-confluent-kafka-consumer.name
   secret_name     = "CI_GITHUB_USERNAME"
-  plaintext_value = "${var.github_username}"
+  plaintext_value = local.github_username
 }
 
 resource "github_actions_secret" "configure-confluent-kafka-consumer_github_token" {
-  repository      = "${github_repository.configure-confluent-kafka-consumer.name}"
+  repository      = github_repository.configure-confluent-kafka-consumer.name
   secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = "${var.github_token}"
+  plaintext_value = local.github_token
 }
+

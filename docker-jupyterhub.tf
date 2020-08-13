@@ -13,14 +13,14 @@ resource "github_repository" "docker-jupyterhub" {
 }
 
 resource "github_team_repository" "docker-jupyterhub-dataworks" {
-  repository = "${github_repository.docker-jupyterhub.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.docker-jupyterhub.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "docker-jupyterhub-master" {
-  branch         = "${github_repository.docker-jupyterhub.default_branch}"
-  repository     = "${github_repository.docker-jupyterhub.name}"
+  branch         = github_repository.docker-jupyterhub.default_branch
+  repository     = github_repository.docker-jupyterhub.name
   enforce_admins = false
 
   required_status_checks {
@@ -34,43 +34,44 @@ resource "github_branch_protection" "docker-jupyterhub-master" {
 }
 
 resource "github_actions_secret" "docker-jupyterhub_github_email" {
-  repository      = "${github_repository.docker-jupyterhub.name}"
+  repository      = github_repository.docker-jupyterhub.name
   secret_name     = "CI_GITHUB_EMAIL"
-  plaintext_value = "${var.github_email}"
+  plaintext_value = local.github_email
 }
 
 resource "github_actions_secret" "docker-jupyterhub_github_username" {
-  repository      = "${github_repository.docker-jupyterhub.name}"
+  repository      = github_repository.docker-jupyterhub.name
   secret_name     = "CI_GITHUB_USERNAME"
-  plaintext_value = "${var.github_username}"
+  plaintext_value = local.github_username
 }
 
 resource "github_actions_secret" "docker-jupyterhub_github_token" {
-  repository      = "${github_repository.docker-jupyterhub.name}"
+  repository      = github_repository.docker-jupyterhub.name
   secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = "${var.github_token}"
+  plaintext_value = local.github_token
 }
 
 resource "github_actions_secret" "docker-jupyterhub-dockerhub-password" {
-  repository      = "${github_repository.docker-jupyterhub.name}"
+  repository      = github_repository.docker-jupyterhub.name
   secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = "${var.dockerhub_password}"
+  plaintext_value = local.dockerhub_password
 }
 
 resource "github_actions_secret" "docker-jupyterhub-dockerhub-username" {
-  repository      = "${github_repository.docker-jupyterhub.name}"
+  repository      = github_repository.docker-jupyterhub.name
   secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = "${var.dockerhub_username}"
+  plaintext_value = local.dockerhub_username
 }
 
 resource "github_actions_secret" "docker-jupyterhub-snyk-token" {
-  repository      = "${github_repository.docker-jupyterhub.name}"
+  repository      = github_repository.docker-jupyterhub.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = "${var.snyk_token}"
+  plaintext_value = local.snyk_token
 }
 
 resource "github_actions_secret" "docker-jupyterhub-slack-webhook" {
-  repository      = "${github_repository.docker-jupyterhub.name}"
+  repository      = github_repository.docker-jupyterhub.name
   secret_name     = "SLACK_WEBHOOK"
-  plaintext_value = "${var.slack_webhook_url}"
+  plaintext_value = local.slack_webhook_url
 }
+

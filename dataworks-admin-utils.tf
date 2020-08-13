@@ -13,14 +13,14 @@ resource "github_repository" "dataworks-admin-utils" {
 }
 
 resource "github_team_repository" "dataworks_admin_utils_dataworks" {
-  repository = "${github_repository.dataworks-admin-utils.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.dataworks-admin-utils.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "dataworks_admin_utils_master" {
-  branch         = "${github_repository.dataworks-admin-utils.default_branch}"
-  repository     = "${github_repository.dataworks-admin-utils.name}"
+  branch         = github_repository.dataworks-admin-utils.default_branch
+  repository     = github_repository.dataworks-admin-utils.name
   enforce_admins = false
 
   required_status_checks {
@@ -34,19 +34,20 @@ resource "github_branch_protection" "dataworks_admin_utils_master" {
 }
 
 resource "github_actions_secret" "dataworks-admin-utils_github_email" {
-  repository      = "${github_repository.dataworks-admin-utils.name}"
+  repository      = github_repository.dataworks-admin-utils.name
   secret_name     = "CI_GITHUB_EMAIL"
-  plaintext_value = "${var.github_email}"
+  plaintext_value = local.github_email
 }
 
 resource "github_actions_secret" "dataworks-admin-utils_github_username" {
-  repository      = "${github_repository.dataworks-admin-utils.name}"
+  repository      = github_repository.dataworks-admin-utils.name
   secret_name     = "CI_GITHUB_USERNAME"
-  plaintext_value = "${var.github_username}"
+  plaintext_value = local.github_username
 }
 
 resource "github_actions_secret" "dataworks-admin-utils_github_token" {
-  repository      = "${github_repository.dataworks-admin-utils.name}"
+  repository      = github_repository.dataworks-admin-utils.name
   secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = "${var.github_token}"
+  plaintext_value = local.github_token
 }
+

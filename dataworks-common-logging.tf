@@ -13,14 +13,14 @@ resource "github_repository" "dataworks-common-logging" {
 }
 
 resource "github_team_repository" "dataworks-common-logging-dataworks" {
-  repository = "${github_repository.dataworks-common-logging.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.dataworks-common-logging.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "dataworks-common-logging-master" {
-  branch         = "${github_repository.dataworks-common-logging.default_branch}"
-  repository     = "${github_repository.dataworks-common-logging.name}"
+  branch         = github_repository.dataworks-common-logging.default_branch
+  repository     = github_repository.dataworks-common-logging.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "dataworks-common-logging-master" {
     require_code_owner_reviews = true
   }
 }
+

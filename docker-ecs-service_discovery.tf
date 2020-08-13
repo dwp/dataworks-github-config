@@ -1,7 +1,7 @@
 resource "github_repository" "docker_ecs_service_discovery" {
-  name             = "docker-ecs-service-discovery"
-  description      = "Repo for the Docker ECS service discovery service for use with Prometheus"
-  auto_init        = true
+  name        = "docker-ecs-service-discovery"
+  description = "Repo for the Docker ECS service discovery service for use with Prometheus"
+  auto_init   = true
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -12,20 +12,20 @@ resource "github_repository" "docker_ecs_service_discovery" {
   }
 
   template {
-    owner = "${var.github_organization}"
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }
 
 resource "github_team_repository" "docker_ecs_service_discovery_dataworks" {
-  repository = "${github_repository.docker_ecs_service_discovery.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.docker_ecs_service_discovery.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "docker_ecs_service_discovery_master" {
-  branch         = "${github_repository.docker_ecs_service_discovery.default_branch}"
-  repository     = "${github_repository.docker_ecs_service_discovery.name}"
+  branch         = github_repository.docker_ecs_service_discovery.default_branch
+  repository     = github_repository.docker_ecs_service_discovery.name
   enforce_admins = false
 
   required_status_checks {
@@ -40,27 +40,28 @@ resource "github_branch_protection" "docker_ecs_service_discovery_master" {
 
 resource "null_resource" "docker_ecs_service_discovery" {
   triggers = {
-    repo = "${github_repository.docker_ecs_service_discovery.name}"
+    repo = github_repository.docker_ecs_service_discovery.name
   }
   provisioner "local-exec" {
-    command = "./initial-commit.sh ${github_repository.docker_ecs_service_discovery.name} '${github_repository.docker_ecs_service_discovery.description}' ${github_repository.docker_ecs_service_discovery.template.0.repository}"
+    command = "./initial-commit.sh ${github_repository.docker_ecs_service_discovery.name} '${github_repository.docker_ecs_service_discovery.description}' ${github_repository.docker_ecs_service_discovery.template[0].repository}"
   }
 }
 
 resource "github_actions_secret" "docker_ecs_service_discovery_dockerhub_password" {
-  repository      = "${github_repository.docker_ecs_service_discovery.name}"
+  repository      = github_repository.docker_ecs_service_discovery.name
   secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = "${var.dockerhub_password}"
+  plaintext_value = local.dockerhub_password
 }
 
 resource "github_actions_secret" "docker_ecs_service_discovery_dockerhub_username" {
-  repository      = "${github_repository.docker_ecs_service_discovery.name}"
+  repository      = github_repository.docker_ecs_service_discovery.name
   secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = "${var.dockerhub_username}"
+  plaintext_value = local.dockerhub_username
 }
 
 resource "github_actions_secret" "docker_ecs_service_discovery_snyk_token" {
-  repository      = "${github_repository.docker_ecs_service_discovery.name}"
+  repository      = github_repository.docker_ecs_service_discovery.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = "${var.snyk_token}"
+  plaintext_value = local.snyk_token
 }
+

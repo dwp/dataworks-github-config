@@ -14,14 +14,14 @@ resource "github_repository" "ssm-parameter-store" {
 }
 
 resource "github_team_repository" "ssm-parameter-store-dataworks" {
-  repository = "${github_repository.ssm-parameter-store.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.ssm-parameter-store.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "ssm-parameter-store-master" {
-  branch         = "${github_repository.ssm-parameter-store.default_branch}"
-  repository     = "${github_repository.ssm-parameter-store.name}"
+  branch         = github_repository.ssm-parameter-store.default_branch
+  repository     = github_repository.ssm-parameter-store.name
   enforce_admins = false
 
   required_status_checks {
@@ -33,3 +33,4 @@ resource "github_branch_protection" "ssm-parameter-store-master" {
     require_code_owner_reviews = true
   }
 }
+

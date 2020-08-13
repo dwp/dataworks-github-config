@@ -13,14 +13,14 @@ resource "github_repository" "mock-nifi" {
 }
 
 resource "github_team_repository" "mock-nifi-dataworks" {
-  repository = "${github_repository.mock-nifi.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.mock-nifi.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "mock-nifi-master" {
-  branch         = "${github_repository.mock-nifi.default_branch}"
-  repository     = "${github_repository.mock-nifi.name}"
+  branch         = github_repository.mock-nifi.default_branch
+  repository     = github_repository.mock-nifi.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "mock-nifi-master" {
     require_code_owner_reviews = true
   }
 }
+

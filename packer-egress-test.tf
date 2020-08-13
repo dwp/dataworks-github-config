@@ -13,14 +13,14 @@ resource "github_repository" "packer-egress-test" {
 }
 
 resource "github_team_repository" "packer-egress-test-dataworks" {
-  repository = "${github_repository.packer-egress-test.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.packer-egress-test.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "packer-egress-test-master" {
-  branch         = "${github_repository.packer-egress-test.default_branch}"
-  repository     = "${github_repository.packer-egress-test.name}"
+  branch         = github_repository.packer-egress-test.default_branch
+  repository     = github_repository.packer-egress-test.name
   enforce_admins = false
 
   required_status_checks {
@@ -34,19 +34,20 @@ resource "github_branch_protection" "packer-egress-test-master" {
 }
 
 resource "github_actions_secret" "packer-egress-test_github_email" {
-  repository      = "${github_repository.packer-egress-test.name}"
+  repository      = github_repository.packer-egress-test.name
   secret_name     = "CI_GITHUB_EMAIL"
-  plaintext_value = "${var.github_email}"
+  plaintext_value = local.github_email
 }
 
 resource "github_actions_secret" "packer-egress-test_github_username" {
-  repository      = "${github_repository.packer-egress-test.name}"
+  repository      = github_repository.packer-egress-test.name
   secret_name     = "CI_GITHUB_USERNAME"
-  plaintext_value = "${var.github_username}"
+  plaintext_value = local.github_username
 }
 
 resource "github_actions_secret" "packer-egress-test_github_token" {
-  repository      = "${github_repository.packer-egress-test.name}"
+  repository      = github_repository.packer-egress-test.name
   secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = "${var.github_token}"
+  plaintext_value = local.github_token
 }
+

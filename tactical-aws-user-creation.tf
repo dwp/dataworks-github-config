@@ -13,14 +13,14 @@ resource "github_repository" "tactical-aws-user-creation" {
 }
 
 resource "github_team_repository" "tactical-aws-user-creation_dataworks" {
-  repository = "${github_repository.tactical-aws-user-creation.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.tactical-aws-user-creation.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "tactical-aws-user-creation_master" {
-  branch         = "${github_repository.tactical-aws-user-creation.default_branch}"
-  repository     = "${github_repository.tactical-aws-user-creation.name}"
+  branch         = github_repository.tactical-aws-user-creation.default_branch
+  repository     = github_repository.tactical-aws-user-creation.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "tactical-aws-user-creation_master" {
     require_code_owner_reviews = true
   }
 }
+

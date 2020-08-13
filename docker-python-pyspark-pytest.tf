@@ -13,14 +13,14 @@ resource "github_repository" "docker-python-pyspark-pytest" {
 }
 
 resource "github_team_repository" "docker-python-pyspark-pytest-dataworks" {
-  repository = "${github_repository.docker-python-pyspark-pytest.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.docker-python-pyspark-pytest.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "docker-python-pyspark-pytest-master" {
-  branch         = "${github_repository.docker-python-pyspark-pytest.default_branch}"
-  repository     = "${github_repository.docker-python-pyspark-pytest.name}"
+  branch         = github_repository.docker-python-pyspark-pytest.default_branch
+  repository     = github_repository.docker-python-pyspark-pytest.name
   enforce_admins = false
 
   required_status_checks {
@@ -34,19 +34,20 @@ resource "github_branch_protection" "docker-python-pyspark-pytest-master" {
 }
 
 resource "github_actions_secret" "docker-python-pyspark-pytest_dockerhub_password" {
-  repository      = "${github_repository.docker-python-pyspark-pytest.name}"
+  repository      = github_repository.docker-python-pyspark-pytest.name
   secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = "${var.dockerhub_password}"
+  plaintext_value = local.dockerhub_password
 }
 
 resource "github_actions_secret" "docker-python-pyspark-pytest_dockerhub_username" {
-  repository      = "${github_repository.docker-python-pyspark-pytest.name}"
+  repository      = github_repository.docker-python-pyspark-pytest.name
   secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = "${var.dockerhub_username}"
+  plaintext_value = local.dockerhub_username
 }
 
 resource "github_actions_secret" "docker-python-pyspark-pytest_snyk_token" {
-  repository      = "${github_repository.docker-python-pyspark-pytest.name}"
+  repository      = github_repository.docker-python-pyspark-pytest.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = "${var.snyk_token}"
+  plaintext_value = local.snyk_token
 }
+

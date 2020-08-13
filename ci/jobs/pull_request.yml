@@ -18,8 +18,8 @@ jobs:
             type: docker-image
             source:
               repository: hashicorp/terraform
-              version: ((dataworks.terraform_11_version))
-              tag: ((dataworks.terraform_11_version))
+              version: ((dataworks.terraform_version))
+              tag: ((dataworks.terraform_version))
           params:
             TF_INPUT: false
             TF_VAR_github_token: ((dataworks-secrets.concourse_github_pat))

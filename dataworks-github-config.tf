@@ -13,14 +13,14 @@ resource "github_repository" "dataworks-github-config" {
 }
 
 resource "github_team_repository" "dataworks-github-config-dataworks" {
-  repository = "${github_repository.dataworks-github-config.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.dataworks-github-config.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "dataworks-github-config-master" {
-  branch         = "${github_repository.dataworks-github-config.default_branch}"
-  repository     = "${github_repository.dataworks-github-config.name}"
+  branch         = github_repository.dataworks-github-config.default_branch
+  repository     = github_repository.dataworks-github-config.name
   enforce_admins = false
 
   required_status_checks {
@@ -35,21 +35,22 @@ resource "github_branch_protection" "dataworks-github-config-master" {
 }
 
 resource "github_repository_webhook" "dataworks-github-config" {
-  repository = "${github_repository.dataworks-github-config.name}"
+  repository = github_repository.dataworks-github-config.name
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/github-config/resources/${github_repository.dataworks-github-config.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/github-config/resources/${github_repository.dataworks-github-config.name}/check/webhook?webhook_token=${local.github_webhook_token}"
     content_type = "form"
   }
 }
 
 resource "github_repository_webhook" "dataworks-github-config-pr" {
-  repository = "${github_repository.dataworks-github-config.name}"
+  repository = github_repository.dataworks-github-config.name
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/github-config/resources/${github_repository.dataworks-github-config.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/github-config/resources/${github_repository.dataworks-github-config.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
     content_type = "form"
   }
 }
+

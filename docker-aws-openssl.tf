@@ -13,14 +13,14 @@ resource "github_repository" "docker-aws-openssl" {
 }
 
 resource "github_team_repository" "docker-aws-openssl-dataworks" {
-  repository = "${github_repository.docker-aws-openssl.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.docker-aws-openssl.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "docker-aws-openssl-master" {
-  branch         = "${github_repository.docker-aws-openssl.default_branch}"
-  repository     = "${github_repository.docker-aws-openssl.name}"
+  branch         = github_repository.docker-aws-openssl.default_branch
+  repository     = github_repository.docker-aws-openssl.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "docker-aws-openssl-master" {
     require_code_owner_reviews = true
   }
 }
+

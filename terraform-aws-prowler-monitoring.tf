@@ -13,14 +13,14 @@ resource "github_repository" "terraform-aws-prowler-monitoring" {
 }
 
 resource "github_team_repository" "terraform-aws-prowler-monitoring-dataworks" {
-  repository = "${github_repository.terraform-aws-prowler-monitoring.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.terraform-aws-prowler-monitoring.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "terraform-aws-prowler-monitoring-master" {
-  branch         = "${github_repository.terraform-aws-prowler-monitoring.default_branch}"
-  repository     = "${github_repository.terraform-aws-prowler-monitoring.name}"
+  branch         = github_repository.terraform-aws-prowler-monitoring.default_branch
+  repository     = github_repository.terraform-aws-prowler-monitoring.name
   enforce_admins = false
 
   required_status_checks {
@@ -32,3 +32,4 @@ resource "github_branch_protection" "terraform-aws-prowler-monitoring-master" {
     require_code_owner_reviews = true
   }
 }
+
