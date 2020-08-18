@@ -1,4 +1,4 @@
-resource "github_repository" "docker-create-metrics-data-batch" {
+resource "github_repository" "docker_create_metrics_data_batch" {
   name        = "docker-create-metrics-data-batch"
   description = "A container with required extensions and libraries for creating test data for Analytical Environment Performance Monitor"
 
@@ -17,15 +17,15 @@ resource "github_repository" "docker-create-metrics-data-batch" {
   }
 }
 
-resource "github_team_repository" "docker-create-metrics-data-batch-dataworks" {
-  repository = github_repository.docker-create-metrics-data-batch.name
+resource "github_team_repository" "docker_create_metrics_data_batch_dataworks" {
+  repository = github_repository.docker_create_metrics_data_batch.name
   team_id    = github_team.dataworks.id
   permission = "push"
 }
 
-resource "github_branch_protection" "docker-create-metrics-data-batch-master" {
-  branch         = github_repository.docker-create-metrics-data-batch.default_branch
-  repository     = github_repository.docker-create-metrics-data-batch.name
+resource "github_branch_protection" "docker_create_metrics_data_batch_master" {
+  branch         = github_repository.docker_create_metrics_data_batch.default_branch
+  repository     = github_repository.docker_create_metrics_data_batch.name
   enforce_admins = false
 
   required_status_checks {
@@ -38,45 +38,29 @@ resource "github_branch_protection" "docker-create-metrics-data-batch-master" {
   }
 }
 
-resource "github_actions_secret" "docker-create-metrics-data-batch_github_email" {
-  repository      = github_repository.docker-create-metrics-data-batch.name
-  secret_name     = "CI_GITHUB_EMAIL"
-  plaintext_value = local.github_email
+resource "null_resource" "docker_create_metrics_data_batch" {
+  triggers = {
+    repo = "${github_repository.docker_create_metrics_data_batch.name}"
+  }
+  provisioner "local-exec" {
+    command = "./initial-commit.sh ${github_repository.docker_create_metrics_data_batch.name} '${github_repository.docker_create_metrics_data_batch.description}' ${github_repository.docker_create_metrics_data_batch.template.0.repository}"
+  }
 }
 
-resource "github_actions_secret" "docker-create-metrics-data-batch_github_username" {
-  repository      = github_repository.docker-create-metrics-data-batch.name
-  secret_name     = "CI_GITHUB_USERNAME"
-  plaintext_value = local.github_username
-}
-
-resource "github_actions_secret" "docker-create-metrics-data-batch_github_token" {
-  repository      = github_repository.docker-create-metrics-data-batch.name
-  secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = local.github_token
-}
-
-resource "github_actions_secret" "docker-create-metrics-data-batch-dockerhub-password" {
-  repository      = github_repository.docker-create-metrics-data-batch.name
+resource "github_actions_secret" "docker_create_metrics_data_batch_dockerhub_password" {
+  repository      = "${github_repository.docker_create_metrics_data_batch.name}"
   secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = local.dockerhub_password
+  plaintext_value = "${local.dockerhub_password}"
 }
 
-resource "github_actions_secret" "docker-create-metrics-data-batch-dockerhub-username" {
-  repository      = github_repository.docker-create-metrics-data-batch.name
+resource "github_actions_secret" "docker_create_metrics_data_batch_username" {
+  repository      = "${github_repository.docker_create_metrics_data_batch.name}"
   secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = local.dockerhub_username
+  plaintext_value = "${local.dockerhub_username}"
 }
 
-resource "github_actions_secret" "docker-create-metrics-data-batch-snyk-token" {
-  repository      = github_repository.docker-create-metrics-data-batch.name
+resource "github_actions_secret" "docker_create_metrics_data_batch_snyk_token" {
+  repository      = "${github_repository.docker_create_metrics_data_batch.name}"
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = local.snyk_token
+  plaintext_value = "${local.snyk_token}"
 }
-
-resource "github_actions_secret" "docker-create-metrics-data-batch-slack-webhook" {
-  repository      = github_repository.docker-create-metrics-data-batch.name
-  secret_name     = "SLACK_WEBHOOK"
-  plaintext_value = local.slack_webhook_url
-}
-
