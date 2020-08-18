@@ -12,20 +12,20 @@ resource "github_repository" "example" {
   }
 
   template {
-    owner = "${var.github_organization}"
+    owner = var.github_organization
     repository = "dataworks-repo-template-terraform"
   }
 }
 
 resource "github_team_repository" "example_dataworks" {
-  repository = "${github_repository.example.name}"
-  team_id    = "${github_team.dataworks.id}"
+  repository = github_repository.example.name
+  team_id    = github_team.dataworks.id
   permission = "push"
 }
 
 resource "github_branch_protection" "example_master" {
-  branch         = "${github_repository.example.default_branch}"
-  repository     = "${github_repository.example.name}"
+  branch         = github_repository.example.default_branch
+  repository     = github_repository.example.name
   enforce_admins = false
 
   required_status_checks {
@@ -41,7 +41,7 @@ resource "github_branch_protection" "example_master" {
 
 resource "null_resource" "example" {
   triggers = {
-    repo = "${github_repository.example.name}"
+    repo = github_repository.example.name
   }
   provisioner "local-exec" {
     command = "./initial-commit.sh ${github_repository.example.name} '${github_repository.example.description}' ${github_repository.example.template.0.repository}"
@@ -49,21 +49,21 @@ resource "null_resource" "example" {
 }
 
 resource "github_repository_webhook" "example" {
-  repository = "${github_repository.example.name}"
+  repository = github_repository.example.name
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.example.name}/resources/${github_repository.example.name}/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.example.name}/resources/${github_repository.example.name}/check/webhook?webhook_token=${local.github_webhook_token
     content_type = "form"
   }
 }
 
 resource "github_repository_webhook" "example_pr" {
-  repository = "${github_repository.example.name}"
+  repository = github_repository.example.name
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.example.name}/resources/${github_repository.example.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.example.name}/resources/${github_repository.example.name}-pr/check/webhook?webhook_token=${local.github_webhook_token
     content_type = "form"
   }
 }
