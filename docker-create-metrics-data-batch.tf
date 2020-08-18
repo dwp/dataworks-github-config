@@ -10,6 +10,11 @@ resource "github_repository" "docker-create-metrics-data-batch" {
   lifecycle {
     prevent_destroy = true
   }
+
+  template {
+    owner      = var.github_organization
+    repository = "dataworks-repo-template-docker"
+  }
 }
 
 resource "github_team_repository" "docker-create-metrics-data-batch-dataworks" {
