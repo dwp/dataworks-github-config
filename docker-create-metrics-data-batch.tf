@@ -40,7 +40,7 @@ resource "github_branch_protection" "docker_create_metrics_data_batch_master" {
 
 resource "null_resource" "docker_create_metrics_data_batch" {
   triggers = {
-    repo = "${github_repository.docker_create_metrics_data_batch.name}"
+    repo = github_repository.docker_create_metrics_data_batch.name
   }
   provisioner "local-exec" {
     command = "./initial-commit.sh ${github_repository.docker_create_metrics_data_batch.name} '${github_repository.docker_create_metrics_data_batch.description}' ${github_repository.docker_create_metrics_data_batch.template.0.repository}"
@@ -48,19 +48,19 @@ resource "null_resource" "docker_create_metrics_data_batch" {
 }
 
 resource "github_actions_secret" "docker_create_metrics_data_batch_dockerhub_password" {
-  repository      = "${github_repository.docker_create_metrics_data_batch.name}"
+  repository      = github_repository.docker_create_metrics_data_batch.name
   secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = "${local.dockerhub_password}"
+  plaintext_value = local.dockerhub_password
 }
 
 resource "github_actions_secret" "docker_create_metrics_data_batch_username" {
-  repository      = "${github_repository.docker_create_metrics_data_batch.name}"
+  repository      = github_repository.docker_create_metrics_data_batch.name
   secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = "${local.dockerhub_username}"
+  plaintext_value = local.dockerhub_username
 }
 
 resource "github_actions_secret" "docker_create_metrics_data_batch_snyk_token" {
-  repository      = "${github_repository.docker_create_metrics_data_batch.name}"
+  repository      = github_repository.docker_create_metrics_data_batch.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = "${local.snyk_token}"
+  plaintext_value = local.snyk_token
 }
