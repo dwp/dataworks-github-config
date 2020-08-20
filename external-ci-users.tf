@@ -1,7 +1,7 @@
 resource "github_repository" "external_ci_users" {
-  name             = "external-ci-users"
-  description      = "Repo to manage users from a third-party CI/CD tool"
-  auto_init        = false
+  name        = "external-ci-users"
+  description = "Repo to manage users from a third-party CI/CD tool"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -12,7 +12,7 @@ resource "github_repository" "external_ci_users" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-terraform"
   }
 }
@@ -29,7 +29,7 @@ resource "github_branch_protection" "external_ci_users_master" {
   enforce_admins = false
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["concourse-ci/status"]
   }
 
@@ -53,7 +53,7 @@ resource "github_repository_webhook" "external_ci_users" {
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.external_ci_users.name}/resources/${github_repository.external_ci_users.name}/check/webhook?webhook_token=${local.github_webhook_token
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.external_ci_users.name}/resources/${github_repository.external_ci_users.name}/check/webhook?webhook_token=${local.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -63,7 +63,7 @@ resource "github_repository_webhook" "external_ci_users_pr" {
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.external_ci_users.name}/resources/${github_repository.external_ci_users.name}-pr/check/webhook?webhook_token=${local.github_webhook_token
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.external_ci_users.name}/resources/${github_repository.external_ci_users.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
     content_type = "form"
   }
 }
