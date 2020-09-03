@@ -1,6 +1,6 @@
 locals {
-  gha_aws_access_key_id     = jsondecode(data.aws_secretsmanager_secret_version.dataworks_secret.secret_binary)["gha_aws_access_key_id"]
-  gha_aws_secret_access_key = jsondecode(data.aws_secretsmanager_secret_version.dataworks_secret.secret_binary)["gha_aws_secret_access_key"]
+  gha_aws_access_key_id     = jsondecode(data.aws_secretsmanager_secret_version.dataworks_secret.secret_binary)["gha_aws_concourse_access_key_id"]
+  gha_aws_secret_access_key = jsondecode(data.aws_secretsmanager_secret_version.dataworks_secret.secret_binary)["gha_aws_concourse_secret_access_key"]
   gha_external_id           = jsondecode(data.aws_secretsmanager_secret_version.dataworks_secret.secret_binary)["gha_external_id"]
 }
 
