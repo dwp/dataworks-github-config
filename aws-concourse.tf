@@ -43,7 +43,7 @@ resource "github_branch_protection" "aws-concourse-master" {
 resource "github_actions_secret" "aws_role_mgmt_dev" {
   repository      = github_repository.aws-concourse.name
   secret_name     = "AWS_GHA_ROLE_MGMT_DEV"
-  plaintext_value = "arn:aws:iam::${local.aws_mgmt_dev}:role/gha_aws_concourse_role"
+  plaintext_value = "arn:aws:iam::${local.aws_mgmt_dev}:role/gha_aws_concourse"
 }
 
 resource "github_actions_secret" "aws_actions_key_id" {
