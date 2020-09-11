@@ -37,5 +37,5 @@ resource "github_branch_protection" "aws-concourse-master" {
 resource "github_actions_secret" "concourse_aws_profile" {
   repository      = github_repository.aws-concourse.name
   secret_name     = "AWS_PROFILE"
-  plaintext_value = "arn:aws:iam::${local.aws_mgmt_dev}:role/ci"
+  plaintext_value = "arn:aws:iam::${local.account.management-dev}:role/ci"
 }

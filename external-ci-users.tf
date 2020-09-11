@@ -53,7 +53,7 @@ resource "github_repository_webhook" "external_ci_users" {
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.external_ci_users.name}/resources/${github_repository.external_ci_users.name}/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.external_ci_users.name}/resources/${github_repository.external_ci_users.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -63,7 +63,7 @@ resource "github_repository_webhook" "external_ci_users_pr" {
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.external_ci_users.name}/resources/${github_repository.external_ci_users.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.external_ci_users.name}/resources/${github_repository.external_ci_users.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }

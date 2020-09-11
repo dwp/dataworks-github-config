@@ -53,7 +53,7 @@ resource "github_repository_webhook" "aws_internet_egress" {
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/internet_egress/resources/${github_repository.aws_internet_egress.name}/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/internet_egress/resources/${github_repository.aws_internet_egress.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -63,7 +63,7 @@ resource "github_repository_webhook" "aws_internet_egress_pr" {
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/internet_egress/resources/${github_repository.aws_internet_egress.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/internet_egress/resources/${github_repository.aws_internet_egress.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }

@@ -53,7 +53,7 @@ resource "github_repository_webhook" "terraform_aws_wafv2" {
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.terraform_aws_wafv2.name}/resources/${github_repository.terraform_aws_wafv2.name}/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.terraform_aws_wafv2.name}/resources/${github_repository.terraform_aws_wafv2.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -63,7 +63,7 @@ resource "github_repository_webhook" "terraform_aws_wafv2_pr" {
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.terraform_aws_wafv2.name}/resources/${github_repository.terraform_aws_wafv2.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.terraform_aws_wafv2.name}/resources/${github_repository.terraform_aws_wafv2.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }

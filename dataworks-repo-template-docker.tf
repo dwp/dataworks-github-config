@@ -41,18 +41,18 @@ resource "github_branch_protection" "dataworks_repo_template_docker_master" {
 resource "github_actions_secret" "dataworks_repo_template_docker_dockerhub_password" {
   repository      = github_repository.dataworks_repo_template_docker.name
   secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = local.dockerhub_password
+  plaintext_value = var.dockerhub_password
 }
 
 resource "github_actions_secret" "dataworks_repo_template_docker_dockerhub_username" {
   repository      = github_repository.dataworks_repo_template_docker.name
   secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = local.dockerhub_username
+  plaintext_value = var.dockerhub_username
 }
 
 resource "github_actions_secret" "dataworks_repo_template_docker_snyk_token" {
   repository      = github_repository.dataworks_repo_template_docker.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = local.snyk_token
+  plaintext_value = var.snyk_token
 }
 

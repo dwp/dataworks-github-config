@@ -50,24 +50,24 @@ resource "null_resource" "rstudiooss" {
 resource "github_actions_secret" "rstudiooss_dockerhub_password" {
   repository      = github_repository.rstudiooss.name
   secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = local.dockerhub_password
+  plaintext_value = var.dockerhub_password
 }
 
 resource "github_actions_secret" "rstudiooss_dockerhub_username" {
   repository      = github_repository.rstudiooss.name
   secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = local.dockerhub_username
+  plaintext_value = var.dockerhub_username
 }
 
 resource "github_actions_secret" "rstudiooss_snyk_token" {
   repository      = github_repository.rstudiooss.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = local.snyk_token
+  plaintext_value = var.snyk_token
 }
 
 resource "github_actions_secret" "rstudiooss_slack_webhook" {
   repository      = github_repository.rstudiooss.name
   secret_name     = "SLACK_WEBHOOK"
-  plaintext_value = local.slack_webhook_url
+  plaintext_value = var.slack_webhook_url
 }
 

@@ -36,36 +36,36 @@ resource "github_branch_protection" "ucfs-claimant-api-load-data_master" {
 resource "github_actions_secret" "ucfs-claimant-api-load-data_dockerhub_password" {
   repository      = github_repository.ucfs-claimant-api-load-data.name
   secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = local.dockerhub_password
+  plaintext_value = var.dockerhub_password
 }
 
 resource "github_actions_secret" "ucfs-claimant-api-load-data_dockerhub_username" {
   repository      = github_repository.ucfs-claimant-api-load-data.name
   secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = local.dockerhub_username
+  plaintext_value = var.dockerhub_username
 }
 
 resource "github_actions_secret" "ucfs-claimant-api-load-data_snyk_token" {
   repository      = github_repository.ucfs-claimant-api-load-data.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = local.snyk_token
+  plaintext_value = var.snyk_token
 }
 
 resource "github_actions_secret" "ucfs-claimant-api-load-data_github_email" {
   repository      = github_repository.ucfs-claimant-api-load-data.name
   secret_name     = "CI_GITHUB_EMAIL"
-  plaintext_value = local.github_email
+  plaintext_value = var.github_email
 }
 
 resource "github_actions_secret" "ucfs-claimant-api-load-data_github_username" {
   repository      = github_repository.ucfs-claimant-api-load-data.name
   secret_name     = "CI_GITHUB_USERNAME"
-  plaintext_value = local.github_username
+  plaintext_value = var.github_username
 }
 
 resource "github_actions_secret" "ucfs-claimant-api-load-data_github_token" {
   repository      = github_repository.ucfs-claimant-api-load-data.name
   secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = local.github_token
+  plaintext_value = var.github_token
 }
 
