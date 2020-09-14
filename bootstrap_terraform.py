@@ -56,6 +56,8 @@ def main():
     config_data['dockerhub_password'] = json.loads(dataworks_secret['SecretBinary'])["dockerhub_token"]
     config_data['snyk_token'] = json.loads(dataworks_secret['SecretBinary'])["snyk_token"]
     config_data['slack_webhook_url'] = json.loads(dataworks_sensitive['SecretBinary'])["slack_webhook_url"]
+    config_data['gha_aws_concourse_access_key_id'] = json.loads(dataworks_secret['SecretBinary'])["gha_aws_concourse_access_key_id"]
+    config_data['gha_aws_concourse_secret_access_key'] = json.loads(dataworks_secret['SecretBinary'])["gha_aws_concourse_secret_access_key"]
 
     with open("terraform.tf.j2") as in_template:
         template = jinja2.Template(in_template.read())

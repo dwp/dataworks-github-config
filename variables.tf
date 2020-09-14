@@ -55,3 +55,11 @@ variable "github_webhook_token" {
   type        = string
   description = "GitHub token to auth with CI"
 }
+
+variable "gha_aws_concourse" {
+  type = object({
+    access_key_id = string
+    secret_access_key = string
+  })
+  description = "AWS access key and secret for GitHub Actions aws-concourse deployment"
+}
