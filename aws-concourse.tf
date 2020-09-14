@@ -1,3 +1,9 @@
+locals {
+  gha_aws_access_key_id     = jsondecode(data.aws_secretsmanager_secret_version.dataworks_secret.secret_binary)["gha_aws_concourse_access_key_id"]
+  gha_aws_secret_access_key = jsondecode(data.aws_secretsmanager_secret_version.dataworks_secret.secret_binary)["gha_aws_concourse_secret_access_key"]
+  gha_external_id           = jsondecode(data.aws_secretsmanager_secret_version.dataworks_secret.secret_binary)["gha_external_id"]
+}
+
 resource "github_repository" "aws-concourse" {
   name        = "aws-concourse"
   description = "An AWS based Concourse platform"
@@ -34,8 +40,14 @@ resource "github_branch_protection" "aws-concourse-master" {
   }
 }
 
-resource "github_actions_secret" "concourse_aws_profile" {
+resource "github_actions_secret" "aws_actions_key_id" {
   repository      = github_repository.aws-concourse.name
-  secret_name     = "AWS_PROFILE"
-  plaintext_value = "arn:aws:iam::${local.account.management-dev}:role/ci"
+  secret_name     = "ACTIONS_ACCESS_KEY_ID"
+  plaintext_value = local.gha_aws_access_key_id
+}
+
+resource "github_actions_secret" "aws_secret_access_key" {
+  repository      = github_repository.aws-concourse.name
+  secret_name     = "ACTIONS_SECRET_ACCESS_KEY"
+  plaintext_value = local.gha_aws_secret_access_key
 }
