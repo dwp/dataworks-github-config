@@ -51,3 +51,9 @@ resource "github_actions_secret" "aws_role_mgmt_dev" {
   secret_name     = "AWS_GHA_ROLE_MGMT_DEV"
   plaintext_value = "arn:aws:iam::${local.account["management-dev"]}:role/gha_aws_concourse"
 }
+
+resource "github_actions_secret" "aws_role_mgmt" {
+  repository      = github_repository.aws-concourse.name
+  secret_name     = "AWS_GHA_ROLE_MGMT"
+  plaintext_value = "arn:aws:iam::${local.account["management"]}:role/gha_aws_concourse"
+}
