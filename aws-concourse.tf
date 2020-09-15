@@ -25,7 +25,7 @@ resource "github_branch_protection" "aws-concourse-master" {
 
   required_status_checks {
     strict   = true
-    contexts = ["Pull Request / Terraform (pull_request)"]
+    contexts = ["concourse-ci/aws-concourse-pr"]
   }
 
   required_pull_request_reviews {
