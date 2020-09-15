@@ -43,7 +43,7 @@ resource "github_repository_webhook" "aws-pdm-dataset-generation" {
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.pipeline_name}/resources/${github_repository.aws-pdm-dataset-generation.name}/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.pipeline_name}/resources/${github_repository.aws-pdm-dataset-generation.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -53,7 +53,7 @@ resource "github_repository_webhook" "aws-pdm-dataset-generation_pr" {
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.pipeline_name}/resources/${github_repository.aws-pdm-dataset-generation.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.pipeline_name}/resources/${github_repository.aws-pdm-dataset-generation.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }

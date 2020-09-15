@@ -36,19 +36,19 @@ resource "github_branch_protection" "frontend-service-master" {
 resource "github_actions_secret" "frontend-service-dockerhub-password" {
   repository      = github_repository.frontend-service.name
   secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = local.dockerhub_password
+  plaintext_value = var.dockerhub_password
 }
 
 resource "github_actions_secret" "frontend-service-dockerhub-username" {
   repository      = github_repository.frontend-service.name
   secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = local.dockerhub_username
+  plaintext_value = var.dockerhub_username
 }
 
 resource "github_actions_secret" "frontend-service-snyk-token" {
   repository      = github_repository.frontend-service.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = local.snyk_token
+  plaintext_value = var.snyk_token
 }
 
 resource "github_repository_webhook" "frontend-service" {
@@ -56,7 +56,7 @@ resource "github_repository_webhook" "frontend-service" {
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/analytical-frontend-service/resources/${github_repository.frontend-service.name}/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/analytical-frontend-service/resources/${github_repository.frontend-service.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -66,7 +66,7 @@ resource "github_repository_webhook" "frontend-service_pr" {
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/analytical-frontend-service/resources/${github_repository.frontend-service.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/analytical-frontend-service/resources/${github_repository.frontend-service.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }

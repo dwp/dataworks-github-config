@@ -37,18 +37,18 @@ resource "github_branch_protection" "emr-launcher_master" {
 resource "github_actions_secret" "emr-launcher_github_email" {
   repository      = github_repository.emr-launcher.name
   secret_name     = "CI_GITHUB_EMAIL"
-  plaintext_value = local.github_email
+  plaintext_value = var.github_email
 }
 
 resource "github_actions_secret" "emr-launcher_github_username" {
   repository      = github_repository.emr-launcher.name
   secret_name     = "CI_GITHUB_USERNAME"
-  plaintext_value = local.github_username
+  plaintext_value = var.github_username
 }
 
 resource "github_actions_secret" "emr-launcher_github_token" {
   repository      = github_repository.emr-launcher.name
   secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = local.github_token
+  plaintext_value = var.github_token
 }
 

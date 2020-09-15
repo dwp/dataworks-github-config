@@ -38,7 +38,7 @@ resource "github_repository_webhook" "orchestration-service" {
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.orchestration-service.name}/resources/${github_repository.orchestration-service.name}/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.orchestration-service.name}/resources/${github_repository.orchestration-service.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -48,7 +48,7 @@ resource "github_repository_webhook" "orchestration-service_pr" {
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.orchestration-service.name}/resources/${github_repository.orchestration-service.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.orchestration-service.name}/resources/${github_repository.orchestration-service.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -56,24 +56,24 @@ resource "github_repository_webhook" "orchestration-service_pr" {
 resource "github_actions_secret" "orchestration-service-dockerhub-password" {
   repository      = github_repository.orchestration-service.name
   secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = local.dockerhub_password
+  plaintext_value = var.dockerhub_password
 }
 
 resource "github_actions_secret" "orchestration-service-dockerhub-username" {
   repository      = github_repository.orchestration-service.name
   secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = local.dockerhub_username
+  plaintext_value = var.dockerhub_username
 }
 
 resource "github_actions_secret" "orchestration-service-snyk-token" {
   repository      = github_repository.orchestration-service.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = local.snyk_token
+  plaintext_value = var.snyk_token
 }
 
 resource "github_actions_secret" "orchestration-service-slack-webhook" {
   repository      = github_repository.orchestration-service.name
   secret_name     = "SLACK_WEBHOOK"
-  plaintext_value = local.slack_webhook_url
+  plaintext_value = var.slack_webhook_url
 }
 

@@ -36,18 +36,18 @@ resource "github_branch_protection" "ami-builder-master" {
 resource "github_actions_secret" "ami-builder_github_email" {
   repository      = github_repository.ami-builder.name
   secret_name     = "CI_GITHUB_EMAIL"
-  plaintext_value = local.github_email
+  plaintext_value = var.github_email
 }
 
 resource "github_actions_secret" "ami-builder_github_username" {
   repository      = github_repository.ami-builder.name
   secret_name     = "CI_GITHUB_USERNAME"
-  plaintext_value = local.github_username
+  plaintext_value = var.github_username
 }
 
 resource "github_actions_secret" "ami-builder_github_token" {
   repository      = github_repository.ami-builder.name
   secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = local.github_token
+  plaintext_value = var.github_token
 }
 

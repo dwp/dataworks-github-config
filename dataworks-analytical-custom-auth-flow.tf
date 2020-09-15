@@ -36,6 +36,6 @@ resource "github_branch_protection" "dataworks-analytical-custom-auth-flow-maste
 resource "github_actions_secret" "dataworks-analytical-custom-auth-flow-snyk-token" {
   repository      = github_repository.dataworks-analytical-custom-auth-flow.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = local.snyk_token
+  plaintext_value = var.snyk_token
 }
 

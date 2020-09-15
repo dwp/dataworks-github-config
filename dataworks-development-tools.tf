@@ -53,7 +53,7 @@ resource "github_repository_webhook" "dataworks_development_tools" {
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/development_tools/resources/${github_repository.dataworks_development_tools.name}/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/development_tools/resources/${github_repository.dataworks_development_tools.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -63,7 +63,7 @@ resource "github_repository_webhook" "dataworks_development_tools_pr" {
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/development_tools/resources/${github_repository.dataworks_development_tools.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/development_tools/resources/${github_repository.dataworks_development_tools.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -71,18 +71,18 @@ resource "github_repository_webhook" "dataworks_development_tools_pr" {
 resource "github_actions_secret" "dataworks_development_tools_github_email" {
   repository      = github_repository.dataworks_development_tools.name
   secret_name     = "CI_GITHUB_EMAIL"
-  plaintext_value = local.github_email
+  plaintext_value = var.github_email
 }
 
 resource "github_actions_secret" "dataworks_development_tools_github_username" {
   repository      = github_repository.dataworks_development_tools.name
   secret_name     = "CI_GITHUB_USERNAME"
-  plaintext_value = local.github_username
+  plaintext_value = var.github_username
 }
 
 resource "github_actions_secret" "dataworks_development_tools_github_token" {
   repository      = github_repository.dataworks_development_tools.name
   secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = local.github_token
+  plaintext_value = var.github_token
 }
 

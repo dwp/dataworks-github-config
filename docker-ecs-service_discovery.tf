@@ -50,18 +50,18 @@ resource "null_resource" "docker_ecs_service_discovery" {
 resource "github_actions_secret" "docker_ecs_service_discovery_dockerhub_password" {
   repository      = github_repository.docker_ecs_service_discovery.name
   secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = local.dockerhub_password
+  plaintext_value = var.dockerhub_password
 }
 
 resource "github_actions_secret" "docker_ecs_service_discovery_dockerhub_username" {
   repository      = github_repository.docker_ecs_service_discovery.name
   secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = local.dockerhub_username
+  plaintext_value = var.dockerhub_username
 }
 
 resource "github_actions_secret" "docker_ecs_service_discovery_snyk_token" {
   repository      = github_repository.docker_ecs_service_discovery.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = local.snyk_token
+  plaintext_value = var.snyk_token
 }
 

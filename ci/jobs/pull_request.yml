@@ -20,31 +20,31 @@ jobs:
               repository: hashicorp/terraform
               version: ((dataworks.terraform_version))
               tag: ((dataworks.terraform_version))
-          params:
-            TF_INPUT: false
-            TF_VAR_github_token: ((dataworks-secrets.concourse_github_pat))
-            TF_VAR_github_webhook_token: ((dataworks.concourse_github_webhook_token))
-            TF_VAR_github_organization: dwp
-            TF_VAR_dockerhub_username: ((dataworks.dockerhub_username))
-            TF_VAR_dockerhub_password: ((dataworks-secrets.dockerhub_token))
-            TF_VAR_snyk_token: ((dataworks-secrets.snyk_token))
-            TF_VAR_slack_webhook_url: ((dataworks.slack_webhook_url))
-            TF_VAR_github_username: ((dataworks.concourse_github_username))
-            TF_VAR_github_email: ((dataworks.concourse_github_email))
-            TF_CLI_ARGS_plan: -lock-timeout=300s
           run:
             path: sh
-            dir: dataworks-github-config
             args:
               - -exc
               - |
-                cp ../terraform-config/terraform.tf .
-                terraform init
+                cp ../terraform-config/* .
                 terraform workspace show
+                terraform init
                 terraform plan
+            dir: dataworks-github-config
           inputs:
             - name: dataworks-github-config
             - name: terraform-config
+        params:
+          TF_CLI_ARGS_plan: -lock-timeout=300s
+          TF_INPUT: "false"
+          TF_VAR_github_token: ((dataworks-secrets.concourse_github_pat))
+          TF_VAR_github_webhook_token: ((dataworks.concourse_github_webhook_token))
+          TF_VAR_github_organization: dwp
+          TF_VAR_dockerhub_username: ((dataworks.dockerhub_username))
+          TF_VAR_dockerhub_password: ((dataworks-secrets.dockerhub_token))
+          TF_VAR_snyk_token: ((dataworks-secrets.snyk_token))
+          TF_VAR_slack_webhook_url: ((dataworks.slack_webhook_url))
+          TF_VAR_github_username: ((dataworks.concourse_github_username))
+          TF_VAR_github_email: ((dataworks.concourse_github_email))
         input_mapping:
           dataworks-github-config: dataworks-github-config-pr
         on_failure:

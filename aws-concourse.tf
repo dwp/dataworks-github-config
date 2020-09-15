@@ -34,8 +34,26 @@ resource "github_branch_protection" "aws-concourse-master" {
   }
 }
 
-resource "github_actions_secret" "concourse_aws_profile" {
+resource "github_actions_secret" "aws_concourse_access_key_id" {
   repository      = github_repository.aws-concourse.name
-  secret_name     = "AWS_PROFILE"
-  plaintext_value = "arn:aws:iam::${local.aws_mgmt_dev}:role/ci"
+  secret_name     = "ACTIONS_ACCESS_KEY_ID"
+  plaintext_value = var.gha_aws_concourse.access_key_id
+}
+
+resource "github_actions_secret" "aws_concourse_secret_access_key" {
+  repository      = github_repository.aws-concourse.name
+  secret_name     = "ACTIONS_SECRET_ACCESS_KEY"
+  plaintext_value = var.gha_aws_concourse.secret_access_key
+}
+
+resource "github_actions_secret" "aws_role_mgmt_dev" {
+  repository      = github_repository.aws-concourse.name
+  secret_name     = "AWS_GHA_ROLE_MGMT_DEV"
+  plaintext_value = "arn:aws:iam::${local.account["management-dev"]}:role/gha_aws_concourse"
+}
+
+resource "github_actions_secret" "aws_role_mgmt" {
+  repository      = github_repository.aws-concourse.name
+  secret_name     = "AWS_GHA_ROLE_MGMT"
+  plaintext_value = "arn:aws:iam::${local.account["management"]}:role/gha_aws_concourse"
 }

@@ -36,24 +36,24 @@ resource "github_branch_protection" "emr-cluster-broker-master" {
 resource "github_actions_secret" "emr-cluster-broker-dockerhub-password" {
   repository      = github_repository.emr-cluster-broker.name
   secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = local.dockerhub_password
+  plaintext_value = var.dockerhub_password
 }
 
 resource "github_actions_secret" "emr-cluster-broker-dockerhub-username" {
   repository      = github_repository.emr-cluster-broker.name
   secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = local.dockerhub_username
+  plaintext_value = var.dockerhub_username
 }
 
 resource "github_actions_secret" "emr-cluster-broker-snyk-token" {
   repository      = github_repository.emr-cluster-broker.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = local.snyk_token
+  plaintext_value = var.snyk_token
 }
 
 resource "github_actions_secret" "emr-cluster-broker-slack-webhook" {
   repository      = github_repository.emr-cluster-broker.name
   secret_name     = "SLACK_WEBHOOK"
-  plaintext_value = local.slack_webhook_url
+  plaintext_value = var.slack_webhook_url
 }
 

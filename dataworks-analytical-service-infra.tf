@@ -39,7 +39,7 @@ resource "github_repository_webhook" "dataworks-analytical-service-infra" {
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/analytical-service-infra/resources/${github_repository.dataworks-analytical-service-infra.name}/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/analytical-service-infra/resources/${github_repository.dataworks-analytical-service-infra.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -49,7 +49,7 @@ resource "github_repository_webhook" "dataworks-analytical-service-infra_pr" {
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/analytical-service-infra/resources/${github_repository.dataworks-analytical-service-infra.name}-pr/check/webhook?webhook_token=${local.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/analytical-service-infra/resources/${github_repository.dataworks-analytical-service-infra.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }

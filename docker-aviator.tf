@@ -50,17 +50,17 @@ resource "null_resource" "docker_aviator" {
 resource "github_actions_secret" "docker_aviator_dockerhub_password" {
   repository      = github_repository.docker_aviator.name
   secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = local.dockerhub_password
+  plaintext_value = var.dockerhub_password
 }
 
 resource "github_actions_secret" "docker_aviator_dockerhub_username" {
   repository      = github_repository.docker_aviator.name
   secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = local.dockerhub_username
+  plaintext_value = var.dockerhub_username
 }
 
 resource "github_actions_secret" "docker_aviator_snyk_token" {
   repository      = github_repository.docker_aviator.name
   secret_name     = "SNYK_TOKEN"
-  plaintext_value = local.snyk_token
+  plaintext_value = var.snyk_token
 }
