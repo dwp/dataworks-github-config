@@ -17,6 +17,7 @@ meta:
             - |
               python bootstrap_terraform.py
               cp terraform.tf ../terraform-config
+              cp terraform.tfvars ../terraform-config
           dir: dataworks-github-config
         inputs:
           - name: dataworks-github-config
@@ -40,7 +41,7 @@ meta:
           args:
             - -exc
             - |
-              cp ../terraform-config/terraform.tf .
+              cp ../terraform-config/* .
               terraform workspace show
               terraform init
               terraform plan -out terraform.plan
@@ -78,7 +79,7 @@ meta:
           args:
             - -exc
             - |
-              cp ../terraform-config/terraform.tf .
+              cp ../terraform-config/* .
               terraform workspace show
               terraform init
               terraform plan -detailed-exitcode
