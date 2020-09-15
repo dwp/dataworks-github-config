@@ -49,5 +49,5 @@ resource "github_actions_secret" "aws_concourse_secret_access_key" {
 resource "github_actions_secret" "aws_role_mgmt_dev" {
   repository      = github_repository.aws-concourse.name
   secret_name     = "AWS_GHA_ROLE_MGMT_DEV"
-  plaintext_value = "arn:aws:iam::${lookup(local.account, "management-dev")}:role/gha_aws_concourse"
+  plaintext_value = "arn:aws:iam::${local.account["management-dev"]}:role/gha_aws_concourse"
 }
