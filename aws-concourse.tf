@@ -23,6 +23,10 @@ resource "github_branch_protection" "aws-concourse-master" {
   repository     = github_repository.aws-concourse.name
   enforce_admins = false
 
+  required_status_checks {
+    strict   = true
+  }
+
   required_pull_request_reviews {
     dismiss_stale_reviews      = true
     require_code_owner_reviews = true
