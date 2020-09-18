@@ -1,7 +1,7 @@
 resource "github_repository" "aws_azkaban" {
-  name             = "aws-azkaban"
-  description      = "An AWS based azkaban platform"
-  auto_init        = false
+  name        = "aws-azkaban"
+  description = "An AWS based azkaban platform"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -12,7 +12,7 @@ resource "github_repository" "aws_azkaban" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-terraform"
   }
 }
@@ -29,7 +29,7 @@ resource "github_branch_protection" "aws_azkaban_master" {
   enforce_admins = false
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["concourse-ci/status"]
   }
 

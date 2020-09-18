@@ -1,7 +1,7 @@
 resource "github_repository" "docker_aviator" {
-  name             = "docker-aviator"
-  description      = "Docker image that will run Aviator"
-  auto_init        = false
+  name        = "docker-aviator"
+  description = "Docker image that will run Aviator"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -12,7 +12,7 @@ resource "github_repository" "docker_aviator" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }
