@@ -24,7 +24,7 @@ resource "github_branch_protection" "aws-concourse-master" {
   enforce_admins = false
 
   required_status_checks {
-    strict   = true
+    strict = true
   }
 
   required_pull_request_reviews {
