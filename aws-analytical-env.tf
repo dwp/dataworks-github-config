@@ -24,6 +24,7 @@ resource "github_branch_protection" "aws-analytical-env-master" {
   enforce_admins = false
 
   required_status_checks {
+    contexts = ["concourse-ci/status"]
     strict = true
   }
 
