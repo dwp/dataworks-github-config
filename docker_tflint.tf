@@ -1,5 +1,5 @@
 resource "github_repository" "docker_tflint" {
-  name             = "docker_tflint"
+  name             = "docker-tflint"
   description      = "alpine container with bash, tflint, ca-certs and jq baked in"
   auto_init        = true
 
