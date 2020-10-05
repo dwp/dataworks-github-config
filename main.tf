@@ -3,3 +3,21 @@ resource "github_team" "dataworks" {
   privacy = "closed"
 }
 
+locals {
+  common_labels = [
+    {
+      name   = "invalid"
+      colour = "000000"
+    }
+  ]
+  common_topics = [
+    "govuk",
+    "hacktoberfest",
+  ]
+  aws_topics = [
+    "aws",
+    "terraform",
+    "infrastructure",
+    "infrastructure-as-code",
+  ]
+}
