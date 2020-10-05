@@ -12,7 +12,7 @@ locals {
   ]
   common_topics = [
     "govuk",
-    "hactoberfest",
+    "hacktoberfest",
   ]
   aws_topics = [
     "aws",
