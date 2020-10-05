@@ -6,6 +6,7 @@ resource "github_repository" "dataworks-analytical-service-infra" {
   allow_merge_commit     = false
   delete_branch_on_merge = true
   has_issues             = true
+  topics                 = local.common_topics
 
   lifecycle {
     prevent_destroy = true
@@ -32,6 +33,13 @@ resource "github_branch_protection" "dataworks-analytical-service-infra_master" 
     dismiss_stale_reviews      = true
     require_code_owner_reviews = true
   }
+}
+
+resource "github_issue_label" "dataworks-analytical-service-infra" {
+  for_each   = { for common_label in local.common_labels : common_label.name => common_label }
+  color      = each.value.colour
+  name       = each.value.name
+  repository = github_repository.dataworks-analytical-service-infra.name
 }
 
 resource "github_repository_webhook" "dataworks-analytical-service-infra" {
