@@ -10,4 +10,14 @@ locals {
       colour = "000000"
     }
   ]
+  common_topics = [
+    "govuk",
+    "hactoberfest",
+  ]
+  aws_topics = [
+    "aws",
+    "terraform",
+    "infrastructure",
+    "infrastructure-as-code",
+  ]
 }
