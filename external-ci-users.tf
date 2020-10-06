@@ -6,6 +6,7 @@ resource "github_repository" "external_ci_users" {
   allow_merge_commit     = false
   delete_branch_on_merge = true
   has_issues             = true
+  topics                 = local.common_topics
 
   lifecycle {
     prevent_destroy = true
@@ -37,6 +38,13 @@ resource "github_branch_protection" "external_ci_users_master" {
     dismiss_stale_reviews      = true
     require_code_owner_reviews = true
   }
+}
+
+resource "github_issue_label" "external_ci_users" {
+  for_each   = { for common_label in local.common_labels : common_label.name => common_label }
+  color      = each.value.colour
+  name       = each.value.name
+  repository = github_repository.external_ci_users.name
 }
 
 resource "null_resource" "external_ci_users" {

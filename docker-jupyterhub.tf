@@ -33,6 +33,13 @@ resource "github_branch_protection" "docker-jupyterhub-master" {
   }
 }
 
+resource "github_issue_label" "docker-jupyterhub" {
+  for_each   = { for common_label in local.common_labels : common_label.name => common_label }
+  color      = each.value.colour
+  name       = each.value.name
+  repository = github_repository.docker-jupyterhub.name
+}
+
 resource "github_actions_secret" "docker-jupyterhub_github_email" {
   repository      = github_repository.docker-jupyterhub.name
   secret_name     = "CI_GITHUB_EMAIL"

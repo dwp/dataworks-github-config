@@ -6,6 +6,7 @@ resource "github_repository" "aws-sns-to-ses-mailer" {
   delete_branch_on_merge = true
   default_branch         = "master"
   has_issues             = true
+  topics                 = local.common_topics
 
   lifecycle {
     prevent_destroy = true
@@ -31,6 +32,13 @@ resource "github_branch_protection" "aws-sns-to-ses-mailer-master" {
     dismiss_stale_reviews      = true
     require_code_owner_reviews = true
   }
+}
+
+resource "github_issue_label" "aws-sns-to-ses-mailer" {
+  for_each   = { for common_label in local.common_labels : common_label.name => common_label }
+  color      = each.value.colour
+  name       = each.value.name
+  repository = github_repository.aws-sns-to-ses-mailer.name
 }
 
 resource "github_actions_secret" "aws-sns-to-ses-mailer_github_email" {

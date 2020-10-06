@@ -5,6 +5,7 @@ resource "github_repository" "frontend-service" {
   allow_merge_commit     = false
   delete_branch_on_merge = true
   has_issues             = true
+  topics                 = local.common_topics
   auto_init              = true
 
   lifecycle {
@@ -31,6 +32,13 @@ resource "github_branch_protection" "frontend-service-master" {
     dismiss_stale_reviews      = true
     require_code_owner_reviews = true
   }
+}
+
+resource "github_issue_label" "frontend-service" {
+  for_each   = { for common_label in local.common_labels : common_label.name => common_label }
+  color      = each.value.colour
+  name       = each.value.name
+  repository = github_repository.frontend-service.name
 }
 
 resource "github_actions_secret" "frontend-service-dockerhub-password" {
