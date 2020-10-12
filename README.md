@@ -18,15 +18,15 @@ This process is currently intended for use with *public*, not private repositori
 ## Post Repo Creation
 After the repo has been created you need to do the follwoing:
 ### For all repos:
-1. Create the project on SonarCloud
-1.1. Go to https://sonarcloud.io/projects/create (sign in with GitHub)
-1.1. Find your new repo(s) in the lists, select it and choose "Set Up" in the right hand margin
-1.1. There will be very little code at this point, but click the "Force Automatic Analysis" button to ovveride the warning
+* Create the project on SonarCloud
+  1. Go to https://sonarcloud.io/projects/create (sign in with GitHub)
+  1. Find your new repo(s) in the lists, select it and choose "Set Up" in the right hand margin
+  1. There will be very little code at this point, but click the "Force Automatic Analysis" button to ovveride the warning
 
 ### For Docker repos:
-1. Create a repo on Docker Hub
-1.1. Create the Docker repo in the [dwpdigital](https://hub.docker.com/u/dwpdigital) team
-1.1. After creating the repo go to the permissions tab and grant the `dataworks` team `admin` access
+* Create a repo on Docker Hub
+  1. Create the Docker repo in the [dwpdigital](https://hub.docker.com/u/dwpdigital) team
+  1. After creating the repo go to the permissions tab and grant the `dataworks` team `admin` access
 
 # Notes
 
