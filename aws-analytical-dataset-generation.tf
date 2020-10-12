@@ -7,7 +7,7 @@ resource "github_repository" "aws-analytical-dataset-generation" {
   delete_branch_on_merge = true
   default_branch         = "master"
   has_issues             = true
-  topics                 = local.common_topics
+  topics                 = concat(local.common_topics, local.aws_topics)
 
   lifecycle {
     prevent_destroy = true
