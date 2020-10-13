@@ -9,7 +9,7 @@ resource "github_repository" "dataworks_aws_tarball_ingestion" {
   topics                 = concat(local.common_topics, local.aws_topics)
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   template {
