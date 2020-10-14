@@ -41,3 +41,22 @@ resource "github_issue_label" "ami-builder-configs" {
   repository = github_repository.ami-builder-configs.name
 }
 
+resource "github_repository_webhook" "ami-builder-configs" {
+  repository = github_repository.ami-builder-configs.name
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/github-config/resources/${github_repository.ami-builder-configs.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
+resource "github_repository_webhook" "ami-builder-configs-pr" {
+  repository = github_repository.ami-builder-configs.name
+  events     = ["pull_request"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/github-config/resources/${github_repository.ami-builder-configs.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
