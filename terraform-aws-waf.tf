@@ -1,6 +1,6 @@
 resource "github_repository" "terraform_aws_waf" {
   name             = "terraform-aws-waf"
-  description      = "A Terraform module to create an AWS WAF with consistent features"
+  description      = "A Terraform module to create an AWS Classic Regional WAF with consistent features"
   auto_init        = false
 
   allow_merge_commit     = false
