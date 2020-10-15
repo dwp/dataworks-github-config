@@ -14,7 +14,7 @@ resource "github_repository" "terraform_aws_waf" {
 
   template {
     owner = var.github_organization
-    repository = "dataworks-repo-template-terraform"
+    repository = "dataworks-repo-template"
   }
 }
 
