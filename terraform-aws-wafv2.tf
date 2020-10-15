@@ -9,7 +9,7 @@ resource "github_repository" "terraform_aws_wafv2" {
   topics                 = concat(local.common_topics, local.aws_topics)
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   template {
