@@ -1,3 +1,11 @@
+locals {
+  resources = [
+    "aws-management-infrastructure",
+    "aws-security-tools",
+    "ami-builder-configs"
+  ]
+}
+
 resource "github_repository" "ami-builder-configs" {
   name        = "ami-builder-configs"
   description = "Configuration files for building various AMIs using ami-builder"
@@ -41,12 +49,13 @@ resource "github_issue_label" "ami-builder-configs" {
   repository = github_repository.ami-builder-configs.name
 }
 
-resource "github_repository_webhook" "ami-builder-configs" {
+resource "github_repository_webhook" "resources" {
   repository = github_repository.ami-builder-configs.name
   events     = ["push"]
+  count      = length(local.resources)
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/github-config/resources/${github_repository.ami-builder-configs.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/github-config/resources/${local.resources[count.index]}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
