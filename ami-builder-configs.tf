@@ -1,3 +1,13 @@
+locals {
+  resources = [
+    "dw-al2-base-ami",
+    "dw-al2-hardened-ami",
+    "dw-al2-emr-ami",
+    "dw-al2-ecs-ami",
+    "dw-al2-concourse-ami",
+  ]
+}
+
 resource "github_repository" "ami-builder-configs" {
   name        = "ami-builder-configs"
   description = "Configuration files for building various AMIs using ami-builder"
@@ -41,3 +51,24 @@ resource "github_issue_label" "ami-builder-configs" {
   repository = github_repository.ami-builder-configs.name
 }
 
+resource "github_repository_webhook" "resources" {
+  count      = length(local.resources)
+  repository = github_repository.ami-builder-configs.name
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/ami-builder/resources/${local.resources[count.index]}-config/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
+resource "github_repository_webhook" "ami-builder-configs-pr" {
+  count      = length(local.resources)
+  repository = github_repository.ami-builder-configs.name
+  events     = ["pull_request"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/ami-builder/resources/${local.resources[count.index]}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
