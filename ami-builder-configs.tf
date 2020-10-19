@@ -51,7 +51,7 @@ resource "github_issue_label" "ami-builder-configs" {
   repository = github_repository.ami-builder-configs.name
 }
 
-resource "github_repository_webhook" "resources" {
+resource "github_repository_webhook" "ami-builder-configs" {
   count      = length(local.resources)
   repository = github_repository.ami-builder-configs.name
   events     = ["push"]
@@ -69,6 +69,16 @@ resource "github_repository_webhook" "ami-builder-configs-pr" {
 
   configuration {
     url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/ami-builder/resources/${local.resources[count.index]}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
+resource "github_repository_webhook" "ami-builder-configs-template" {
+  repository = github_repository.ami-builder-configs.name
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/ami-builder/resources/dw-al2-base-ami-template/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
