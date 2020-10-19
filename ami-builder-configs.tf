@@ -82,14 +82,3 @@ resource "github_repository_webhook" "ami-builder-configs-template" {
     content_type = "form"
   }
 }
-
-
-resource "github_repository_webhook" "ami-builder-configs-template-pr" {
-  repository = github_repository.ami-builder-configs.name
-  events     = ["pull_request"]
-
-  configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/ami-builder/resources/dw-al2-base-ami-template-pr/check/webhook?webhook_token=${var.github_webhook_token}"
-    content_type = "form"
-  }
-}
