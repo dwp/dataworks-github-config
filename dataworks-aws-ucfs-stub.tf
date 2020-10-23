@@ -1,6 +1,6 @@
 resource "github_repository" "dataworks_aws_ucfs_stub" {
   name        = "dataworks-aws-ucfs-stub"
-  description = "A repo for DataWorks AWS UCFS export server stub"
+  description = "A repo for DataWorks AWS UCFS stub infrastructure"
   auto_init   = false
 
   allow_merge_commit     = false
