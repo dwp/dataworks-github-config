@@ -1,5 +1,5 @@
 resource "github_repository" "ucfs_claimant_kafka_consumer" {
-  name             = "ucfs-claimant-kafka-consumer "
+  name             = "ucfs-claimant-kafka-consumer"
   description      = "UCFS Claimant Kafka Consumer"
   auto_init        = false
 
