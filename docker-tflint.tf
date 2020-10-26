@@ -1,7 +1,7 @@
 resource "github_repository" "docker_tflint" {
-  name             = "docker-tflint"
-  description      = "alpine container with bash, tflint, ca-certs and jq baked in"
-  auto_init        = true
+  name        = "docker-tflint"
+  description = "alpine container with bash, tflint, ca-certs and jq baked in"
+  auto_init   = true
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "docker_tflint" {
   }
 
   template {
-    owner = "${var.github_organization}"
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }
