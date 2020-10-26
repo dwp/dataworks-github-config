@@ -9,7 +9,7 @@ resource "github_repository" "ucfs_claimant_kafka_consumer" {
   topics                 = local.common_topics
 
   lifecycle {
-    prevent_destroy = false
+    prevent_destroy = true
   }
 
   template {
