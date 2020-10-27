@@ -1,6 +1,6 @@
 resource "github_repository" "github_action_resource_tag_check" {
   name             = "resource-tag-check-github-action"
-  description      = "Git Hub action to check that terraform resources are tagged correctly"
+  description      = "GitHub action to check that terraform resources are tagged correctly"
   auto_init        = false
 
   allow_merge_commit     = false
