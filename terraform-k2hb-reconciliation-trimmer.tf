@@ -1,4 +1,4 @@
-resource "github_repository" "k2hb-reconciliation-trimmer" {
+resource "github_repository" "k2hb_reconciliation_trimmer" {
   name             = "dataworks-aws-k2hb-reconciliation-trimmer"
   description      = "Terraform infrastructure repo for K2HB Reconciliation Trimmer"
   auto_init        = false
@@ -17,15 +17,15 @@ resource "github_repository" "k2hb-reconciliation-trimmer" {
   }
 }
 
-resource "github_team_repository" "k2hb-reconciliation-trimmer_dataworks" {
-  repository = github_repository.k2hb-reconciliation-trimmer.name
+resource "github_team_repository" "k2hb_reconciliation_trimmer_dataworks" {
+  repository = github_repository.k2hb_reconciliation_trimmer.name
   team_id    = github_team.dataworks.id
   permission = "push"
 }
 
-resource "github_branch_protection" "k2hb-reconciliation-trimmer_master" {
-  branch         = github_repository.k2hb-reconciliation-trimmer.default_branch
-  repository     = github_repository.k2hb-reconciliation-trimmer.name
+resource "github_branch_protection" "k2hb_reconciliation_trimmer_master" {
+  branch         = github_repository.k2hb_reconciliation_trimmer.default_branch
+  repository     = github_repository.k2hb_reconciliation_trimmer.name
   enforce_admins = false
 
   required_status_checks {
@@ -39,31 +39,31 @@ resource "github_branch_protection" "k2hb-reconciliation-trimmer_master" {
   }
 }
 
-resource "null_resource" "k2hb-reconciliation-trimmer" {
+resource "null_resource" "k2hb_reconciliation_trimmer" {
   triggers = {
-    repo = github_repository.k2hb-reconciliation-trimmer.name
+    repo = github_repository.k2hb_reconciliation_trimmer.name
   }
   provisioner "local-exec" {
-    command = "./initial-commit.sh ${github_repository.k2hb-reconciliation-trimmer.name} '${github_repository.k2hb-reconciliation-trimmer.description}' ${github_repository.k2hb-reconciliation-trimmer.template.0.repository}"
+    command = "./initial-commit.sh ${github_repository.k2hb_reconciliation_trimmer.name} '${github_repository.k2hb_reconciliation_trimmer.description}' ${github_repository.k2hb_reconciliation_trimmer.template.0.repository}"
   }
 }
 
-resource "github_repository_webhook" "k2hb-reconciliation-trimmer" {
-  repository = github_repository.k2hb-reconciliation-trimmer.name
+resource "github_repository_webhook" "k2hb_reconciliation_trimmer" {
+  repository = github_repository.k2hb_reconciliation_trimmer.name
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.k2hb-reconciliation-trimmer.name}/resources/${github_repository.k2hb-reconciliation-trimmer.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.k2hb_reconciliation_trimmer.name}/resources/${github_repository.k2hb_reconciliation_trimmer.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
 
-resource "github_repository_webhook" "k2hb-reconciliation-trimmer_pr" {
-  repository = github_repository.k2hb-reconciliation-trimmer.name
+resource "github_repository_webhook" "k2hb_reconciliation_trimmer_pr" {
+  repository = github_repository.k2hb_reconciliation_trimmer.name
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.k2hb-reconciliation-trimmer.name}/resources/${github_repository.k2hb-reconciliation-trimmer.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.k2hb_reconciliation_trimmer.name}/resources/${github_repository.k2hb_reconciliation_trimmer.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
