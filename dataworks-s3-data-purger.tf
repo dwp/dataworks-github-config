@@ -1,6 +1,6 @@
 resource "github_repository" "dataworks_s3_data_purger" {
   name             = "dataworks-s3-data-purger"
-  description      = "Lambda for deleting old redundant S3 data"
+  description      = "Utility Lambda for deleting old redundant S3 data"
   auto_init        = false
 
   allow_merge_commit     = false
