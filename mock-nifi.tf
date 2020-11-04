@@ -1,6 +1,6 @@
 resource "github_repository" "mock-nifi" {
   name        = "mock-nifi"
-  description = "Mock nifi endpoint - writes posted data to disk."
+  description = "Mock nifi endpoint - writes posted data to disk. Test"
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
