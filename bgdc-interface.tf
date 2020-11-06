@@ -1,5 +1,5 @@
 resource "github_repository" "bgdc_interface" {
-  name             = "bgdc-interface"
+  name             = "dataworks-bgdc-interface"
   description      = "bgdc-interface"
   auto_init        = false
 
