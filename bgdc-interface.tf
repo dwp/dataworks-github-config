@@ -1,6 +1,6 @@
 resource "github_repository" "bgdc_interface" {
   name             = "dataworks-bgdc-interface"
-  description      = "bgdc-interface"
+  description      = "Infrastructure for the interface between BGDC and Dataworks"
   auto_init        = false
 
   allow_merge_commit     = false
