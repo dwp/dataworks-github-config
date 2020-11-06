@@ -1,6 +1,6 @@
 resource "github_repository" "dataworks_aws_bgdc_connectivity" {
   name             = "dataworks-aws-bgdc-connectivity"
-  description      = "Infrastructure for the connectivity between BGDC and Dataworks"
+  description      = "Infrastructure for the connectivity between Business Glossary Data Catalog and DataWorks"
   auto_init        = false
 
   allow_merge_commit     = false
