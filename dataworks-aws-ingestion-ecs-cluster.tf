@@ -56,12 +56,16 @@ resource "null_resource" "dataworks_aws_ingestion_ecs_cluster" {
   }
 }
 
+locals {
+  dataworks_aws_ingestion_ecs_cluster_pipeline_name = "ingestion-ecs-cluster"
+}
+
 resource "github_repository_webhook" "dataworks_aws_ingestion_ecs_cluster" {
   repository = github_repository.dataworks_aws_ingestion_ecs_cluster.name
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.dataworks_aws_ingestion_ecs_cluster.name}/resources/${github_repository.dataworks_aws_ingestion_ecs_cluster.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.dataworks_aws_ingestion_ecs_cluster_pipeline_name}/resources/${github_repository.dataworks_aws_ingestion_ecs_cluster.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -71,7 +75,7 @@ resource "github_repository_webhook" "dataworks_aws_ingestion_ecs_cluster_pr" {
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.dataworks_aws_ingestion_ecs_cluster.name}/resources/${github_repository.dataworks_aws_ingestion_ecs_cluster.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.dataworks_aws_ingestion_ecs_cluster_pipeline_name}/resources/${github_repository.dataworks_aws_ingestion_ecs_cluster.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
