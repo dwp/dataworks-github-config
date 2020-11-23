@@ -1,6 +1,6 @@
 resource "github_repository" "dataworks_audit_data_ingest" {
   name             = "dataworks-audit-data-ingest"
-  description      = "Ingest encrypted audit data from UC Kafka into S3"
+  description      = "Ingest encrypted UC Kafka audit data into S3"
   auto_init        = false
 
   allow_merge_commit     = false
