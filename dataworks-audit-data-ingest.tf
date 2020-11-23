@@ -1,7 +1,7 @@
 resource "github_repository" "dataworks_audit_data_ingest" {
-  name             = "dataworks-audit-data-ingest"
-  description      = "Ingest encrypted UC Kafka audit data into S3"
-  auto_init        = false
+  name        = "dataworks-audit-data-ingest"
+  description = "Ingest encrypted UC Kafka audit data into S3"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "dataworks_audit_data_ingest" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template"
   }
 }
