@@ -56,12 +56,15 @@ resource "null_resource" "dataworks_aws_ucfs_claimant_consumer" {
   }
 }
 
+locals {
+  dataworks_aws_ucfs_claimant_consumer_pipeline_name = "ucfs-claimant-consumer"
+}
 resource "github_repository_webhook" "dataworks_aws_ucfs_claimant_consumer" {
   repository = github_repository.dataworks_aws_ucfs_claimant_consumer.name
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.dataworks_aws_ucfs_claimant_consumer.name}/resources/${github_repository.dataworks_aws_ucfs_claimant_consumer.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.dataworks_aws_ucfs_claimant_consumer_pipeline_name}/resources/${github_repository.dataworks_aws_ucfs_claimant_consumer.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -71,7 +74,7 @@ resource "github_repository_webhook" "dataworks_aws_ucfs_claimant_consumer_pr" {
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.dataworks_aws_ucfs_claimant_consumer.name}/resources/${github_repository.dataworks_aws_ucfs_claimant_consumer.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.dataworks_aws_ucfs_claimant_consumer_pipeline_name}/resources/${github_repository.dataworks_aws_ucfs_claimant_consumer.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
