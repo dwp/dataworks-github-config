@@ -12,6 +12,7 @@ This process is currently intended for use with *public*, not private repositori
    - _*All other repositories:*_ Copy `template-repository.tf.sample` to a new `.tf` file to create a standard empty repository
 1. Update the `github_repository` resource name (example) using underscores as separators if required. Its `name`  should use hyphen separators if required, and `description` attributes should be a single sentence. 
 1. Replace every instance of `example` with the name of your repo using underscores.
+   1. For Terraform repos also update the `local.example_pipeline_name` key and value. This allows the pipeline name to differ from the repo, and typically be a shorter name.
 1. Raise a PR with your changes
 1. Once approved and merged, the concourse job for this repo (not your new one) will run and create your new repository. This takes a while as it checks all repos configured here.
 
