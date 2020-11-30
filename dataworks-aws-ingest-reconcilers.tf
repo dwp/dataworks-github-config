@@ -18,13 +18,13 @@ resource "github_repository" "dataworks_aws_ingest_reconcilers" {
   }
 }
 
-resource "github_team_repository" "dataworks-aws-ingest-reconcilers_dataworks" {
+resource "github_team_repository" "dataworks_aws_ingest_reconcilers_dataworks" {
   repository = github_repository.dataworks_aws_ingest_reconcilers.name
   team_id    = github_team.dataworks.id
   permission = "push"
 }
 
-resource "github_branch_protection" "dataworks-aws-ingest-reconcilers_master" {
+resource "github_branch_protection" "dataworks_aws_ingest_reconcilers_master" {
   branch         = github_repository.dataworks_aws_ingest_reconcilers.default_branch
   repository     = github_repository.dataworks_aws_ingest_reconcilers.name
   enforce_admins = false
@@ -40,14 +40,14 @@ resource "github_branch_protection" "dataworks-aws-ingest-reconcilers_master" {
   }
 }
 
-resource "github_issue_label" "dataworks-aws-ingest-reconcilers" {
+resource "github_issue_label" "dataworks_aws_ingest_reconcilers" {
   for_each   = { for common_label in local.common_labels : common_label.name => common_label }
   color      = each.value.colour
   name       = each.value.name
   repository = github_repository.dataworks_aws_ingest_reconcilers.name
 }
 
-resource "null_resource" "dataworks-aws-ingest-reconcilers" {
+resource "null_resource" "dataworks_aws_ingest_reconcilers" {
   triggers = {
     repo = github_repository.dataworks_aws_ingest_reconcilers.name
   }
@@ -59,7 +59,7 @@ resource "null_resource" "dataworks-aws-ingest-reconcilers" {
 locals {
   dataworks_aws_ingest_reconcilers_pipeline_name = "aws-ingest-reconcilers"
 }
-resource "github_repository_webhook" "dataworks-aws-ingest-reconcilers" {
+resource "github_repository_webhook" "dataworks_aws_ingest_reconcilers" {
   repository = github_repository.dataworks_aws_ingest_reconcilers.name
   events     = ["push"]
 
@@ -69,7 +69,7 @@ resource "github_repository_webhook" "dataworks-aws-ingest-reconcilers" {
   }
 }
 
-resource "github_repository_webhook" "dataworks-aws-ingest-reconcilers_pr" {
+resource "github_repository_webhook" "dataworks_aws_ingest_reconcilers_pr" {
   repository = github_repository.dataworks_aws_ingest_reconcilers.name
   events     = ["pull_request"]
 
