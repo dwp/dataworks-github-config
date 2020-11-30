@@ -56,12 +56,15 @@ resource "null_resource" "dataworks-aws-ingest-reconcilers" {
   }
 }
 
+locals {
+  dataworks_aws_ingest_reconcilers_pipeline_name = "aws-ingest-reconcilers"
+}
 resource "github_repository_webhook" "dataworks-aws-ingest-reconcilers" {
   repository = github_repository.dataworks_aws_ingest_reconcilers.name
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.dataworks_aws_ingest_reconcilers.name}/resources/${github_repository.dataworks_aws_ingest_reconcilers.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.dataworks_aws_ingest_reconcilers_pipeline_name}/resources/${github_repository.dataworks_aws_ingest_reconcilers.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
@@ -71,7 +74,7 @@ resource "github_repository_webhook" "dataworks-aws-ingest-reconcilers_pr" {
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${github_repository.dataworks_aws_ingest_reconcilers.name}/resources/${github_repository.dataworks_aws_ingest_reconcilers.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.dataworks_aws_ingest_reconcilers_pipeline_name}/resources/${github_repository.dataworks_aws_ingest_reconcilers.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
