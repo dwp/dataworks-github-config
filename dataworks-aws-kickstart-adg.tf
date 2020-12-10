@@ -3,7 +3,7 @@ locals {
 }
 
 resource "github_repository" "dataworks_aws_kickstart_adg" {
-  name             = "dataworks_aws_kickstart_adg"
+  name             = "dataworks-aws-kickstart-adg"
   description      = "This repository holds the codes for ingesting and generating analytical dataset for kickstart into dataworks"
   auto_init        = false
 
