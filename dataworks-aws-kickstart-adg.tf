@@ -1,5 +1,5 @@
 locals {
-  dataworks_aws_kickstart_adg_pipeline_name = "dataworks_aws_kickstart_adg"
+  dataworks_aws_kickstart_adg_pipeline_name = "kickstart-adg"
 }
 
 resource "github_repository" "dataworks_aws_kickstart_adg" {
