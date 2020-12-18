@@ -21,7 +21,7 @@ resource "github_repository" "ucfs_claimant_kafka_consumer" {
 resource "github_team_repository" "ucfs_claimant_kafka_consumer_dataworks" {
   repository = github_repository.ucfs_claimant_kafka_consumer.name
   team_id    = github_team.dataworks.id
-  permission = "admin"
+  permission = "push"
 }
 
 resource "github_branch_protection" "ucfs_claimant_kafka_consumer_master" {
