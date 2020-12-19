@@ -78,3 +78,13 @@ resource "github_repository_webhook" "dataworks_aws_ucfs_claimant_consumer_pr" {
     content_type = "form"
   }
 }
+
+resource "github_repository_webhook" "dataworks_aws_ucfs_claimant_consumer_manage_ecs" {
+  repository = github_repository.dataworks_aws_ucfs_claimant_consumer.name
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/utility/pipelines/manage-ecs-services/resources/dataworks-aws-ucfs-claimant-consumer/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
