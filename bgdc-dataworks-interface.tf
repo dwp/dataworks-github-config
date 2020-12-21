@@ -4,7 +4,7 @@ locals {
 
 resource "github_repository" "dataworks_aws_bgdc_interface" {
   name             = "dataworks-aws-bgdc-interface"
-  description      = "Dataworks interface for Business Glossary & Data Catalog to consume from"
+  description      = "DataWorks interface for Business Glossary & Data Catalog to consume from"
   auto_init        = false
 
   allow_merge_commit     = false
