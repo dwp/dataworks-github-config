@@ -1,3 +1,7 @@
+locals {
+  dataworks_metrics_infrastructure_pipeline_name = "metrics-infrastructure"
+}
+
 resource "github_repository" "dataworks_metrics_infrastructure" {
   name        = "dataworks-metrics-infrastructure"
   description = "Repo for storing the Metrics Infrastructure to be used in AWS"
@@ -44,3 +48,22 @@ resource "github_issue_label" "dataworks_metrics_infrastructure" {
   repository = github_repository.dataworks_metrics_infrastructure.name
 }
 
+resource "github_repository_webhook" "dataworks_aws_data_egress" {
+  repository = github_repository.dataworks_aws_data_egress.name
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.dataworks_metrics_infrastructure_pipeline_name}/resources/${github_repository.dataworks_metrics_infrastructure.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
+resource "github_repository_webhook" "dataworks_aws_data_egress_pr" {
+  repository = github_repository.dataworks_aws_data_egress.name
+  events     = ["pull_request"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.dataworks_metrics_infrastructure_pipeline_name}/resources/${github_repository.dataworks_metrics_infrastructure.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
