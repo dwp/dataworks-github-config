@@ -1,5 +1,5 @@
 locals {
-  dataworks_aws_data_egress_pipeline_name = "data_egress"
+  dataworks_aws_data_egress_pipeline_name = "data-egress"
 }
 
 resource "github_repository" "dataworks_aws_data_egress" {
