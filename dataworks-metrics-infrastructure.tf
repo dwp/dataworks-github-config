@@ -48,7 +48,7 @@ resource "github_issue_label" "dataworks_metrics_infrastructure" {
   repository = github_repository.dataworks_metrics_infrastructure.name
 }
 
-resource "github_repository_webhook" "dataworks_aws_data_egress" {
+resource "github_repository_webhook" "dataworks_metrics_infrastructure" {
   repository = github_repository.dataworks_aws_data_egress.name
   events     = ["push"]
 
@@ -58,7 +58,7 @@ resource "github_repository_webhook" "dataworks_aws_data_egress" {
   }
 }
 
-resource "github_repository_webhook" "dataworks_aws_data_egress_pr" {
+resource "github_repository_webhook" "dataworks_metrics_infrastructure_pr" {
   repository = github_repository.dataworks_aws_data_egress.name
   events     = ["pull_request"]
 
