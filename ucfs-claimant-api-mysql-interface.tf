@@ -66,9 +66,3 @@ resource "github_actions_secret" "ucfs_claimant_api_mysql_interface_github_usern
   secret_name     = "CI_GITHUB_USERNAME"
   plaintext_value = var.github_username
 }
-
-resource "github_actions_secret" "ucfs_claimant_api_mysql_interface_github_token" {
-  repository      = github_repository.ucfs_claimant_api_mysql_interface.name
-  secret_name     = "CI_GITHUB_TOKEN"
-  plaintext_value = var.github_token
-}
