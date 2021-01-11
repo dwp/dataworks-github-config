@@ -54,3 +54,15 @@ resource "null_resource" "ucfs_claimant_api_mysql_interface" {
     command = "./initial-commit.sh ${github_repository.ucfs_claimant_api_mysql_interface.name} '${github_repository.ucfs_claimant_api_mysql_interface.description}' ${github_repository.ucfs_claimant_api_mysql_interface.template.0.repository}"
   }
 }
+
+resource "github_actions_secret" "ucfs_claimant_api_mysql_interface_github_email" {
+  repository      = github_repository.ucfs_claimant_api_mysql_interface.name
+  secret_name     = "CI_GITHUB_EMAIL"
+  plaintext_value = var.github_email
+}
+
+resource "github_actions_secret" "ucfs_claimant_api_mysql_interface_github_username" {
+  repository      = github_repository.ucfs_claimant_api_mysql_interface.name
+  secret_name     = "CI_GITHUB_USERNAME"
+  plaintext_value = var.github_username
+}
