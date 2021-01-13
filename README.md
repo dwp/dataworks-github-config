@@ -31,6 +31,11 @@ After the repo has been created you need to do the follwoing:
   1. Create the Docker repo in the [dwpdigital](https://hub.docker.com/u/dwpdigital) team
   1. After creating the repo go to the permissions tab and grant the `dataworks` team `admin` access
 
+### Naming convention
+Repo names should avoid using any technology within its name, incase the technology changes which would lead to confusion.
+Infrastructure repos should be prefixed with `dataworks-aws`.
+Application repos should not be prefixed with `dataworks-aws`.
+
 # Notes
 
 1. You will need Python, Jinja, Spruce and Aviator installed to successfully generate and apply the new updated Concourse pipelines.
