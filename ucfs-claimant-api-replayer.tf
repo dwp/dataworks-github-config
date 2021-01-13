@@ -55,14 +55,14 @@ resource "null_resource" "ucfs_claimant_api_replayer" {
   }
 }
 
-resource "github_actions_secret" "ucfs_claimant_api_mysql_interface_github_email" {
-  repository      = github_repository.ucfs_claimant_api_mysql_interface.name
+resource "github_actions_secret" "ucfs_claimant_api_replayer_github_email" {
+  repository      = github_repository.ucfs_claimant_api_replayer.name
   secret_name     = "CI_GITHUB_EMAIL"
   plaintext_value = var.github_email
 }
 
-resource "github_actions_secret" "ucfs_claimant_api_mysql_interface_github_username" {
-  repository      = github_repository.ucfs_claimant_api_mysql_interface.name
+resource "github_actions_secret" "ucfs_claimant_api_replayer_github_username" {
+  repository      = github_repository.ucfs_claimant_api_replayer.name
   secret_name     = "CI_GITHUB_USERNAME"
   plaintext_value = var.github_username
 }
