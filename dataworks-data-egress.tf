@@ -72,3 +72,18 @@ resource "github_actions_secret" "dataworks_data_egress_snyk_token" {
   secret_name     = "SNYK_TOKEN"
   plaintext_value = var.snyk_token
 }
+
+resource "github_actions_secret" "dataworks_data_egress_github_email" {
+  repository      = github_repository.dataworks_data_egress.name
+  secret_name     = "CI_GITHUB_EMAIL"
+  plaintext_value = var.github_email
+}
+
+resource "github_actions_secret" "dataworks_data_egress_github_username" {
+  repository      = github_repository.dataworks_data_egress.name
+  secret_name     = "CI_GITHUB_USERNAME"
+  plaintext_value = var.github_username
+}
+
+
+
