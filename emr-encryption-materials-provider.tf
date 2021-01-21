@@ -1,3 +1,7 @@
+locals {
+  emr_encryptions_material_provider_pipeline_name = "asset-mgmt-emr-encryption-materials-provider"
+}
+
 resource "github_repository" "emr-encryption-materials-provider" {
   name        = "emr-encryption-materials-provider"
   description = "An EMR Security Configuration plugin implementing transparent client-side encryption and decryption between EMR and data persisted in S3 (via EMRFS)"
@@ -65,3 +69,22 @@ resource "github_actions_secret" "emr-encryption-materials-provider-slack-webhoo
   plaintext_value = var.slack_webhook_url
 }
 
+resource "github_repository_webhook" "emr-encryption-materials-provider" {
+  repository = github_repository.emr-encryption-materials-provider.name
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.emr_encryptions_material_provider_pipeline_name}/resources/${github_repository.emr-encryption-materials-provider.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
+resource "github_repository_webhook" "emr-encryption-materials-provider-pr" {
+  repository = github_repository.emr-encryption-materials-provider.name
+  events     = ["pull_request"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.emr_encryptions_material_provider_pipeline_name}/resources/${github_repository.emr-encryption-materials-provider.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
