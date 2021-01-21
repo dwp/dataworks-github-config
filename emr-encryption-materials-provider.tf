@@ -78,13 +78,3 @@ resource "github_repository_webhook" "emr-encryption-materials-provider" {
     content_type = "form"
   }
 }
-
-resource "github_repository_webhook" "emr-encryption-materials-provider-pr" {
-  repository = github_repository.emr-encryption-materials-provider.name
-  events     = ["pull_request"]
-
-  configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.emr_encryptions_material_provider_pipeline_name}/resources/${github_repository.emr-encryption-materials-provider.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
-    content_type = "form"
-  }
-}
