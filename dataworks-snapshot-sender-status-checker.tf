@@ -56,13 +56,13 @@ resource "null_resource" "dataworks_snapshot_sender_status_checker" {
 }
 
 resource "github_actions_secret" "dataworks_snapshot_sender_status_github_email" {
-  repository      = github_repository.ucfs_claimant_api_replayer.name
+  repository      = github_repository.dataworks_snapshot_sender_status_checker.name
   secret_name     = "CI_GITHUB_EMAIL"
   plaintext_value = var.github_email
 }
 
 resource "github_actions_secret" "dataworks_snapshot_sender_status_github_username" {
-  repository      = github_repository.ucfs_claimant_api_replayer.name
+  repository      = github_repository.dataworks_snapshot_sender_status_checker.name
   secret_name     = "CI_GITHUB_USERNAME"
   plaintext_value = var.github_username
 }
