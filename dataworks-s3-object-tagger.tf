@@ -1,3 +1,7 @@
+locals {
+  dataworks_s3_object_tagger_pipeline_name = "dataworks-s3-object-tagger"
+}
+
 resource "github_repository" "dataworks_s3_object_tagger" {
   name             = "dataworks-s3-object-tagger"
   description      = "An application to tag S3 objects based on various rules and source config files"
@@ -82,4 +86,24 @@ resource "github_actions_secret" "dataworks_s3_object_tagger_github_username" {
   repository      = github_repository.dataworks_s3_object_tagger.name
   secret_name     = "CI_GITHUB_USERNAME"
   plaintext_value = var.github_username
+}
+
+resource "github_repository_webhook" "dataworks_s3_object_tagger" {
+  repository = github_repository.dataworks_s3_object_tagger.name
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.dataworks_s3_object_tagger_pipeline_name}/resources/${github_repository.dataworks_s3_object_tagger.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
+resource "github_repository_webhook" "dataworks_s3_object_tagger_pr" {
+  repository = github_repository.dataworks_s3_object_tagger.name
+  events     = ["pull_request"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.dataworks_s3_object_tagger_pipeline_name}/resources/${github_repository.dataworks_s3_object_tagger.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
 }
