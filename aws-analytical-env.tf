@@ -62,3 +62,13 @@ resource "github_repository_webhook" "aws-analytical-env_pr" {
   }
 }
 
+resource "github_repository_webhook" "aws-rbac" {
+  repository = github_repository.aws-analytical-env.name
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/aws-rbac/resources/${github_repository.aws-analytical-env.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
+}
+
