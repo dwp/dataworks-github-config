@@ -1,5 +1,5 @@
 locals {
-  dataworks_aws_s3_object_tagger_pipeline_name = "s3-object-tagger"
+  dataworks_aws_s3_object_tagger_pipeline_name = "s3-object-tagger-infra"
 }
 
 resource "github_repository" "dataworks_aws_s3_object_tagger" {
