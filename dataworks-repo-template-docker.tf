@@ -64,3 +64,15 @@ resource "github_actions_secret" "dataworks_repo_template_docker_snyk_token" {
   plaintext_value = var.snyk_token
 }
 
+resource "github_actions_secret" "dataworks_repo_template_docker_github_email" {
+  repository      = github_repository.dataworks_repo_template_docker.name
+  secret_name     = "CI_GITHUB_EMAIL"
+  plaintext_value = var.github_email
+}
+
+resource "github_actions_secret" "dataworks_repo_template_docker_github_username" {
+  repository      = github_repository.dataworks_repo_template_docker.name
+  secret_name     = "CI_GITHUB_USERNAME"
+  plaintext_value = var.github_username
+}
+
