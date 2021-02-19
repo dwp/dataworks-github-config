@@ -11,6 +11,11 @@ resource "github_repository" "dataworks_emr_relauncher" {
   lifecycle {
     prevent_destroy = true
   }
+
+  template {
+    owner = var.github_organization
+    repository = "dataworks-repo-template-docker"
+  }
 }
 
 resource "github_team_repository" "dataworks_emr_relauncher_dataworks" {
@@ -26,7 +31,6 @@ resource "github_branch_protection" "dataworks_emr_relauncher_master" {
 
   required_status_checks {
     strict = true
-    # The contexts line should only be kept for Terraform repos.
   }
 
   required_pull_request_reviews {
@@ -40,6 +44,15 @@ resource "github_issue_label" "dataworks_emr_relauncher" {
   color      = each.value.colour
   name       = each.value.name
   repository = github_repository.dataworks_emr_relauncher.name
+}
+
+resource "null_resource" "dataworks_emr_relauncher" {
+  triggers = {
+    repo = github_repository.dataworks_emr_relauncher.name
+  }
+  provisioner "local-exec" {
+    command = "./initial-commit.sh ${github_repository.dataworks_emr_relauncher.name} '${github_repository.dataworks_emr_relauncher.description}' ${github_repository.dataworks_emr_relauncher.template.0.repository}"
+  }
 }
 
 resource "github_actions_secret" "dataworks_emr_relauncher_github_email" {
@@ -59,4 +72,3 @@ resource "github_actions_secret" "dataworks_emr_relauncher_github_token" {
   secret_name     = "CI_GITHUB_TOKEN"
   plaintext_value = var.github_token
 }
-
