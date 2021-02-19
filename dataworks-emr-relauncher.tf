@@ -13,13 +13,13 @@ resource "github_repository" "dataworks-emr-relauncher" {
   }
 }
 
-resource "github_team_repository" "dataworks-emr-relauncher_dataworks" {
+resource "github_team_repository" "dataworks-emr-relauncher-dataworks" {
   repository = github_repository.dataworks-emr-relauncher.name
   team_id    = github_team.dataworks.id
   permission = "push"
 }
 
-resource "github_branch_protection" "dataworks-emr-relauncher_master" {
+resource "github_branch_protection" "dataworks-emr-relauncher-master" {
   branch         = github_repository.dataworks-emr-relauncher.default_branch
   repository     = github_repository.dataworks-emr-relauncher.name
   enforce_admins = false
@@ -42,19 +42,19 @@ resource "github_issue_label" "dataworks-emr-relauncher" {
   repository = github_repository.dataworks-emr-relauncher.name
 }
 
-resource "github_actions_secret" "dataworks-emr-relauncher_github_email" {
+resource "github_actions_secret" "dataworks-emr-relauncher-github-email" {
   repository      = github_repository.dataworks-emr-relauncher.name
   secret_name     = "CI_GITHUB_EMAIL"
   plaintext_value = var.github_email
 }
 
-resource "github_actions_secret" "dataworks-emr-relauncher_github_username" {
+resource "github_actions_secret" "dataworks-emr-relauncher-github-username" {
   repository      = github_repository.dataworks-emr-relauncher.name
   secret_name     = "CI_GITHUB_USERNAME"
   plaintext_value = var.github_username
 }
 
-resource "github_actions_secret" "dataworks-emr-relauncher_github_token" {
+resource "github_actions_secret" "dataworks-emr-relauncher-github-token" {
   repository      = github_repository.dataworks-emr-relauncher.name
   secret_name     = "CI_GITHUB_TOKEN"
   plaintext_value = var.github_token
