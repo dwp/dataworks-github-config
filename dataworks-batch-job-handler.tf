@@ -9,7 +9,7 @@ resource "github_repository" "dataworks_batch_job_handler" {
   topics                 = local.common_topics
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   template {
