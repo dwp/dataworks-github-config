@@ -76,6 +76,7 @@ resource "github_actions_secret" "dataworks_s3_object_tagger_snyk_token" {
   secret_name     = "SNYK_TOKEN"
   plaintext_value = var.snyk_token
 }
+
 resource "github_actions_secret" "dataworks_s3_object_tagger_github_email" {
   repository      = github_repository.dataworks_s3_object_tagger.name
   secret_name     = "CI_GITHUB_EMAIL"
