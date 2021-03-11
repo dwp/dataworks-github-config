@@ -70,7 +70,7 @@ resource "github_repository_webhook" "dataworks_aws_ingest_replica" {
   }
 }
 
-resource "github_repository_webhook" "example_pr" {
+resource "github_repository_webhook" "dataworks_aws_ingest_replica_pr" {
   repository = github_repository.dataworks_aws_ingest_replica.name
   events     = ["pull_request"]
 
