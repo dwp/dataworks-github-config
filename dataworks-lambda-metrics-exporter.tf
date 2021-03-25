@@ -1,6 +1,6 @@
 resource "github_repository" "dataworks_lambda_metrics_exporter" {
-  name        = "dataworks-emr-relauncher"
-  description = "Lambda based EMR Cluster relauncher"
+  name        = "dataworks-lambda-metrics-exporter"
+  description = "Lambda to pull Cloudwatch metrics"
   auto_init   = true
 
   allow_merge_commit     = false
