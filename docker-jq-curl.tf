@@ -42,3 +42,20 @@ resource "github_issue_label" "docker-jq-curl" {
   repository = github_repository.docker-jq-curl.name
 }
 
+resource "github_actions_secret" "docker-jq-curl_dockerhub_password" {
+  repository      = github_repository.docker-jq-curl.name
+  secret_name     = "DOCKERHUB_PASSWORD"
+  plaintext_value = var.dockerhub_password
+}
+
+resource "github_actions_secret" "docker-jq-curl_dockerhub_username" {
+  repository      = github_repository.docker-jq-curl.name
+  secret_name     = "DOCKERHUB_USERNAME"
+  plaintext_value = var.dockerhub_username
+}
+
+resource "github_actions_secret" "docker-jq-curl_snyk_token" {
+  repository      = github_repository.docker-jq-curl.name
+  secret_name     = "SNYK_TOKEN"
+  plaintext_value = var.snyk_token
+}
