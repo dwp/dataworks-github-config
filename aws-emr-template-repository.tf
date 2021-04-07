@@ -4,7 +4,7 @@ locals {
 
 resource "github_repository" "aws_emr_template_repository" {
   name             = "aws-emr-template-repository"
-  description      = "A template repository for building EMR cluster in AWSgc"
+  description      = "A template repository for building EMR cluster in AWS"
   auto_init        = false
 
   allow_merge_commit     = false
