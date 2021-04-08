@@ -1,9 +1,9 @@
 locals {
-  ingest_replica_pipeline_name = "ingest-replica"
+  ingest_replica_pipeline_name = "dataworks-aws-ingest-replica"
 }
 
 resource "github_repository" "dataworks_aws_ingest_replica" {
-  name             = "dataworks-aws-ingest-replica"
+  name             = local.ingest_replica_pipeline_name
   description      = "Infra for ingest-hbase replica"
   auto_init        = false
 
