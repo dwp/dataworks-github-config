@@ -3,6 +3,14 @@ NEW_REPO_NAME=$1
 REPO_DESCRIPTION=$2
 TEMPLATE_REPO_NAME=$3
 
+
+#This is for terraform resources
+TEMPLATE_REPO_NAME_UNDERSCORE=$(tr '-' '_' <<<"$TEMPLATE_REPO_NAME")
+NEW_REPO_NAME_UNDERSCORE=$(tr '-' '_' <<<"$NEW_REPO_NAME")
+TEMPLATE_REPO_NAME_ONE_WORD=$(tr '-' '' <<<"$TEMPLATE_REPO_NAME")
+NEW_REPO_NAME_ONE_WORD=$(tr '-' '' <<<"$NEW_REPO_NAME")
+
+
 git config --global user.name "${GIT_USERNAME}"
 git config --global user.email "${GIT_EMAIL}"
 
@@ -17,6 +25,8 @@ find README.md -type f -exec sed -i "s/##\ Description/##\ ${REPO_DESCRIPTION}/g
 case "$TEMPLATE_REPO_NAME" in
     *-terraform)
         find ci -type f -exec sed -i "s/$TEMPLATE_REPO_NAME/$NEW_REPO_NAME/g" {} +
+        find ci -type f -exec sed -i "s/$TEMPLATE_REPO_NAME_UNDERSCORE/$NEW_REPO_NAME_UNDERSCORE/g" {} +
+        find ci -type f -exec sed -i "s/$TEMPLATE_REPO_NAME_ONE_WORD/$NEW_REPO_NAME_ONE_WORD/g" {} +
         find ci -type f -exec sed -i s/"#ENABLE_BY_INITIAL_COMMIT "/""/g {} +
         find ci -type f -exec sed -i /"^.*#REMOVE_BY_INITIAL_COMMIT.*"/d {} +
         find *.tf -type f -exec sed -i "s/$TEMPLATE_REPO_NAME/$NEW_REPO_NAME/g" {} +
