@@ -15,11 +15,6 @@ resource "github_repository" "aws_emr_template_repository" {
   lifecycle {
     prevent_destroy = true
   }
-
-  template {
-    owner = var.github_organization
-    repository = "dataworks-repo-template-terraform"
-  }
 }
 
 resource "github_team_repository" "aws_emr_template_repository_dataworks" {
