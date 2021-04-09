@@ -1,5 +1,5 @@
 resource "github_repository" "aws_emr_test" {
-  name             = "aws-emr-test2"
+  name             = "aws-emr-test"
   description      = "aws_emr_test"
   auto_init        = false
 
