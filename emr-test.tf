@@ -12,10 +12,6 @@ resource "github_repository" "aws_emr_test" {
   has_issues             = true
   topics                 = concat(local.common_topics, local.aws_topics)
 
-  lifecycle {
-    prevent_destroy = true
-  }
-
   template {
     owner = var.github_organization
     repository = "aws-emr-template-repository"
