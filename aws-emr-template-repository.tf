@@ -12,9 +12,9 @@ resource "github_repository" "aws_emr_template_repository" {
   has_issues             = true
   topics                 = concat(local.common_topics, local.aws_topics)
 
-  lifecycle {
-    prevent_destroy = true
-  }
+//  lifecycle {
+//    prevent_destroy = true
+//  }
 }
 
 resource "github_team_repository" "aws_emr_template_repository_dataworks" {
