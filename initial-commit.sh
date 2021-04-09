@@ -5,8 +5,8 @@ TEMPLATE_REPO_NAME=$3
 
 
 #This is for terraform resources
-TEMPLATE_REPO_NAME_UNDERSCORE=$(tr '-' '_' <<<"$TEMPLATE_REPO_NAME")
-NEW_REPO_NAME_UNDERSCORE=$(tr '-' '_' <<<"$NEW_REPO_NAME")
+TEMPLATE_REPO_NAME_UNDERSCORE=$(echo $TEMPLATE_REPO_NAME | tr '-' '_')
+NEW_REPO_NAME_UNDERSCORE=$(echo $NEW_REPO_NAME | tr '-' '_')
 
 git config --global user.name "${GIT_USERNAME}"
 git config --global user.email "${GIT_EMAIL}"
