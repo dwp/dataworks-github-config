@@ -35,7 +35,6 @@ resource "github_branch_protection" "aws_emr_template_repository_master" {
 
   required_status_checks {
     strict = true
-    contexts = ["concourse-ci/status"]
   }
 
   required_pull_request_reviews {
