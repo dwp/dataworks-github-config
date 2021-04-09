@@ -1,3 +1,7 @@
+locals {
+  aws_emr_test_pipeline_name = "aws_emr_test"
+}
+
 resource "github_repository" "aws_emr_test" {
   name             = "aws-emr-test"
   description      = "aws_emr_test"
@@ -6,7 +10,7 @@ resource "github_repository" "aws_emr_test" {
   allow_merge_commit     = false
   delete_branch_on_merge = true
   has_issues             = true
-  topics                 = local.common_topics
+  topics                 = concat(local.common_topics, local.aws_topics)
 
   lifecycle {
     prevent_destroy = true
@@ -56,20 +60,22 @@ resource "null_resource" "aws_emr_test" {
   }
 }
 
-resource "github_actions_secret" "aws_emr_test_dockerhub_password" {
-  repository      = github_repository.aws_emr_test.name
-  secret_name     = "DOCKERHUB_PASSWORD"
-  plaintext_value = var.dockerhub_password
+resource "github_repository_webhook" "aws_emr_test" {
+  repository = github_repository.aws_emr_test.name
+  events     = ["push"]
+
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.aws_emr_test_pipeline_name}/resources/${github_repository.aws_emr_test.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
 }
 
-resource "github_actions_secret" "aws_emr_test_dockerhub_username" {
-  repository      = github_repository.aws_emr_test.name
-  secret_name     = "DOCKERHUB_USERNAME"
-  plaintext_value = var.dockerhub_username
-}
+resource "github_repository_webhook" "aws_emr_test_pr" {
+  repository = github_repository.aws_emr_test.name
+  events     = ["pull_request"]
 
-resource "github_actions_secret" "aws_emr_test_snyk_token" {
-  repository      = github_repository.aws_emr_test.name
-  secret_name     = "SNYK_TOKEN"
-  plaintext_value = var.snyk_token
+  configuration {
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.aws_emr_test_pipeline_name}/resources/${github_repository.aws_emr_test.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    content_type = "form"
+  }
 }
