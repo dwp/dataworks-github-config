@@ -3,7 +3,7 @@ locals {
 }
 
 resource "github_repository" "aws_emr_test" {
-  name             = "aws-emr-template-repository"
+  name             = "aws-emr-test"
   description      = "A template repository for building EMR cluster in AWS"
   auto_init        = false
 
