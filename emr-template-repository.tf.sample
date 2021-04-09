@@ -18,7 +18,7 @@ resource "github_repository" "example" {
 
   template {
     owner = var.github_organization
-    repository = "aws-emr-template-repository"
+    repository = "aws-emr-template"
   }
 }
 
