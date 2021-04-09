@@ -4,7 +4,7 @@ locals {
 
 resource "github_repository" "aws_emr_test" {
   name             = "aws-emr-test"
-  description      = "A template repository for building EMR cluster in AWS"
+  description      = "aws_emr_test"
   auto_init        = false
 
   allow_merge_commit     = false
@@ -14,7 +14,7 @@ resource "github_repository" "aws_emr_test" {
 
   template {
     owner = var.github_organization
-    repository = "dataworks-repo-template-terraform"
+    repository = "aws-emr-template-repository"
   }
 }
 
