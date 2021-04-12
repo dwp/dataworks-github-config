@@ -9,6 +9,7 @@ resource "github_repository" "aws_emr_template_repository" {
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
+  is_template            = true
   has_issues             = true
   topics                 = concat(local.common_topics, local.aws_topics)
 
