@@ -59,6 +59,24 @@ resource "github_actions_secret" "acm-pca-cert-generator_github_token" {
   plaintext_value = var.github_token
 }
 
+resource "github_actions_secret" "acm-pca-cert-generator_dockerhub_password" {
+  repository      = github_repository.acm-pca-cert-generator.name
+  secret_name     = "DOCKERHUB_PASSWORD"
+  plaintext_value = var.dockerhub_password
+}
+
+resource "github_actions_secret" "acm-pca-cert-generator_dockerhub_username" {
+  repository      = github_repository.acm-pca-cert-generator.name
+  secret_name     = "DOCKERHUB_USERNAME"
+  plaintext_value = var.dockerhub_username
+}
+
+resource "github_actions_secret" "acm-pca-cert-generator_snyk_token" {
+  repository      = github_repository.acm-pca-cert-generator.name
+  secret_name     = "SNYK_TOKEN"
+  plaintext_value = var.snyk_token
+}
+
 resource "github_repository_webhook" "acm-pca-cert-generator" {
   repository = github_repository.acm-pca-cert-generator.name
   events     = ["release"]
