@@ -54,3 +54,15 @@ resource "null_resource" "analytical_env_hive_custom_auth" {
     command = "./initial-commit.sh ${github_repository.analytical_env_hive_custom_auth.name} '${github_repository.analytical_env_hive_custom_auth.description}' ${github_repository.analytical_env_hive_custom_auth.template.0.repository}"
   }
 }
+
+resource "github_actions_secret" "analytical_env_hive_custom_auth_snyk_token" {
+  repository      = github_repository.analytical_env_hive_custom_auth.name
+  secret_name     = "SNYK_TOKEN"
+  plaintext_value = var.snyk_token
+}
+
+resource "github_actions_secret" "analytical_env_hive_custom_auth_slack_webhook" {
+  repository      = github_repository.analytical_env_hive_custom_auth.name
+  secret_name     = "SLACK_WEBHOOK"
+  plaintext_value = var.slack_webhook_url
+}
