@@ -1,5 +1,5 @@
 locals {
-  dataworks_aws_mongo_latest_pipeline_name = "dataworks-aws-mongo-latest"
+  dataworks_aws_mongo_latest_pipeline_name = "aws-mongo-latest"
 }
 
 resource "github_repository" "dataworks_aws_mongo_latest" {
