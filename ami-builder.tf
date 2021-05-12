@@ -22,7 +22,7 @@ resource "github_team_repository" "ami-builder-dataworks" {
 resource "github_branch_protection" "ami-builder-master" {
   branch         = github_repository.ami-builder.default_branch
   repository     = github_repository.ami-builder.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

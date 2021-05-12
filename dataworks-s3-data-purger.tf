@@ -27,7 +27,7 @@ resource "github_team_repository" "dataworks_s3_data_purger_dataworks" {
 resource "github_branch_protection" "dataworks_s3_data_purger_master" {
   branch         = github_repository.dataworks_s3_data_purger.default_branch
   repository     = github_repository.dataworks_s3_data_purger.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

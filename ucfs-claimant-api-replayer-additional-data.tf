@@ -27,7 +27,7 @@ resource "github_team_repository" "ucfs_claimant_api_replayer_mismatch_handler_d
 resource "github_branch_protection" "ucfs_claimant_api_replayer_mismatch_handler_master" {
   branch         = github_repository.ucfs_claimant_api_replayer_mismatch_handler.default_branch
   repository     = github_repository.ucfs_claimant_api_replayer_mismatch_handler.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

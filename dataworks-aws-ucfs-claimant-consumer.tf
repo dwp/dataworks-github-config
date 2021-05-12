@@ -27,7 +27,7 @@ resource "github_team_repository" "dataworks_aws_ucfs_claimant_consumer_datawork
 resource "github_branch_protection" "dataworks_aws_ucfs_claimant_consumer_master" {
   branch         = github_repository.dataworks_aws_ucfs_claimant_consumer.default_branch
   repository     = github_repository.dataworks_aws_ucfs_claimant_consumer.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

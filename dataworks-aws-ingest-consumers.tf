@@ -27,7 +27,7 @@ resource "github_team_repository" "dataworks_aws_ingest_consumers_dataworks" {
 resource "github_branch_protection" "dataworks_aws_ingest_consumers_master" {
   branch         = github_repository.dataworks_aws_ingest_consumers.default_branch
   repository     = github_repository.dataworks_aws_ingest_consumers.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

@@ -27,7 +27,7 @@ resource "github_team_repository" "docker_ecs_service_discovery_dataworks" {
 resource "github_branch_protection" "docker_ecs_service_discovery_master" {
   branch         = github_repository.docker_ecs_service_discovery.default_branch
   repository     = github_repository.docker_ecs_service_discovery.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

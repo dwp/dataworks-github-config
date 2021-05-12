@@ -27,7 +27,7 @@ resource "github_team_repository" "jmx_exporter_dataworks" {
 resource "github_branch_protection" "jmx_exporter_master" {
   branch         = github_repository.jmx_exporter.default_branch
   repository     = github_repository.jmx_exporter.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

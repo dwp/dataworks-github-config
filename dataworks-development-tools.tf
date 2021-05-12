@@ -27,7 +27,7 @@ resource "github_team_repository" "dataworks_development_tools_dataworks" {
 resource "github_branch_protection" "dataworks_development_tools_master" {
   branch         = github_repository.dataworks_development_tools.default_branch
   repository     = github_repository.dataworks_development_tools.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict   = true

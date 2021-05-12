@@ -22,7 +22,7 @@ resource "github_team_repository" "mock-nifi-dataworks" {
 resource "github_branch_protection" "mock-nifi-master" {
   branch         = github_repository.mock-nifi.default_branch
   repository     = github_repository.mock-nifi.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

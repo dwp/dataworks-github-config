@@ -27,7 +27,7 @@ resource "github_team_repository" "terraform_aws_waf" {
 resource "github_branch_protection" "terraform_aws_waf_master" {
   branch         = github_repository.terraform_aws_waf.default_branch
   repository     = github_repository.terraform_aws_waf.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

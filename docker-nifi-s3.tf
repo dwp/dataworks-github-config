@@ -22,7 +22,7 @@ resource "github_team_repository" "docker-nifi-s3-dataworks" {
 resource "github_branch_protection" "docker-nifi-s3-master" {
   branch         = github_repository.docker-nifi-s3.default_branch
   repository     = github_repository.docker-nifi-s3.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

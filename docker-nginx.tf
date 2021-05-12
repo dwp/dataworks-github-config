@@ -27,7 +27,7 @@ resource "github_team_repository" "docker_nginx_s3_dataworks" {
 resource "github_branch_protection" "docker_nginx_s3_dataworks" {
   branch         = github_repository.docker_nginx_s3.default_branch
   repository     = github_repository.docker_nginx_s3.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

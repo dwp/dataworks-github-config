@@ -22,7 +22,7 @@ resource "github_team_repository" "orchestration-service-dataworks" {
 resource "github_branch_protection" "orchestration-service-master" {
   branch         = github_repository.orchestration-service.default_branch
   repository     = github_repository.orchestration-service.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

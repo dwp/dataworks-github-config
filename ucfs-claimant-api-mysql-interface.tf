@@ -27,7 +27,7 @@ resource "github_team_repository" "ucfs_claimant_api_mysql_interface_dataworks" 
 resource "github_branch_protection" "ucfs_claimant_api_mysql_interface_master" {
   branch         = github_repository.ucfs_claimant_api_mysql_interface.default_branch
   repository     = github_repository.ucfs_claimant_api_mysql_interface.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

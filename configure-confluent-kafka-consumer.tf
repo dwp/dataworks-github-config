@@ -22,7 +22,7 @@ resource "github_team_repository" "configure-confluent-kafka-consumer-dataworks"
 resource "github_branch_protection" "configure-confluent-kafka-consumer-master" {
   branch         = github_repository.configure-confluent-kafka-consumer.default_branch
   repository     = github_repository.configure-confluent-kafka-consumer.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

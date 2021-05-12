@@ -22,7 +22,7 @@ resource "github_team_repository" "aws-sns-to-ses-mailer-dataworks" {
 resource "github_branch_protection" "aws-sns-to-ses-mailer-master" {
   branch         = github_repository.aws-sns-to-ses-mailer.default_branch
   repository     = github_repository.aws-sns-to-ses-mailer.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

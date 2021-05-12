@@ -31,7 +31,7 @@ resource "github_team_repository" "dataworks_aws_kickstart_adg_dataworks" {
 resource "github_branch_protection" "dataworks_aws_kickstart_adg_master" {
   branch         = github_repository.dataworks_aws_kickstart_adg.default_branch
   repository     = github_repository.dataworks_aws_kickstart_adg.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

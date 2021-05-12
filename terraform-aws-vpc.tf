@@ -22,7 +22,7 @@ resource "github_team_repository" "terraform-aws-vpc-dataworks" {
 resource "github_branch_protection" "terraform-aws-vpc-master" {
   branch         = github_repository.terraform-aws-vpc.default_branch
   repository     = github_repository.terraform-aws-vpc.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

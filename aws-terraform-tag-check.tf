@@ -27,7 +27,7 @@ resource "github_team_repository" "aws_terraform_tag_check_dataworks" {
 resource "github_branch_protection" "aws_terraform_tag_check_master" {
   branch         = github_repository.aws_terraform_tag_check.default_branch
   repository     = github_repository.aws_terraform_tag_check.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

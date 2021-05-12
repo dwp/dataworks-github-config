@@ -26,7 +26,7 @@ resource "github_team_repository" "frontend-service-dataworks" {
 resource "github_branch_protection" "frontend-service-master" {
   branch         = github_repository.frontend-service.default_branch
   repository     = github_repository.frontend-service.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

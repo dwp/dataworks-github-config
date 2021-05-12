@@ -27,7 +27,7 @@ resource "github_team_repository" "hbase_table_provisioner_dataworks" {
 resource "github_branch_protection" "hbase_table_provisioner_master" {
   branch         = github_repository.hbase_table_provisioner.default_branch
   repository     = github_repository.hbase_table_provisioner.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

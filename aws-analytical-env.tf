@@ -22,7 +22,7 @@ resource "github_team_repository" "aws-analytical-dataworks" {
 resource "github_branch_protection" "aws-analytical-env-master" {
   branch         = github_repository.aws-analytical-env.default_branch
   repository     = github_repository.aws-analytical-env.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     contexts = ["concourse-ci/status"]

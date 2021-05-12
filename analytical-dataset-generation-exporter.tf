@@ -27,7 +27,7 @@ resource "github_team_repository" "analytical_dataset_generation_exporter_datawo
 resource "github_branch_protection" "analytical_dataset_generation_exporter_master" {
   branch         = github_repository.analytical_dataset_generation_exporter.default_branch
   repository     = github_repository.analytical_dataset_generation_exporter.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

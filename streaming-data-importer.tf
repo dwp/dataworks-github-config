@@ -27,7 +27,7 @@ resource "github_team_repository" "streaming_data_importer_dataworks" {
 resource "github_branch_protection" "streaming_data_importer_master" {
   branch         = github_repository.streaming_data_importer.default_branch
   repository     = github_repository.streaming_data_importer.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

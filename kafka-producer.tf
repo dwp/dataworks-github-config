@@ -22,7 +22,7 @@ resource "github_team_repository" "kafka-producer-dataworks" {
 resource "github_branch_protection" "kafka-producer-master" {
   branch         = github_repository.kafka-producer.default_branch
   repository     = github_repository.kafka-producer.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

@@ -31,7 +31,7 @@ resource "github_team_repository" "aws_clive_dataworks" {
 resource "github_branch_protection" "aws_clive_master" {
   branch         = github_repository.aws_clive.default_branch
   repository     = github_repository.aws_clive.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

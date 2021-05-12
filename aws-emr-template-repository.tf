@@ -32,7 +32,7 @@ resource "github_team_repository" "aws_emr_template_repository_dataworks" {
 resource "github_branch_protection" "aws_emr_template_repository_master" {
   branch         = github_repository.aws_emr_template_repository.default_branch
   repository     = github_repository.aws_emr_template_repository.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

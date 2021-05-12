@@ -27,7 +27,7 @@ resource "github_team_repository" "blackbox_exporter_dataworks" {
 resource "github_branch_protection" "blackbox_exporter_master" {
   branch         = github_repository.blackbox_exporter.default_branch
   repository     = github_repository.blackbox_exporter.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true
