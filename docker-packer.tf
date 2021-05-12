@@ -27,7 +27,7 @@ resource "github_team_repository" "packer_dataworks" {
 resource "github_branch_protection" "packer_master" {
   branch         = github_repository.packer.default_branch
   repository     = github_repository.packer.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

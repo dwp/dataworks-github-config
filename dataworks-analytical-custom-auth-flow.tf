@@ -22,7 +22,7 @@ resource "github_team_repository" "dataworks-analytical-custom-auth-flow-datawor
 resource "github_branch_protection" "dataworks-analytical-custom-auth-flow-master" {
   branch         = github_repository.dataworks-analytical-custom-auth-flow.default_branch
   repository     = github_repository.dataworks-analytical-custom-auth-flow.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

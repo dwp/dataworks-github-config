@@ -27,7 +27,7 @@ resource "github_team_repository" "ucfs_claimant_kafka_consumer_dataworks" {
 resource "github_branch_protection" "ucfs_claimant_kafka_consumer_master" {
   branch         = github_repository.ucfs_claimant_kafka_consumer.default_branch
   repository     = github_repository.ucfs_claimant_kafka_consumer.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

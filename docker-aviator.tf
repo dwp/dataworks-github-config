@@ -27,7 +27,7 @@ resource "github_team_repository" "docker_aviator_dataworks" {
 resource "github_branch_protection" "docker_aviator_master" {
   branch         = github_repository.docker_aviator.default_branch
   repository     = github_repository.docker_aviator.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

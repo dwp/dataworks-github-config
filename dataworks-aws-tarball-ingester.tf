@@ -27,7 +27,7 @@ resource "github_team_repository" "dataworks_aws_tarball_ingester_dataworks" {
 resource "github_branch_protection" "dataworks_aws_tarball_ingester_master" {
   branch         = github_repository.dataworks_aws_tarball_ingester.default_branch
   repository     = github_repository.dataworks_aws_tarball_ingester.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

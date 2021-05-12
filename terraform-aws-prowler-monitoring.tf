@@ -22,7 +22,7 @@ resource "github_team_repository" "terraform-aws-prowler-monitoring-dataworks" {
 resource "github_branch_protection" "terraform-aws-prowler-monitoring-master" {
   branch         = github_repository.terraform-aws-prowler-monitoring.default_branch
   repository     = github_repository.terraform-aws-prowler-monitoring.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

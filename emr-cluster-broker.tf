@@ -22,7 +22,7 @@ resource "github_team_repository" "emr-cluster-broker-dataworks" {
 resource "github_branch_protection" "emr-cluster-broker-master" {
   branch         = github_repository.emr-cluster-broker.default_branch
   repository     = github_repository.emr-cluster-broker.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

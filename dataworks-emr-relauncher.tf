@@ -22,7 +22,7 @@ resource "github_team_repository" "dataworks_emr_relauncher_dataworks" {
 resource "github_branch_protection" "dataworks_emr_relauncher_master" {
   branch         = github_repository.dataworks_emr_relauncher.default_branch
   repository     = github_repository.dataworks_emr_relauncher.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

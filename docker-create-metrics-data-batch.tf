@@ -26,7 +26,7 @@ resource "github_team_repository" "docker_create_metrics_data_batch_dataworks" {
 resource "github_branch_protection" "docker_create_metrics_data_batch_master" {
   branch         = github_repository.docker_create_metrics_data_batch.default_branch
   repository     = github_repository.docker_create_metrics_data_batch.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

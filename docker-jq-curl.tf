@@ -23,7 +23,7 @@ resource "github_team_repository" "docker-jq-curl-dataworks" {
 resource "github_branch_protection" "docker-jq-curl-master" {
   branch         = github_repository.docker-jq-curl.default_branch
   repository     = github_repository.docker-jq-curl.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

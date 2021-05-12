@@ -26,7 +26,7 @@ resource "github_team_repository" "aws-pdm-dataset-generation_dataworks" {
 resource "github_branch_protection" "aws-pdm-dataset-generation_master" {
   branch         = github_repository.aws-pdm-dataset-generation.default_branch
   repository     = github_repository.aws-pdm-dataset-generation.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict   = true

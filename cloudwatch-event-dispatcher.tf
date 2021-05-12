@@ -22,7 +22,7 @@ resource "github_team_repository" "cloudwatch-event-dispatcher-dataworks" {
 resource "github_branch_protection" "cloudwatch-event-dispatcher-master" {
   branch         = github_repository.cloudwatch-event-dispatcher.default_branch
   repository     = github_repository.cloudwatch-event-dispatcher.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

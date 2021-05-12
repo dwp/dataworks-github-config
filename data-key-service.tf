@@ -22,7 +22,7 @@ resource "github_team_repository" "data-key-service-dataworks" {
 resource "github_branch_protection" "data-key-service-master" {
   branch         = github_repository.data-key-service.default_branch
   repository     = github_repository.data-key-service.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

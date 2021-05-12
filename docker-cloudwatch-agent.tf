@@ -27,7 +27,7 @@ resource "github_team_repository" "cloudwatch_agent_dataworks" {
 resource "github_branch_protection" "cloudwatch_agent_master" {
   branch         = github_repository.cloudwatch_agent.default_branch
   repository     = github_repository.cloudwatch_agent.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

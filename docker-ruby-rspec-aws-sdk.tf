@@ -22,7 +22,7 @@ resource "github_team_repository" "docker-ruby-rspec-aws-sdk-dataworks" {
 resource "github_branch_protection" "docker-ruby-rspec-aws-sdk-master" {
   branch         = github_repository.docker-ruby-rspec-aws-sdk.default_branch
   repository     = github_repository.docker-ruby-rspec-aws-sdk.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

@@ -27,7 +27,7 @@ resource "github_team_repository" "dataworks_repo_template_docker_dataworks" {
 resource "github_branch_protection" "dataworks_repo_template_docker_master" {
   branch         = github_repository.dataworks_repo_template_docker.default_branch
   repository     = github_repository.dataworks_repo_template_docker.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

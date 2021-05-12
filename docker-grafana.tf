@@ -27,7 +27,7 @@ resource "github_team_repository" "docker_grafana_dataworks" {
 resource "github_branch_protection" "docker_grafana_master" {
   branch         = github_repository.docker_grafana.default_branch
   repository     = github_repository.docker_grafana.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

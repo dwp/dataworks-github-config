@@ -22,7 +22,7 @@ resource "github_team_repository" "tactical-aws-user-creation_dataworks" {
 resource "github_branch_protection" "tactical-aws-user-creation_master" {
   branch         = github_repository.tactical-aws-user-creation.default_branch
   repository     = github_repository.tactical-aws-user-creation.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

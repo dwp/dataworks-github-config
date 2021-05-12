@@ -22,7 +22,7 @@ resource "github_team_repository" "manage-mysql-user-dataworks" {
 resource "github_branch_protection" "manage-mysql-user-master" {
   branch         = github_repository.manage-mysql-user.default_branch
   repository     = github_repository.manage-mysql-user.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

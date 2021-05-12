@@ -27,7 +27,7 @@ resource "github_team_repository" "kafka_queue_trawler_dataworks" {
 resource "github_branch_protection" "kafka_queue_trawler_master" {
   branch         = github_repository.kafka_queue_trawler.default_branch
   repository     = github_repository.kafka_queue_trawler.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

@@ -23,7 +23,7 @@ resource "github_team_repository" "ssm-parameter-store-dataworks" {
 resource "github_branch_protection" "ssm-parameter-store-master" {
   branch         = github_repository.ssm-parameter-store.default_branch
   repository     = github_repository.ssm-parameter-store.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

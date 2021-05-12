@@ -22,7 +22,7 @@ resource "github_team_repository" "hbase-retriever-dataworks" {
 resource "github_branch_protection" "hbase-retriever-master" {
   branch         = github_repository.hbase-retriever.default_branch
   repository     = github_repository.hbase-retriever.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

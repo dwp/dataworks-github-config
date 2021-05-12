@@ -22,7 +22,7 @@ resource "github_team_repository" "dataworks-common-logging-dataworks" {
 resource "github_branch_protection" "dataworks-common-logging-master" {
   branch         = github_repository.dataworks-common-logging.default_branch
   repository     = github_repository.dataworks-common-logging.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

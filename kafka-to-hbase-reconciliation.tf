@@ -27,7 +27,7 @@ resource "github_team_repository" "kafka_to_hbase_reconciliation_dataworks" {
 resource "github_branch_protection" "kafka_to_hbase_reconciliation_master" {
   branch         = github_repository.kafka_to_hbase_reconciliation.default_branch
   repository     = github_repository.kafka_to_hbase_reconciliation.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

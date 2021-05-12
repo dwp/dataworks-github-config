@@ -27,7 +27,7 @@ resource "github_team_repository" "docker_alertmanager_dataworks" {
 resource "github_branch_protection" "docker_alertmanager_master" {
   branch         = github_repository.docker_alertmanager.default_branch
   repository     = github_repository.docker_alertmanager.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

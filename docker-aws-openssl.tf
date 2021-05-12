@@ -22,7 +22,7 @@ resource "github_team_repository" "docker-aws-openssl-dataworks" {
 resource "github_branch_protection" "docker-aws-openssl-master" {
   branch         = github_repository.docker-aws-openssl.default_branch
   repository     = github_repository.docker-aws-openssl.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

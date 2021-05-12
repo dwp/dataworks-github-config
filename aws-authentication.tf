@@ -23,7 +23,7 @@ resource "github_team_repository" "aws-authentication-dataworks" {
 resource "github_branch_protection" "aws-authentication-master" {
   branch         = github_repository.aws-authentication.default_branch
   repository     = github_repository.aws-authentication.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

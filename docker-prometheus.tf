@@ -28,7 +28,7 @@ resource "github_team_repository" "docker_prometheus_dataworks" {
 resource "github_branch_protection" "docker_prometheus_master" {
   branch         = github_repository.docker_prometheus.default_branch
   repository     = github_repository.docker_prometheus.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

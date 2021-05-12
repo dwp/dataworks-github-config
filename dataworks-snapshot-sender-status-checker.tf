@@ -27,7 +27,7 @@ resource "github_team_repository" "dataworks_snapshot_sender_status_checker_data
 resource "github_branch_protection" "dataworks_snapshot_sender_status_checker_master" {
   branch         = github_repository.dataworks_snapshot_sender_status_checker.default_branch
   repository     = github_repository.dataworks_snapshot_sender_status_checker.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true
