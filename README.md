@@ -20,9 +20,10 @@ This process is currently intended for use with *public*, not private repositori
 After the repo has been created you need to do the follwoing:
 ### For all repos:
 * Create the project on SonarCloud
-  1. Go to https://sonarcloud.io/projects/create (sign in with GitHub)
-  1. Find your new repo(s) in the lists, select it and choose "Set Up" in the right hand margin
-  1. There will be very little code at this point, but click the "Force Automatic Analysis" button to override the warning
+  1. Go to https://sonarcloud.io/projects/create (sign in with GitHub).  If you are unable to use SonarCloud with DWP 
+     GitHub, you may need to be added to the DataWorks Team on SonarCloud
+  1. Find your new repo(s) in the lists, select it and choose "Set Up" in the right-hand margin
+  1. There will be very little code at this point, but click the "More Information" and "Force Automatic Analysis" buttons to override the warning
 * Request that the repo is added to the [DataWorks Slack notification](https://github.com/organizations/dwp/settings/reminders/12081)
   1. Send the above link to a [GitHub organisation owner](https://github.com/orgs/dwp/people?query=role%3Aowner) and ask them to add the new repo to the list
 
