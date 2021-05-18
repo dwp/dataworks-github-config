@@ -79,3 +79,9 @@ resource "github_repository_webhook" "dataworks_aws_ingest_replica_pr" {
     content_type = "form"
   }
 }
+
+resource "github_actions_secret" "dataworks_aws_ingest_replica_snyk_token" {
+  repository      = github_repository.dataworks_aws_ingest_replica.name
+  secret_name     = "SNYK_TOKEN"
+  plaintext_value = var.snyk_token
+}
