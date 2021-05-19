@@ -27,7 +27,7 @@ resource "github_team_repository" "corporate_data_loader_dataworks" {
 resource "github_branch_protection" "corporate_data_loader_master" {
   branch         = github_repository.corporate_data_loader.default_branch
   repository     = github_repository.corporate_data_loader.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

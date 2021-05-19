@@ -22,7 +22,7 @@ resource "github_team_repository" "terraform-aws-metric-filter-alarm-dataworks" 
 resource "github_branch_protection" "terraform-aws-metric-filter-alarm-master" {
   branch         = github_repository.terraform-aws-metric-filter-alarm.default_branch
   repository     = github_repository.terraform-aws-metric-filter-alarm.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

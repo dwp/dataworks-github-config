@@ -22,7 +22,7 @@ resource "github_team_repository" "cognito-guacamole-extension-dataworks" {
 resource "github_branch_protection" "cognito-guacamole-extension-master" {
   branch         = github_repository.cognito-guacamole-extension.default_branch
   repository     = github_repository.cognito-guacamole-extension.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

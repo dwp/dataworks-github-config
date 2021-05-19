@@ -26,7 +26,7 @@ resource "github_team_repository" "emr-encryption-materials-provider-dataworks" 
 resource "github_branch_protection" "emr-encryption-materials-provider-master" {
   branch         = github_repository.emr-encryption-materials-provider.default_branch
   repository     = github_repository.emr-encryption-materials-provider.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

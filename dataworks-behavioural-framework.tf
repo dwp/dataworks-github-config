@@ -27,7 +27,7 @@ resource "github_team_repository" "dataworks_behavioural_framework_dataworks" {
 resource "github_branch_protection" "dataworks_behavioural_framework_master" {
   branch         = github_repository.dataworks_behavioural_framework.default_branch
   repository     = github_repository.dataworks_behavioural_framework.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

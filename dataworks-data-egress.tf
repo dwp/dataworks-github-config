@@ -27,7 +27,7 @@ resource "github_team_repository" "dataworks_data_egress_dataworks" {
 resource "github_branch_protection" "dataworks_data_egress_master" {
   branch         = github_repository.dataworks_data_egress.default_branch
   repository     = github_repository.dataworks_data_egress.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

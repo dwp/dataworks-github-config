@@ -22,7 +22,7 @@ resource "github_team_repository" "docker-headless-chrome-dataworks" {
 resource "github_branch_protection" "docker-headless-chrome-master" {
   branch         = github_repository.docker-headless-chrome.default_branch
   repository     = github_repository.docker-headless-chrome.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

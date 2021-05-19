@@ -22,7 +22,7 @@ resource "github_team_repository" "hardened-guac-chrome-dataworks" {
 resource "github_branch_protection" "hardened-guac-chrome-master" {
   branch         = github_repository.hardened-guac-chrome.default_branch
   repository     = github_repository.hardened-guac-chrome.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

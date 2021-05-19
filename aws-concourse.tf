@@ -22,7 +22,7 @@ resource "github_team_repository" "aws-concourse-dataworks" {
 resource "github_branch_protection" "aws-concourse-master" {
   branch         = github_repository.aws-concourse.default_branch
   repository     = github_repository.aws-concourse.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

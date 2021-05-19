@@ -22,7 +22,7 @@ resource "github_team_repository" "docker-ansible-pass-gpg-dataworks" {
 resource "github_branch_protection" "docker-ansible-pass-gpg-master" {
   branch         = github_repository.docker-ansible-pass-gpg.default_branch
   repository     = github_repository.docker-ansible-pass-gpg.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

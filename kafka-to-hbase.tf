@@ -22,7 +22,7 @@ resource "github_team_repository" "kafka-to-hbase-dataworks" {
 resource "github_branch_protection" "kafka-to-hbase-master" {
   branch         = github_repository.kafka-to-hbase.default_branch
   repository     = github_repository.kafka-to-hbase.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

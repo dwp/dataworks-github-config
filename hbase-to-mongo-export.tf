@@ -22,7 +22,7 @@ resource "github_team_repository" "hbase-to-mongo-export-dataworks" {
 resource "github_branch_protection" "hbase-to-mongo-export-master" {
   branch         = github_repository.hbase-to-mongo-export.default_branch
   repository     = github_repository.hbase-to-mongo-export.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

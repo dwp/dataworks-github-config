@@ -22,7 +22,7 @@ resource "github_team_repository" "ucfs-claimant-api-load-data_dataworks" {
 resource "github_branch_protection" "ucfs-claimant-api-load-data_master" {
   branch         = github_repository.ucfs-claimant-api-load-data.default_branch
   repository     = github_repository.ucfs-claimant-api-load-data.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

@@ -22,7 +22,7 @@ resource "github_team_repository" "acm-pca-cert-generator-dataworks" {
 resource "github_branch_protection" "acm-pca-cert-generator-master" {
   branch         = github_repository.acm-pca-cert-generator.default_branch
   repository     = github_repository.acm-pca-cert-generator.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true
@@ -57,6 +57,24 @@ resource "github_actions_secret" "acm-pca-cert-generator_github_token" {
   repository      = github_repository.acm-pca-cert-generator.name
   secret_name     = "CI_GITHUB_TOKEN"
   plaintext_value = var.github_token
+}
+
+resource "github_actions_secret" "acm-pca-cert-generator_dockerhub_password" {
+  repository      = github_repository.acm-pca-cert-generator.name
+  secret_name     = "DOCKERHUB_PASSWORD"
+  plaintext_value = var.dockerhub_password
+}
+
+resource "github_actions_secret" "acm-pca-cert-generator_dockerhub_username" {
+  repository      = github_repository.acm-pca-cert-generator.name
+  secret_name     = "DOCKERHUB_USERNAME"
+  plaintext_value = var.dockerhub_username
+}
+
+resource "github_actions_secret" "acm-pca-cert-generator_snyk_token" {
+  repository      = github_repository.acm-pca-cert-generator.name
+  secret_name     = "SNYK_TOKEN"
+  plaintext_value = var.snyk_token
 }
 
 resource "github_repository_webhook" "acm-pca-cert-generator" {

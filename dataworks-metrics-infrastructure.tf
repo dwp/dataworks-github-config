@@ -26,7 +26,7 @@ resource "github_team_repository" "dataworks_metrics_infrastructure_dataworks" {
 resource "github_branch_protection" "dataworks_metrics_infrastructure_master" {
   branch         = github_repository.dataworks_metrics_infrastructure.default_branch
   repository     = github_repository.dataworks_metrics_infrastructure.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

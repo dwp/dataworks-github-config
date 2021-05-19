@@ -27,7 +27,7 @@ resource "github_team_repository" "dataworks_corporate_storage_coalescence_dataw
 resource "github_branch_protection" "dataworks_corporate_storage_coalescence_master" {
   branch         = github_repository.dataworks_corporate_storage_coalescence.default_branch
   repository     = github_repository.dataworks_corporate_storage_coalescence.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

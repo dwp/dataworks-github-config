@@ -22,7 +22,7 @@ resource "github_team_repository" "docker-python-boto-behave-dataworks" {
 resource "github_branch_protection" "docker-python-boto-behave-master" {
   branch         = github_repository.docker-python-boto-behave.default_branch
   repository     = github_repository.docker-python-boto-behave.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

@@ -23,7 +23,7 @@ resource "github_team_repository" "ucfs-claimant-get-award-details_dataworks" {
 resource "github_branch_protection" "ucfs-claimant-get-award-details_master" {
   branch         = github_repository.ucfs-claimant-get-award-details.default_branch
   repository     = github_repository.ucfs-claimant-get-award-details.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

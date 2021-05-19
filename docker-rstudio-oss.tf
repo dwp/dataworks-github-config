@@ -27,7 +27,7 @@ resource "github_team_repository" "rstudiooss_dataworks" {
 resource "github_branch_protection" "rstudiooss_master" {
   branch         = github_repository.rstudiooss.default_branch
   repository     = github_repository.rstudiooss.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

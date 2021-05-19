@@ -23,7 +23,7 @@ resource "github_team_repository" "aws-analytical-dataset-generation_dataworks" 
 resource "github_branch_protection" "aws-analytical-dataset-generation_master" {
   branch         = github_repository.aws-analytical-dataset-generation.default_branch
   repository     = github_repository.aws-analytical-dataset-generation.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict   = true

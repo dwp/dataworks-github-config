@@ -22,7 +22,7 @@ resource "github_team_repository" "dataworks_hardened_images" {
 resource "github_branch_protection" "dataworks_hardened_images_master" {
   branch         = github_repository.dataworks_hardened_images.default_branch
   repository     = github_repository.dataworks_hardened_images.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

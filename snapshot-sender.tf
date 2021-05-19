@@ -22,7 +22,7 @@ resource "github_team_repository" "snapshot-sender-dataworks" {
 resource "github_branch_protection" "mongo-export-delivery-master" {
   branch         = github_repository.snapshot-sender.default_branch
   repository     = github_repository.snapshot-sender.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true
