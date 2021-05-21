@@ -51,6 +51,16 @@ variable "snyk_token" {
   description = "Snyk Token to provide to GitHub Actions"
 }
 
+variable "terraform_12_version" {
+  type        = string
+  description = "The current version of tf12"
+}
+
+variable "terraform_13_version" {
+  type        = string
+  description = "The current version of tf13"
+}
+
 variable "github_webhook_token" {
   type        = string
   description = "GitHub token to auth with CI"

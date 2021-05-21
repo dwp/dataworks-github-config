@@ -55,7 +55,7 @@ def main():
     config_data['dockerhub_username'] = json.loads(dataworks_sensitive['SecretBinary'])["dockerhub_username"]
     config_data['dockerhub_password'] = json.loads(dataworks_secret['SecretBinary'])["dockerhub_token"]
     config_data['snyk_token'] = json.loads(dataworks_secret['SecretBinary'])["snyk_token"]
-    config_data['terraform_12_version'] = json.loads(dataworks_secret['SecretBinary'])["terraform_12_version"]
+    config_data['terraform_12_version'] = json.loads(dataworks_secret['SecretBinary'])["terraform_version"]
     config_data['terraform_13_version'] = json.loads(dataworks_secret['SecretBinary'])["terraform_13_version"]
     config_data['slack_webhook_url'] = json.loads(dataworks_sensitive['SecretBinary'])["slack_webhook_url"]
     config_data['gha_aws_concourse_access_key_id'] = json.loads(dataworks_secret['SecretBinary'])["gha_aws_concourse_access_key_id"]
