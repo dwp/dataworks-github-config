@@ -65,7 +65,7 @@ resource "github_actions_secret" "emr-cluster-broker-slack-webhook" {
   plaintext_value = var.slack_webhook_url
 }
 
-resource "github_actions_secret" "terraform_version" {
+resource "github_actions_secret" "emr_cluster_broker_terraform_version" {
   repository      = github_repository.emr-cluster-broker.name
   secret_name     = "TERRAFORM_VERSION"
   plaintext_value = var.terraform_12_version

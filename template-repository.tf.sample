@@ -55,7 +55,7 @@ resource "null_resource" "example" {
   }
 }
 
-resource "github_actions_secret" "terraform_version" {
+resource "github_actions_secret" "example_terraform_version" {
   repository      = github_repository.example.name
   secret_name     = "TERRAFORM_VERSION"
   plaintext_value = var.terraform_12_version
