@@ -1,4 +1,4 @@
-resource "github_repository" "terraform-aws-dataworks-common" {
+resource "github_repository" "terraform_aws_dataworks_common" {
   name        = "terraform-aws-dataworks-common"
   description = "A Terraform module to house common configuration for the DWP DataWorks team."
 
@@ -13,15 +13,15 @@ resource "github_repository" "terraform-aws-dataworks-common" {
   }
 }
 
-resource "github_team_repository" "terraform-aws-dataworks-common-dataworks" {
-  repository = github_repository.terraform-aws-dataworks-common.name
+resource "github_team_repository" "terraform_aws_dataworks_common_dataworks" {
+  repository = github_repository.terraform_aws_dataworks_common_.name
   team_id    = github_team.dataworks.id
   permission = "push"
 }
 
-resource "github_branch_protection" "terraform-aws-dataworks-common-master" {
-  branch         = github_repository.terraform-aws-dataworks-common.default_branch
-  repository     = github_repository.terraform-aws-dataworks-common.name
+resource "github_branch_protection" "terraform_aws_dataworks_common_master" {
+  branch         = github_repository.terraform_aws_dataworks_common_.default_branch
+  repository     = github_repository.terraform_aws_dataworks_common_.name
   enforce_admins = true
 
   required_status_checks {
@@ -34,10 +34,10 @@ resource "github_branch_protection" "terraform-aws-dataworks-common-master" {
   }
 }
 
-resource "github_issue_label" "terraform-aws-dataworks-common" {
+resource "github_issue_label" "terraform_aws_dataworks_common_" {
   for_each   = { for common_label in local.common_labels : common_label.name => common_label }
   color      = each.value.colour
   name       = each.value.name
-  repository = github_repository.terraform-aws-dataworks-common.name
+  repository = github_repository.terraform_aws_dataworks_common_.name
 }
 
