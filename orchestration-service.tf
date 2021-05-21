@@ -85,3 +85,15 @@ resource "github_actions_secret" "orchestration-service-slack-webhook" {
   plaintext_value = var.slack_webhook_url
 }
 
+resource "github_actions_secret" "terraform_12_version" {
+  repository      = github_repository.orchestration-service.name
+  secret_name     = "TERRAFORM_12_VERSION"
+  plaintext_value = var.terraform_12_version
+}
+
+resource "github_actions_secret" "terraform_13_version" {
+  repository      = github_repository.orchestration-service.name
+  secret_name     = "TERRAFORM_13_VERSION"
+  plaintext_value = var.terraform_13_version
+}
+
