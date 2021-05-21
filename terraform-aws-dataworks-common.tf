@@ -1,10 +1,11 @@
 resource "github_repository" "terraform_aws_dataworks_common" {
   name        = "terraform-aws-dataworks-common"
   description = "A Terraform module to house common configuration for the DWP DataWorks team."
+  auto_init   = true
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
-  default_branch         = "develop"
+  default_branch         = "master"
   has_issues             = true
   topics                 = concat(local.common_topics, local.aws_topics)
 
