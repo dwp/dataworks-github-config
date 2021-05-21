@@ -54,3 +54,9 @@ resource "null_resource" "example" {
     command = "./initial-commit.sh ${github_repository.example.name} '${github_repository.example.description}' ${github_repository.example.template.0.repository}"
   }
 }
+
+resource "github_actions_secret" "example_terraform_version" {
+  repository      = github_repository.example.name
+  secret_name     = "TERRAFORM_VERSION"
+  plaintext_value = var.terraform_12_version
+}
