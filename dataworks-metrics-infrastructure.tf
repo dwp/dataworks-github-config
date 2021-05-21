@@ -49,7 +49,7 @@ resource "github_issue_label" "dataworks_metrics_infrastructure" {
 }
 
 resource "github_repository_webhook" "dataworks_metrics_infrastructure" {
-  repository = github_repository.dataworks_aws_data_egress.name
+  repository = github_repository.dataworks_metrics_infrastructure.name
   events     = ["push"]
 
   configuration {
@@ -59,11 +59,23 @@ resource "github_repository_webhook" "dataworks_metrics_infrastructure" {
 }
 
 resource "github_repository_webhook" "dataworks_metrics_infrastructure_pr" {
-  repository = github_repository.dataworks_aws_data_egress.name
+  repository = github_repository.dataworks_metrics_infrastructure.name
   events     = ["pull_request"]
 
   configuration {
     url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.dataworks_metrics_infrastructure_pipeline_name}/resources/${github_repository.dataworks_metrics_infrastructure.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
+}
+
+resource "github_actions_secret" "terraform_12_version" {
+  repository      = github_repository.dataworks_metrics_infrastructure.name
+  secret_name     = "TERRAFORM_12_VERSION"
+  plaintext_value = var.terraform_12_version
+}
+
+resource "github_actions_secret" "terraform_13_version" {
+  repository      = github_repository.dataworks_metrics_infrastructure.name
+  secret_name     = "TERRAFORM_13_VERSION"
+  plaintext_value = var.terraform_13_version
 }

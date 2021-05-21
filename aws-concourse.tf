@@ -64,3 +64,15 @@ resource "github_actions_secret" "aws_role_mgmt" {
   secret_name     = "AWS_GHA_ROLE_MGMT"
   plaintext_value = "arn:aws:iam::${local.account["management"]}:role/gha_aws_concourse"
 }
+
+resource "github_actions_secret" "terraform_12_version" {
+  repository      = github_repository.aws-concourse.name
+  secret_name     = "TERRAFORM_12_VERSION"
+  plaintext_value = var.terraform_12_version
+}
+
+resource "github_actions_secret" "terraform_13_version" {
+  repository      = github_repository.aws-concourse.name
+  secret_name     = "TERRAFORM_13_VERSION"
+  plaintext_value = var.terraform_13_version
+}
