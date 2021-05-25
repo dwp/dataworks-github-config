@@ -1,6 +1,6 @@
 resource "github_repository" "cert_retriever" {
   name             = "cert-retriever"
-  description      = "Docker repository for fetching all ACM certs in each environment"
+  description      = "Docker repository for fetching all ACM certs in different environments"
   auto_init        = false
 
   allow_merge_commit     = false
@@ -18,13 +18,13 @@ resource "github_repository" "cert_retriever" {
   }
 }
 
-resource "github_team_repository" "example_dataworks" {
+resource "github_team_repository" "cert_retriever_dataworks" {
   repository = github_repository.cert_retriever.name
   team_id    = github_team.dataworks.id
   permission = "push"
 }
 
-resource "github_branch_protection" "example_master" {
+resource "github_branch_protection" "cert_retriever_master" {
   branch         = github_repository.cert_retriever.default_branch
   repository     = github_repository.cert_retriever.name
   enforce_admins = true
@@ -56,19 +56,19 @@ resource "null_resource" "cert_retriever" {
   }
 }
 
-resource "github_actions_secret" "example_dockerhub_password" {
+resource "github_actions_secret" "cert_retriever_dockerhub_password" {
   repository      = github_repository.cert_retriever.name
   secret_name     = "DOCKERHUB_PASSWORD"
   plaintext_value = var.dockerhub_password
 }
 
-resource "github_actions_secret" "example_dockerhub_username" {
+resource "github_actions_secret" "cert_retriever_dockerhub_username" {
   repository      = github_repository.cert_retriever.name
   secret_name     = "DOCKERHUB_USERNAME"
   plaintext_value = var.dockerhub_username
 }
 
-resource "github_actions_secret" "example_snyk_token" {
+resource "github_actions_secret" "cert_retriever_snyk_token" {
   repository      = github_repository.cert_retriever.name
   secret_name     = "SNYK_TOKEN"
   plaintext_value = var.snyk_token
