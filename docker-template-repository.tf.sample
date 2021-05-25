@@ -81,13 +81,13 @@ resource "github_actions_secret" "example_github_email" {
 }
 
 resource "github_actions_secret" "example_github_username" {
-  repository      = ggithub_repository.example.name
+  repository      = github_repository.example.name
   secret_name     = "CI_GITHUB_USERNAME"
   plaintext_value = var.github_username
 }
 
 resource "github_actions_secret" "example_github_token" {
-  repository      = ggithub_repository.example.name
+  repository      = github_repository.example.name
   secret_name     = "CI_GITHUB_TOKEN"
   plaintext_value = var.github_token
 }
