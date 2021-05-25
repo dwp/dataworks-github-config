@@ -1,6 +1,6 @@
 resource "github_repository" "cert_retriever" {
   name             = "cert-retriever"
-  description      = "cert-retriever"
+  description      = "Docker repository for fetching all ACM certs in each environment"
   auto_init        = false
 
   allow_merge_commit     = false
