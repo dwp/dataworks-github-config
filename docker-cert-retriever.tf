@@ -14,7 +14,7 @@ resource "github_repository" "cert_retriever" {
 
   template {
     owner = var.github_organization
-    repository = "docker-cert-retriever"
+    repository = "dataworks-repo-template-docker"
   }
 }
 
