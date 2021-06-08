@@ -1,7 +1,7 @@
 resource "github_repository" "cloudwatch_agent" {
-  name             = "cloudwatch-agent"
-  description      = "This is the Docker image for CloudWatch Agent"
-  auto_init        = false
+  name        = "cloudwatch-agent"
+  description = "This is the Docker image for CloudWatch Agent"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "cloudwatch_agent" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }

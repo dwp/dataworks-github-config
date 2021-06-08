@@ -1,7 +1,7 @@
 resource "github_repository" "ucfs_claimant_api_replayer_mismatch_handler" {
-  name             = "ucfs-claimant-api-replayer-mismatch-handler"
-  description      = "An AWS lambda which receives requests and a response payload, to 'replay' against the v1 UCFS Claimant API in London to assert responses are equal."
-  auto_init        = false
+  name        = "ucfs-claimant-api-replayer-mismatch-handler"
+  description = "An AWS lambda which receives requests and a response payload, to 'replay' against the v1 UCFS Claimant API in London to assert responses are equal."
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "ucfs_claimant_api_replayer_mismatch_handler" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template"
   }
 }

@@ -1,7 +1,7 @@
 resource "github_repository" "corporate_data_loader" {
-  name             = "corporate-data-loader"
-  description      = "corporate_data_loader"
-  auto_init        = false
+  name        = "corporate-data-loader"
+  description = "corporate_data_loader"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "corporate_data_loader" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template"
   }
 }

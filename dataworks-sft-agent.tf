@@ -1,7 +1,7 @@
 resource "github_repository" "dataworks_sft_agent" {
-  name             = "dataworks-sft-agent"
-  description      = "A repo for the dataworks sft agent docker image"
-  auto_init        = false
+  name        = "dataworks-sft-agent"
+  description = "A repo for the dataworks sft agent docker image"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "dataworks_sft_agent" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }

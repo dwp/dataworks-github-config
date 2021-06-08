@@ -3,9 +3,9 @@ locals {
 }
 
 resource "github_repository" "dataworks_aws_mongo_latest" {
-  name             = "dataworks-aws-mongo-latest"
-  description      = "The EMR infrastructure for aws-mongo-latest."
-  auto_init        = false
+  name        = "dataworks-aws-mongo-latest"
+  description = "The EMR infrastructure for aws-mongo-latest."
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -17,7 +17,7 @@ resource "github_repository" "dataworks_aws_mongo_latest" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "aws-emr-template-repository"
   }
 }
@@ -34,7 +34,7 @@ resource "github_branch_protection" "dataworks_aws_mongo_latest_master" {
   enforce_admins = false
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["concourse-ci/status"]
   }
 

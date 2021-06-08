@@ -1,7 +1,7 @@
 resource "github_repository" "dataworks_behavioural_framework" {
-  name             = "dataworks-behavioural-framework"
-  description      = "Framework using behave to create behavioural scenarios for mainly quality assurance purposes"
-  auto_init        = false
+  name        = "dataworks-behavioural-framework"
+  description = "Framework using behave to create behavioural scenarios for mainly quality assurance purposes"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "dataworks_behavioural_framework" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }

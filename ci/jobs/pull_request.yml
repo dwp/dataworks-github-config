@@ -18,8 +18,8 @@ jobs:
             type: docker-image
             source:
               repository: hashicorp/terraform
-              version: ((dataworks.terraform_version))
-              tag: ((dataworks.terraform_version))
+              version: ((dataworks.terraform_13_version))
+              tag: ((dataworks.terraform_13_version))
           run:
             path: sh
             args:
@@ -44,7 +44,7 @@ jobs:
           TF_VAR_snyk_token: ((dataworks-secrets.snyk_token))
           TF_VAR_slack_webhook_url: ((dataworks.slack_webhook_url))
           TF_VAR_github_username: ((dataworks.concourse_github_username))
-          TF_VAR_terraform_12_version: ((dataworks.terraform_12_version))
+          TF_VAR_terraform_13_version: ((dataworks.terraform_13_version))
           TF_VAR_terraform_13_version: ((dataworks.terraform_13_version))
         input_mapping:
           dataworks-github-config: dataworks-github-config-pr

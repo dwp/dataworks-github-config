@@ -1,7 +1,7 @@
 resource "github_repository" "ucfs_claimant_api_mysql_interface" {
-  name             = "ucfs-claimant-api-mysql-interface"
-  description      = "AWS lambda to provide an interface with the UCFS Claimant API database."
-  auto_init        = false
+  name        = "ucfs-claimant-api-mysql-interface"
+  description = "AWS lambda to provide an interface with the UCFS Claimant API database."
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "ucfs_claimant_api_mysql_interface" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template"
   }
 }

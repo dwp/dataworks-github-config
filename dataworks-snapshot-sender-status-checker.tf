@@ -1,7 +1,7 @@
 resource "github_repository" "dataworks_snapshot_sender_status_checker" {
-  name             = "dataworks-snapshot-sender-status-checker"
-  description      = "An AWS lambda which receives SQS messages and monitors and reports on the status of a snapshot sender run."
-  auto_init        = false
+  name        = "dataworks-snapshot-sender-status-checker"
+  description = "An AWS lambda which receives SQS messages and monitors and reports on the status of a snapshot sender run."
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "dataworks_snapshot_sender_status_checker" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }

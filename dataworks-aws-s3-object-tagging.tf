@@ -3,9 +3,9 @@ locals {
 }
 
 resource "github_repository" "dataworks_aws_s3_object_tagger" {
-  name             = "dataworks-aws-s3-object-tagger"
-  description      = "S3 Object tagger application infrastructure"
-  auto_init        = false
+  name        = "dataworks-aws-s3-object-tagger"
+  description = "S3 Object tagger application infrastructure"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -17,7 +17,7 @@ resource "github_repository" "dataworks_aws_s3_object_tagger" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-terraform"
   }
 }
@@ -34,7 +34,7 @@ resource "github_branch_protection" "dataworks_aws_s3_object_tagger_master" {
   enforce_admins = true
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["concourse-ci/status"]
   }
 

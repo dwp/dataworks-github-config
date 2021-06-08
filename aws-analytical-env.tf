@@ -26,7 +26,7 @@ resource "github_branch_protection" "aws-analytical-env-master" {
 
   required_status_checks {
     contexts = ["concourse-ci/status"]
-    strict = true
+    strict   = true
   }
 
   required_pull_request_reviews {

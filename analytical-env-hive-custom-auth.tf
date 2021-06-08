@@ -1,7 +1,7 @@
 resource "github_repository" "analytical_env_hive_custom_auth" {
-  name             = "analytical-env-hive-custom-auth"
-  description      = "DataWorks Analytical Environment custom authentication proivder for HiveServer 2"
-  auto_init        = false
+  name        = "analytical-env-hive-custom-auth"
+  description = "DataWorks Analytical Environment custom authentication proivder for HiveServer 2"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "analytical_env_hive_custom_auth" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template"
   }
 }

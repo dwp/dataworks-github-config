@@ -1,7 +1,7 @@
 resource "github_repository" "dataworks_aws_ucfs_claimant_consumer" {
-  name             = "dataworks-aws-ucfs-claimant-consumer"
-  description      = "AWS infrastructure on which https://github.com/dwp/ucfs-claimant-kafka-consumer can run"
-  auto_init        = false
+  name        = "dataworks-aws-ucfs-claimant-consumer"
+  description = "AWS infrastructure on which https://github.com/dwp/ucfs-claimant-kafka-consumer can run"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "dataworks_aws_ucfs_claimant_consumer" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-terraform"
   }
 }
@@ -30,7 +30,7 @@ resource "github_branch_protection" "dataworks_aws_ucfs_claimant_consumer_master
   enforce_admins = true
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["concourse-ci/status"]
   }
 

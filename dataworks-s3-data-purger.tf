@@ -1,7 +1,7 @@
 resource "github_repository" "dataworks_s3_data_purger" {
-  name             = "dataworks-s3-data-purger"
-  description      = "Utility Lambda for deleting old redundant S3 data"
-  auto_init        = false
+  name        = "dataworks-s3-data-purger"
+  description = "Utility Lambda for deleting old redundant S3 data"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "dataworks_s3_data_purger" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template"
   }
 }
