@@ -1,7 +1,7 @@
 resource "github_repository" "dataworks_alertmanager_sns_forwarder" {
-  name             = "dataworks-alertmanager-sns-forwarder"
-  description      = "A repo for the dataworks alertmanager SNS forwarder docker image"
-  auto_init        = false
+  name        = "dataworks-alertmanager-sns-forwarder"
+  description = "A repo for the dataworks alertmanager SNS forwarder docker image"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "dataworks_alertmanager_sns_forwarder" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }

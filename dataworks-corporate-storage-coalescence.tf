@@ -1,7 +1,7 @@
 resource "github_repository" "dataworks_corporate_storage_coalescence" {
-  name             = "dataworks-corporate-storage-coalescence"
-  description      = "Coalesces corporate storage files into larger objects"
-  auto_init        = false
+  name        = "dataworks-corporate-storage-coalescence"
+  description = "Coalesces corporate storage files into larger objects"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "dataworks_corporate_storage_coalescence" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }

@@ -1,7 +1,7 @@
 resource "github_repository" "ucfs_claimant_kafka_consumer" {
-  name             = "ucfs-claimant-kafka-consumer"
-  description      = "UCFS Claimant Kafka Consumer"
-  auto_init        = false
+  name        = "ucfs-claimant-kafka-consumer"
+  description = "UCFS Claimant Kafka Consumer"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "ucfs_claimant_kafka_consumer" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }

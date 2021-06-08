@@ -3,9 +3,9 @@ locals {
 }
 
 resource "github_repository" "aws_emr_template_repository" {
-  name             = "aws-emr-template-repository"
-  description      = "A template repository for building EMR cluster in AWS"
-  auto_init        = false
+  name        = "aws-emr-template-repository"
+  description = "A template repository for building EMR cluster in AWS"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -18,7 +18,7 @@ resource "github_repository" "aws_emr_template_repository" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-terraform"
   }
 }

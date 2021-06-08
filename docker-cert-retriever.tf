@@ -1,7 +1,7 @@
 resource "github_repository" "cert_retriever" {
-  name             = "cert-retriever"
-  description      = "Docker repository for fetching all ACM certs in different environments"
-  auto_init        = false
+  name        = "cert-retriever"
+  description = "Docker repository for fetching all ACM certs in different environments"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "cert_retriever" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }
@@ -30,7 +30,7 @@ resource "github_branch_protection" "cert_retriever_master" {
   enforce_admins = true
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["docker-build-and-scan"]
   }
 

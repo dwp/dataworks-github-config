@@ -1,7 +1,7 @@
 resource "github_repository" "dataworks_aws_ingest_consumers" {
-  name             = "dataworks-aws-ingest-consumers"
-  description      = "Dataworks Ingest Kafka-to-Hbase consumers"
-  auto_init        = false
+  name        = "dataworks-aws-ingest-consumers"
+  description = "Dataworks Ingest Kafka-to-Hbase consumers"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "dataworks_aws_ingest_consumers" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-terraform"
   }
 }
@@ -30,7 +30,7 @@ resource "github_branch_protection" "dataworks_aws_ingest_consumers_master" {
   enforce_admins = true
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["concourse-ci/status"]
   }
 

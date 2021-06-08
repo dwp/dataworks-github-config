@@ -1,7 +1,7 @@
 resource "github_repository" "dataworks_data_egress" {
-  name             = "dataworks-data-egress"
-  description      = "A repo for dataworks data egress application code"
-  auto_init        = false
+  name        = "dataworks-data-egress"
+  description = "A repo for dataworks data egress application code"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "dataworks_data_egress" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }

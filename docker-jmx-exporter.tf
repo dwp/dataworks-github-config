@@ -1,7 +1,7 @@
 resource "github_repository" "jmx_exporter" {
-  name             = "jmx-exporter"
-  description      = "A process for exposing JMX Beans via HTTP for Prometheus consumption."
-  auto_init        = false
+  name        = "jmx-exporter"
+  description = "A process for exposing JMX Beans via HTTP for Prometheus consumption."
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "jmx_exporter" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }

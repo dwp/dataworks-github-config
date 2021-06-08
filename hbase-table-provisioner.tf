@@ -1,7 +1,7 @@
 resource "github_repository" "hbase_table_provisioner" {
-  name             = "hbase-table-provisioner"
-  description      = "hbase_table_provisioner"
-  auto_init        = false
+  name        = "hbase-table-provisioner"
+  description = "hbase_table_provisioner"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "hbase_table_provisioner" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template"
   }
 }

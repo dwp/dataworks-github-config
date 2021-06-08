@@ -3,9 +3,9 @@ locals {
 }
 
 resource "github_repository" "aws_clive" {
-  name             = "aws-clive"
-  description      = "The EMR infrastructure for aws-clive."
-  auto_init        = false
+  name        = "aws-clive"
+  description = "The EMR infrastructure for aws-clive."
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -17,7 +17,7 @@ resource "github_repository" "aws_clive" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "aws-emr-template-repository"
   }
 }
@@ -34,7 +34,7 @@ resource "github_branch_protection" "aws_clive_master" {
   enforce_admins = true
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["concourse-ci/status"]
   }
 

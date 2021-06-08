@@ -1,7 +1,7 @@
 resource "github_repository" "aws_terraform_tag_check" {
-  name             = "aws-terraform-tag-check"
-  description      = "GitHub action to check that terraform resources are tagged correctly"
-  auto_init        = false
+  name        = "aws-terraform-tag-check"
+  description = "GitHub action to check that terraform resources are tagged correctly"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "aws_terraform_tag_check" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }

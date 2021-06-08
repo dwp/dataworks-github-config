@@ -1,7 +1,7 @@
 resource "github_repository" "dataworks_batch_job_handler" {
-  name             = "dataworks-batch-job-handlers"
-  description      = "An AWS lambda which receives SNS messages from batch job status changes and handles them."
-  auto_init        = false
+  name        = "dataworks-batch-job-handlers"
+  description = "An AWS lambda which receives SNS messages from batch job status changes and handles them."
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "dataworks_batch_job_handler" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }

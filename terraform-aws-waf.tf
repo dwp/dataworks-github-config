@@ -1,7 +1,7 @@
 resource "github_repository" "terraform_aws_waf" {
-  name             = "terraform-aws-waf"
-  description      = "A Terraform module to create an AWS Classic Regional WAF with consistent features"
-  auto_init        = false
+  name        = "terraform-aws-waf"
+  description = "A Terraform module to create an AWS Classic Regional WAF with consistent features"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "terraform_aws_waf" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template"
   }
 }

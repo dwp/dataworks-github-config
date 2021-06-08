@@ -1,7 +1,7 @@
 resource "github_repository" "terraform_upgrader" {
-  name             = "terraform-upgrader"
-  description      = "A suite of tools to facilitate the upgrading of terraform across many repos."
-  auto_init        = false
+  name        = "terraform-upgrader"
+  description = "A suite of tools to facilitate the upgrading of terraform across many repos."
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -13,7 +13,7 @@ resource "github_repository" "terraform_upgrader" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }
@@ -30,7 +30,7 @@ resource "github_branch_protection" "terraform_upgrader_master" {
   enforce_admins = true
 
   required_status_checks {
-    strict = true
+    strict   = true
     contexts = ["docker-build-and-scan"]
   }
 

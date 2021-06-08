@@ -3,9 +3,9 @@ locals {
 }
 
 resource "github_repository" "dataworks_s3_object_tagger" {
-  name             = "dataworks-s3-object-tagger"
-  description      = "An application to tag S3 objects based on various rules and source config files"
-  auto_init        = false
+  name        = "dataworks-s3-object-tagger"
+  description = "An application to tag S3 objects based on various rules and source config files"
+  auto_init   = false
 
   allow_merge_commit     = false
   delete_branch_on_merge = true
@@ -17,7 +17,7 @@ resource "github_repository" "dataworks_s3_object_tagger" {
   }
 
   template {
-    owner = var.github_organization
+    owner      = var.github_organization
     repository = "dataworks-repo-template-docker"
   }
 }
