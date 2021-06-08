@@ -73,3 +73,9 @@ resource "github_actions_secret" "dataworks_metrics_infrastructure_terraform_ver
   secret_name     = "TERRAFORM_VERSION"
   plaintext_value = var.terraform_12_version
 }
+
+resource "github_actions_secret" "dataworks_metrics_infrastructure_terraform_13_version" {
+  repository      = github_repository.dataworks_metrics_infrastructure.name
+  secret_name     = "TERRAFORM_13_VERSION"
+  plaintext_value = var.terraform_13_version
+}

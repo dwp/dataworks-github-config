@@ -70,3 +70,9 @@ resource "github_actions_secret" "aws_concourse_terraform_version" {
   secret_name     = "TERRAFORM_VERSION"
   plaintext_value = var.terraform_12_version
 }
+
+resource "github_actions_secret" "aws_concourse_terraform_13_version" {
+  repository      = github_repository.aws-concourse.name
+  secret_name     = "TERRAFORM_13_VERSION"
+  plaintext_value = var.terraform_13_version
+}

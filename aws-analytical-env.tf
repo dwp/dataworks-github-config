@@ -78,3 +78,9 @@ resource "github_actions_secret" "analytical_env_terraform_version" {
   plaintext_value = var.terraform_12_version
 }
 
+resource "github_actions_secret" "analytical_env_terraform_13_version" {
+  repository      = github_repository.aws-analytical-env.name
+  secret_name     = "TERRAFORM_13_VERSION"
+  plaintext_value = var.terraform_13_version
+}
+
