@@ -3,7 +3,7 @@ locals {
 }
 
 resource "github_repository" "aws_machine_learning_infrastructure" {
-  name             = "dataworks-aws-machine-learning-infrastructure"
+  name             = "aws-machine-learning-infrastructure"
   description      = "The EMR infrastructure for sagemaker analytic"
   auto_init        = false
 
