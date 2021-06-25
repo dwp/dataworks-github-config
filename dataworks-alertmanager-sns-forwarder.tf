@@ -27,7 +27,7 @@ resource "github_team_repository" "dataworks_alertmanager_sns_forwarder_datawork
 resource "github_branch_protection" "dataworks_alertmanager_sns_forwarder_master" {
   branch         = github_repository.dataworks_alertmanager_sns_forwarder.default_branch
   repository     = github_repository.dataworks_alertmanager_sns_forwarder.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true
