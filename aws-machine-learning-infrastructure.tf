@@ -31,7 +31,7 @@ resource "github_team_repository" "aws_machine_learning_infrastructure_dataworks
 resource "github_branch_protection" "aws_machine_learning_infrastructure_master" {
   branch         = github_repository.aws_machine_learning_infrastructure.default_branch
   repository     = github_repository.aws_machine_learning_infrastructure.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

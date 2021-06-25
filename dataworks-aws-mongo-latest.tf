@@ -31,7 +31,7 @@ resource "github_team_repository" "dataworks_aws_mongo_latest_dataworks" {
 resource "github_branch_protection" "dataworks_aws_mongo_latest_master" {
   branch         = github_repository.dataworks_aws_mongo_latest.default_branch
   repository     = github_repository.dataworks_aws_mongo_latest.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict   = true
