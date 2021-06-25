@@ -27,7 +27,7 @@ resource "github_team_repository" "analytical_env_hive_custom_auth_dataworks" {
 resource "github_branch_protection" "analytical_env_hive_custom_auth_master" {
   branch         = github_repository.analytical_env_hive_custom_auth.default_branch
   repository     = github_repository.analytical_env_hive_custom_auth.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict = true

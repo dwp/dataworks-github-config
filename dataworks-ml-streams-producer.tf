@@ -31,7 +31,7 @@ resource "github_team_repository" "dataworks_ml_streams_producer" {
 resource "github_branch_protection" "dataworks_ml_streams_producer_master" {
   branch         = github_repository.dataworks_ml_streams_producer.default_branch
   repository     = github_repository.dataworks_ml_streams_producer.name
-  enforce_admins = false
+  enforce_admins = true
 
   required_status_checks {
     strict   = true
