@@ -19,18 +19,15 @@ def main():
     elif "AWS_SECRETS_ROLE" in os.environ:
         secrets_session = assumed_role_session(os.environ["AWS_SECRETS_ROLE"])
     if "AWS_REGION" in os.environ:
-        ssm = boto3.client("ssm", region_name=os.environ["AWS_REGION"])
         secrets_manager = secrets_session.client(
             "secretsmanager", region_name=os.environ["AWS_REGION"]
         )
     else:
-        ssm = boto3.client("ssm")
         secrets_manager = secrets_session.client("secretsmanager")
 
     try:
-        parameter = ssm.get_parameter(
-            Name="terraform_bootstrap_config", WithDecryption=False
-        )
+        terraform_secret = secrets_manager.get_secret_value(
+            SecretId="/concourse/dataworks/terraform")
         dataworks_secret = secrets_manager.get_secret_value(
             SecretId="/concourse/dataworks/dataworks-secrets"
         )
@@ -47,7 +44,8 @@ def main():
             print("ERROR: Problem calling AWS SSM: {}".format(error_message))
         sys.exit(1)
 
-    config_data = yaml.load(parameter["Parameter"]["Value"], Loader=yaml.FullLoader)
+    config_data = yaml.load(terraform_secret['SecretBinary'], Loader=yaml.FullLoader)
+    config_data['terraform'] = json.loads(terraform_secret['SecretBinary'])["terraform"]
     config_data['github_username'] = json.loads(dataworks_sensitive['SecretBinary'])["concourse_github_username"]
     config_data['github_email'] = json.loads(dataworks_sensitive['SecretBinary'])["concourse_github_email"]
     config_data['github_token'] = json.loads(dataworks_secret['SecretBinary'])["concourse_github_pat"]
