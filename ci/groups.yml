@@ -2,6 +2,11 @@ groups:
   - name: master
     jobs:
       - master
+  
   - name: pull-request
     jobs:
       - dataworks-github-config-pr
+
+  - name: update-pipeline
+    jobs:
+    - update-pipeline
