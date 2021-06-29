@@ -14,8 +14,6 @@ git config --global user.email "${GIT_EMAIL}"
 set -x
 git clone https://github.com/dwp/$NEW_REPO_NAME
 cd $NEW_REPO_NAME
-rm -f .git/index
-git reset
 
 git submodule add https://github.com/dwp/dataworks-githooks .githooks
 
@@ -63,6 +61,14 @@ case "$TEMPLATE_REPO_NAME" in
     ;;
 esac
 
-git add --all
+if git add --all | grep -q 'fatal: unknown index entry format'; then
+    echo "git index entry issue, fixing..."
+    rm -f .git/index
+    git reset
+    git add --all
+else
+    echo "No git index issue"
+fi
+
 git commit -m "Initial commit, adding githooks submodule"
 git push https://${TF_VAR_github_token}:x-oauth-basic@github.com/dwp/$NEW_REPO_NAME
