@@ -31,7 +31,7 @@ resource "github_team_repository" "dataworks_test_cluster_dataworks" {
 resource "github_branch_protection" "dataworks_test_cluster_master" {
   branch         = github_repository.dataworks_test_cluster.default_branch
   repository     = github_repository.dataworks_test_cluster.name
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict = true
