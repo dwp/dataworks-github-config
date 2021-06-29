@@ -11,6 +11,7 @@ NEW_REPO_NAME_UNDERSCORE=$(echo $NEW_REPO_NAME | tr '-' '_')
 git config --global user.name "${GIT_USERNAME}"
 git config --global user.email "${GIT_EMAIL}"
 
+set -x
 git clone https://github.com/dwp/$NEW_REPO_NAME
 cd $NEW_REPO_NAME
 
@@ -61,5 +62,9 @@ case "$TEMPLATE_REPO_NAME" in
 esac
 
 git add --all
+rm -f .git/index
+git reset
+git add --all
+
 git commit -m "Initial commit, adding githooks submodule"
 git push https://${TF_VAR_github_token}:x-oauth-basic@github.com/dwp/$NEW_REPO_NAME
