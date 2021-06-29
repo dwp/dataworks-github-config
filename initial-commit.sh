@@ -12,6 +12,8 @@ git config --global user.name "${GIT_USERNAME}"
 git config --global user.email "${GIT_EMAIL}"
 
 git clone https://github.com/dwp/$NEW_REPO_NAME
+rm -f .git/index
+git reset
 cd $NEW_REPO_NAME
 
 git submodule add https://github.com/dwp/dataworks-githooks .githooks
