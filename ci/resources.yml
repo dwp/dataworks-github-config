@@ -2,7 +2,7 @@ resources:
   - name: dataworks-github-config
     type: git
     source:
-      branch: master
+      branch: test-script
       uri: https://github.com/dwp/dataworks-github-config.git
     webhook_token: ((dataworks.concourse_github_webhook_token))
     check_every: 720h
