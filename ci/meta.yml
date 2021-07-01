@@ -64,6 +64,8 @@ meta:
         TF_VAR_slack_webhook_url: ((dataworks.slack_webhook_url))
         TF_VAR_terraform_12_version: ((dataworks.terraform_12_version))
         TF_VAR_terraform_13_version: ((dataworks.terraform_13_version))
+        TF_VAR_aws_concourse_username: ((dataworks-secrets.concourse_user))
+        TF_VAR_aws_concourse_password: ((dataworks-secrets.concourse_password))
         GIT_USERNAME: ((dataworks.concourse_github_username))
         GIT_EMAIL: ((dataworks.concourse_github_email))
     terraform-plan:
@@ -103,3 +105,5 @@ meta:
         TF_VAR_github_email: ((dataworks.concourse_github_email))
         TF_VAR_terraform_12_version: ((dataworks.terraform_12_version))
         TF_VAR_terraform_13_version: ((dataworks.terraform_13_version))
+        TF_VAR_concourse_username: ((dataworks-secrets.concourse_user))
+        TF_VAR_concourse_password: ((dataworks-secrets.concourse_password))
