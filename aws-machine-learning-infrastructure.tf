@@ -1,5 +1,5 @@
 locals {
-  aws_machine_learning_infrastructure_pipeline_name = "aws_machine_learning_infrastructure"
+  aws_machine_learning_infrastructure_pipeline_name = "aws-machine-learning-infrastructure"
 }
 
 resource "github_repository" "aws_machine_learning_infrastructure" {
