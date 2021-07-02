@@ -10,6 +10,16 @@ variable "aws_concourse_team" {
   default     = "dataworks"
 }
 
+variable "aws_concourse_username" {
+  type        = string
+  description = "Concource CI username"
+}
+
+variable "aws_concourse_password" {
+  type        = string
+  description = "Concource CI password"
+}
+
 variable "github_organization" {
   type        = string
   description = "GitHub Organisation to create repos in"
