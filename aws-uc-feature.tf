@@ -1,5 +1,5 @@
 locals {
-  aws_uc_feature_pipeline_name = "aws-uc-feature"
+  aws_uc_feature_pipeline_name = "uc-feature"
 }
 
 resource "github_repository" "aws_uc_feature" {
