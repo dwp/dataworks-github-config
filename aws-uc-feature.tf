@@ -31,7 +31,7 @@ resource "github_team_repository" "aws_uc_feature_dataworks" {
 resource "github_branch_protection" "aws_uc_feature_master" {
   branch         = github_repository.aws_uc_feature.default_branch
   repository     = github_repository.aws_uc_feature.name
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict   = true
