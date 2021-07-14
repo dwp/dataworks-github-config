@@ -1,8 +1,8 @@
 locals {
-  aws_uc_feature_pipeline_name = "uc-feature-infrastructure"
+  aws_uc_feature_infra_pipeline_name = "uc-feature-infrastructure"
 }
 
-resource "github_repository" "aws_uc_feature" {
+resource "github_repository" "aws_uc_feature_infra" {
   name        = "aws-uc-feature-infrastructure"
   description = "The EMR infrastructure for aws-uc-feature."
   auto_init   = false
@@ -22,15 +22,15 @@ resource "github_repository" "aws_uc_feature" {
   }
 }
 
-resource "github_team_repository" "aws_uc_feature_dataworks" {
-  repository = github_repository.aws_uc_feature.name
+resource "github_team_repository" "aws_uc_feature_infra_dataworks" {
+  repository = github_repository.aws_uc_feature_infra.name
   team_id    = github_team.dataworks.id
   permission = "push"
 }
 
-resource "github_branch_protection" "aws_uc_feature_master" {
-  branch         = github_repository.aws_uc_feature.default_branch
-  repository     = github_repository.aws_uc_feature.name
+resource "github_branch_protection" "aws_uc_feature_infra_master" {
+  branch         = github_repository.aws_uc_feature_infra.default_branch
+  repository     = github_repository.aws_uc_feature_infra.name
   enforce_admins = false
 
   required_status_checks {
@@ -44,38 +44,38 @@ resource "github_branch_protection" "aws_uc_feature_master" {
   }
 }
 
-resource "github_issue_label" "aws_uc_feature" {
+resource "github_issue_label" "aws_uc_feature_infra" {
   for_each   = { for common_label in local.common_labels : common_label.name => common_label }
   color      = each.value.colour
   name       = each.value.name
-  repository = github_repository.aws_uc_feature.name
+  repository = github_repository.aws_uc_feature_infra.name
 }
 
-resource "null_resource" "aws_uc_feature" {
+resource "null_resource" "aws_uc_feature_infra" {
   triggers = {
-    repo = github_repository.aws_uc_feature.name
+    repo = github_repository.aws_uc_feature_infra.name
   }
   provisioner "local-exec" {
-    command = "./initial-commit.sh ${github_repository.aws_uc_feature.name} '${github_repository.aws_uc_feature.description}' ${github_repository.aws_uc_feature.template.0.repository}"
+    command = "./initial-commit.sh ${github_repository.aws_uc_feature_infra.name} '${github_repository.aws_uc_feature_infra.description}' ${github_repository.aws_uc_feature_infra.template.0.repository}"
   }
 }
 
-resource "github_repository_webhook" "aws_uc_feature" {
-  repository = github_repository.aws_uc_feature.name
+resource "github_repository_webhook" "aws_uc_feature_infra" {
+  repository = github_repository.aws_uc_feature_infra.name
   events     = ["push"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.aws_uc_feature_pipeline_name}/resources/${github_repository.aws_uc_feature.name}/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.aws_uc_feature_infra_pipeline_name}/resources/${github_repository.aws_uc_feature_infra.name}/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
 
-resource "github_repository_webhook" "aws_uc_feature_pr" {
-  repository = github_repository.aws_uc_feature.name
+resource "github_repository_webhook" "aws_uc_feature_infra_pr" {
+  repository = github_repository.aws_uc_feature_infra.name
   events     = ["pull_request"]
 
   configuration {
-    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.aws_uc_feature_pipeline_name}/resources/${github_repository.aws_uc_feature.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
+    url          = "https://${var.aws_concourse_domain_name}/api/v1/teams/${var.aws_concourse_team}/pipelines/${local.aws_uc_feature_infra_pipeline_name}/resources/${github_repository.aws_uc_feature_infra.name}-pr/check/webhook?webhook_token=${var.github_webhook_token}"
     content_type = "form"
   }
 }
