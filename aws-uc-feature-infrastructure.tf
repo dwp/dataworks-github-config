@@ -1,9 +1,9 @@
 locals {
-  aws_uc_feature_pipeline_name = "uc-feature"
+  aws_uc_feature_pipeline_name = "uc-feature-infrastructure"
 }
 
 resource "github_repository" "aws_uc_feature" {
-  name        = "aws-uc-feature"
+  name        = "aws-uc-feature-infrastructure"
   description = "The EMR infrastructure for aws-uc-feature."
   auto_init   = false
 
