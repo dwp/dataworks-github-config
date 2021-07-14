@@ -46,8 +46,6 @@ jobs:
           TF_VAR_github_username: ((dataworks.concourse_github_username))
           TF_VAR_terraform_12_version: ((dataworks.terraform_12_version))
           TF_VAR_terraform_13_version: ((dataworks.terraform_13_version))
-          TF_VAR_aws_concourse_username: ((dataworks-secrets.concourse_user))
-          TF_VAR_aws_concourse_password: ((dataworks-secrets.concourse_password))
         input_mapping:
           dataworks-github-config: dataworks-github-config-pr
         on_failure:
