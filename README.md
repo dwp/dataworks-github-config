@@ -44,3 +44,11 @@ Application repos should not be prefixed with `dataworks-aws`.
 # In regards to Secrets (AWS Concourse)
 
 Secrets are _all_ managed via SecretsManager. See: [dataworks-secrets](https://github.ucds.io/dip/dataworks-secrets)
+
+
+## Renaming terraform state files
+If you need to rename the terraform state file for any reason:
+
+1) Rename the state file in S3 while no pipelines are rolling out.
+2) Update the repo terraform.tf.j2 backend s3 resource key value to the new state file name.
+3) PR / Terraform apply out to the environment - there should be no infrastructure changes.
