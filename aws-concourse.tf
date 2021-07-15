@@ -76,3 +76,15 @@ resource "github_actions_secret" "aws_concourse_terraform_13_version" {
   secret_name     = "TERRAFORM_13_VERSION"
   plaintext_value = var.terraform_13_version
 }
+
+resource "github_actions_secret" "aws_acc_mgmt_dev" {
+  repository      = github_repository.aws-concourse.name
+  secret_name     = "AWS_GHA_ACC_MGMT_DEV"
+  plaintext_value = "${local.account["management-dev"]}"
+}
+
+resource "github_actions_secret" "aws_acc_mgmt" {
+  repository      = github_repository.aws-concourse.name
+  secret_name     = "AWS_GHA_ACC_MGMT"
+  plaintext_value = "${local.account["management"]}"
+}
